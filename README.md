@@ -2,17 +2,17 @@
 Helpful classes to reduce code &amp; accelerate speed for writing test cases for WebDriver.io 
 
 ## Objectives
-- Reduce code for `selecting` elements, verifying `asserts`
-- Generate a well `formated` report
+- Reduce code for `selecting` elements and verifying `asserts`
 - Generate unique `page id`, `group id` and `test case id`
 - Run `test cases` based on `page id`, `group id` or `test id`
+- Generate a well `formated` report
 
 ## Setup
 ##### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
 
 ##### Step 2: Configure `wdio.env.sample.js`
 - Rename `wdio.env.sample.js` to `wdio.env.js`
-- Move `wdio.env.js` to the `root` of your project or where `wdio.conf.js` exist
+- Move `wdio.env.js` to the `root` folder of your project or where `wdio.conf.js` exist
 
 ##### Step 3: Include `wdio.env.js`
 In `wdio.conf.js`, include `wdio.env.js` and update following variables:
@@ -104,7 +104,7 @@ npx wdio run ./wdio.conf.js
 
 ##### Step 7: Result
 
-<img src="https://raw.githubusercontent.com/webreinvent/vaah-webdriverio/master/assets/img/result.png" />
+<img src="https://raw.githubusercontent.com/webreinvent/vaah-webdriverio/master/assets/img/result.png" width="70%" />
 
 It contains:
 ```
