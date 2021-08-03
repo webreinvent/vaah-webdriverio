@@ -40,7 +40,7 @@ module.exports = class Page {
     //-------------------------------------------------
     highlight(str)
     {
-        return chalk.bgYellowBright.black(str);
+        return chalk.magenta(str);
     }
     //-------------------------------------------------
     pageId(params)
@@ -55,7 +55,7 @@ module.exports = class Page {
         let id = chalk.red(`
 ---------------------------------------------------------------`);
         id += this.pageId(params);
-        id += ` 
+        id += `
 [GROUP ID: `+this.highlight(this.params.page.id+"_"+this.params.group.count)+"] "+this.params.group.name;
 
         return id;
