@@ -31,7 +31,7 @@ switch(params.env)
         break;
 
     default:
-        params.base_url = 'https://the-internet.herokuapp.com/'
+        params.base_url = 'https://staging.rxconnect.synergeyes.com/public/'
         break;
 
 }

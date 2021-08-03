@@ -12,13 +12,13 @@ class Assert{
 
     pageTitle(text)
     {
-        expect(browser).toHaveTitleContaining(text);
+        return expect(browser).toHaveTitleContaining(text);
 
     }
 
     text(selector, text)
     {
-        expect(selector).toHaveTextContaining(text)
+        expect(selector).toHaveTextContaining(text);
         this.pause();
     }
 
