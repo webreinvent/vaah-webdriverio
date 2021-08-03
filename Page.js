@@ -47,7 +47,7 @@ module.exports = class Page {
     {
 
         return `
-[PAGE ID: ${this.highlight(this.params.page.id)}] Page: `+this.params.page.name+` URL: `+this.params.page.url;
+[PAGE ID: ${this.highlight(params.page.id)}] Page: `+params.page.name+` URL: `+params.page.url;
     }
     //-------------------------------------------------
     groupId(params)
@@ -56,7 +56,7 @@ module.exports = class Page {
 ---------------------------------------------------------------`);
         id += this.pageId(params);
         id += `
-[GROUP ID: `+this.highlight(this.params.page.id+"_"+this.params.group.count)+"] "+this.params.group.name;
+[GROUP ID: `+this.highlight(params.page.id+"_"+params.group.count)+"] "+params.group.name;
 
         return id;
     }
