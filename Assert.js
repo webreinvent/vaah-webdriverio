@@ -18,8 +18,7 @@ class Assert{
 
     text(selector, text)
     {
-        expect(selector).toHaveTextContaining(text);
-        this.pause();
+        return expect(selector).toHaveTextContaining(text);
     }
 
 
