@@ -11,9 +11,15 @@ class El{
         return $("."+name);
     }
     //-----------------------------------------------------
+
     $(selector)
     {
         return $(selector);
+    }
+    //-----------------------------------------------------
+    $$(selector)
+    {
+        return $$(selector);
     }
     //-----------------------------------------------------
     child(parent, child)
@@ -38,7 +44,7 @@ class El{
     //-----------------------------------------------------
     wdio(name,value=null)
     {
-        let el = this.attr('wdio', name);
+        let el = this.attr('data-wdio', name);
         if(value)
         {
             el.setValue(value)
