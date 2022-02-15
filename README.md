@@ -28,11 +28,17 @@ exports.config = {
 }
 
 ```
+In `env.js` tester should set the base URL based on their test environment. // Make sure that the URL ends with '/'.
+````js
+case 'localhost':
+        params.base_url = null // Instead of null insert your base URL inside " ".
+        break;
+````
 
 ##### Step 4: Extend `pageobjects` and variables in `constructor`
 Extend all your `pageobjects` to `const Page = require('./../vaah-webdriverio/Page');`, 
 
-Example: `pageobjects/home.page.js`: 
+Example: `pageobjects/Login.page.js`: 
 ```js
 const Page = require('./../vaah-webdriverio/Page');
 
@@ -72,23 +78,25 @@ describe(login.groupId(), () => {
     //-----------------------------------------------------------
     login.test = {
         count: 1, // Test counter which will be used to generate Test ID
-        name: 'Select by Dusk attribute',
+        name: 'Select by wdio attribute',
         expect: "Alert message 'You logged into a secure area!' should appear",
-        data: "You logged into a secure area!",
+        data: "Action Successful",
     }
 
     it(login.testId(), () => {
         login.open();
         assert.pageTitle("The Internet");
-        sl.name("username", "tomsmith");
-        sl.name("password", "SuperSecretPassword!");
-        sl.class('radius').click();
-        assert.text(sl.id('flash'), login.test.data);
+        sl.wdio("sign-in", "tomsmith"); // This will select the element with attribute as data-wdio='sign-in' and will also insert the value "tomsmith".
+        sl.wdio("password", "SuperSecretPassword!");
+        sl.wdio('submit').click();
+        assert.text(sl.wdio('alert'), login.test.data);
     });
     //-----------------------------------------------------------
     
 });
 ```
+Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.
+Further, we are using data-wdio attribute as an dedicated attribute so make sure that you have added this attribute to the elements.
 
 ##### Step 6: Run test 
 Now, you can run the test via:

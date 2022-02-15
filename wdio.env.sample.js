@@ -18,6 +18,10 @@ params.env = 'localhost';
 
 switch(params.env)
 {
+    case 'localhost':
+        params.base_url = null
+        break;
+
     case 'develop':
         params.base_url = null
         break;
@@ -31,7 +35,7 @@ switch(params.env)
         break;
 
     default:
-        params.base_url = 'https://staging.rxconnect.synergeyes.com/public/'
+        params.base_url = null
         break;
 
 }
