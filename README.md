@@ -40,7 +40,7 @@ class Login extends Page {
 
     constructor() {
         super();
-        this.page.id = "LI"; // Page ID
+        this.page.id = "LI"; // Page ID, Please keep this unique for all the pages.
         this.page.name = "Login";
         this.page.path = "login";
         this.page.url = this.base_url + this.page.path;
@@ -116,9 +116,20 @@ It contains:
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
 ```shell
-npx wdio --mochaOpts.grep <page id>
+npx wdio --mochaOpts.grep <page id> 
+e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI_1
+
 npx wdio --mochaOpts.grep <group id>
+e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
+
 npx wdio --mochaOpts.grep <test id>
+e.g. npx wdio --mochaOpts.grep LI_1_1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1
+// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1.
+// To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
+```
+or you can even run the test cases based on a specific keyword:
+```npx wdio --mochaOpts.grep <keyword>
+e.g. npx wdio --mochaOpts.grep smoke
 ```
 
 <br/>
