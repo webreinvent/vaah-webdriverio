@@ -86,7 +86,7 @@ describe(login.groupId(), () => {
     it(login.testId(), () => {
         login.open();
         assert.pageTitle("The Internet");
-        sl.name("username", "tomsmith"); // This will select the element with attribute as data-wdio='sign-in' and will also insert the value "tomsmith".
+        sl.name("username", "tomsmith"); // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
         sl.name("password", "SuperSecretPassword!");
         sl.class('radius').click();
         assert.text(sl.id('flash'), login.test.data);
