@@ -78,26 +78,108 @@ describe(login.groupId(), () => {
     //-----------------------------------------------------------
     login.test = {
         count: 1, // Test counter which will be used to generate Test ID
-        name: 'Select by wdio attribute',
+        name: 'Tester should be ble to run login test successfully',
         expect: "Alert message 'You logged into a secure area!' should appear",
-        data: "Action Successful",
+        data: "You logged into a secure area!",
     }
 
     it(login.testId(), () => {
         login.open();
         assert.pageTitle("The Internet");
-        sl.wdio("sign-in", "tomsmith"); // This will select the element with attribute as data-wdio='sign-in' and will also insert the value "tomsmith".
-        sl.wdio("password", "SuperSecretPassword!");
-        sl.wdio('submit').click();
-        assert.text(sl.wdio('alert'), login.test.data);
+        sl.name("username", "tomsmith"); // This will select the element with attribute as data-wdio='sign-in' and will also insert the value "tomsmith".
+        sl.name("password", "SuperSecretPassword!");
+        sl.class('radius').click();
+        assert.text(sl.id('flash'), login.test.data);
     });
     //-----------------------------------------------------------
-    
+ 
 });
-```
-Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.
-Further, we are using data-wdio attribute as an dedicated attribute so make sure that you have added this attribute to the elements.
+````   
 
+```markdown
+| Selector | In Selector.js|Use|Description|
+|--|--|--|--|
+|  id|`id(id)  {  return $("#"+id);  } `|`sl.id("submit").click;`|This will select the element with attribute id='submit' and will click on it.|
+|class|`class(name) { return $("."+name); }`|`sl.class("submit").click;`|This will select the element with attribute `id='submit'` and will click on it.
+|$|`$(selector){return $(selector);}`|`sl.$("h1");`|This will select the element having attribute as `h1`. Mostly used during assertion.|
+|attr|`attr(attribute, value){return$('['+attribute+'="'+value+'"]'); }`|`sl.attr('href','#/forgot-password' ).click();`|This will select the element having attribute as `href` and its value as `#/forgot-password`.
+|name|`name(name,value=null) { let el = this.attr('name', name); if(value) { el.setValue(value) } return el; }`|`sl.name("username", "tomsmith");`|This will select the element with attribute `name="username"` and will insert value "tomsmith" in it.|
+|wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio("username", "tomsmith")`|This will select the element having attribute `data-wdio='username'` and then will inser the value as "tomsmith" in it. Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.|
+|dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk("username", "tomsmith")`|This will select the element having attribute `dusk='username'` and then will inser the value as "tomsmith" in it.|
+|role|`role(name) { return this.attr('role', name); }`|`sl.role("navigation").click()`|This will select the element having attribute `role="navigation"` and will click on it.|
+```
+Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
+To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
+
+```js
+
+
+ class Elements {  
+  constructor() {  
+    this.login= {
+signin_email: "signin-email_or_username",  
+signin_password: "signin-password",
+button_signin: "signin-signin",
+ remember_me_checkbox: "checkbox",
+ }}}
+module.exports = new Elements();
+```
+`this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
+ 
+ ```js
+ class Elements {  
+  constructor() {  
+    this.login= {
+signin_email: "signin-email_or_username",  
+signin_password: "signin-password",
+button_signin: "signin-signin",
+ remember_me_checkbox: "checkbox",
+ }
+this.home={
+main_heading:"h1",
+sub_heading:"h2",
+}
+}}
+module.exports = new Elements();
+```
+When using the above pageobject then you can write the selectors in the following manner:
+
+```markdown
+|Selector|In Selector.js|Use with pageobject|
+|--|--|--|--|
+|id|`id(id) { return $("#"+id); }`|`sl.id(elements.login.button_signin).click();`|
+|class|`class(name) { return $("."+name); }`|`sl.class(elements.login.button_signin).click();`|
+|$|`$(selector){return $(selector);}`|`expect(sl.$(elements.login.remember_me_checkbox)).toBeSelected();`|
+|attr|`attr(attribute, value){return$('['+attribute+'="'+value+'"]'); }`|`sl.attr("class", elements.login.button_signin).click();`
+|name|`name(name,value=null) { let el = this.attr('name', name); if(value) { el.setValue(value) } return el; }`|`sl.name(elements.login.signin_email, "tomsmith");` or `sl.name(elements.login.signin_email).setValue("tomsmith");`|
+|wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio(elements.login.signin_email, "tomsmith");` or `sl.wdio(elements.login.signin_email).setValue("tomsmith")`|
+|dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk(elements.login.signin_password, "SuperSecretPassword")` or `sl.dusk(elements.login.signin_password).setValue("SuperSecretPassword");`|
+|role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
+```
+
+I have written an example on how to write a test script for logging in using the page object:
+
+ ```js
+const sl = require('../vaah-webdriverio/Selector');const assert = require('../vaah-webdriverio/Assert');const login = require('../pageobjects/login.page');  
+const elements = require('../data/elements');
+login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
+describe(login.groupId(), () => {  
+ //-----------------------------------------------------------  login.test = {  count: 1, // Test counter which will be used to generate Test ID  
+  name: 'Tester should be ble to run login test successfully',  
+  expect: "Alert message 'You logged into a secure area!' should appear",  
+  data: "You logged into a secure area!",  
+ }  
+ it(login.testId(), () => {  
+  login.open();  
+  assert.pageTitle("The Internet");  
+  sl.wdio(elements.login.signin_email, "tomsmith"); // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email` and will also insert the value "tomsmith".  
+  sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
+  sl.class(elements.login.button_signin).click();  
+  assert.text(sl.id('flash'), login.test.data);  
+ }); //-----------------------------------------------------------  });
+```
+
+> Written with [StackEdit](https://stackedit.io/).
 ##### Step 6: Run test 
 Now, you can run the test via:
 ```sh
