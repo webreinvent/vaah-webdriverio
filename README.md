@@ -214,12 +214,17 @@ Now, you can run the test via:
 ```sh
 npx wdio --spec ./tests/wdio/specs/login.e2e.js
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/wDDnDsxdrt.mp4
+
 
 or run all tests via:
 
 ```shell
 npx wdio run ./wdio.conf.js
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
+
+The Demo shows how an passed an failed test cases will be represented.
 
 ##### Step 7: Result
 
@@ -231,26 +236,42 @@ It contains:
 [GROUP ID: LI_1]
 [TEST ID: LI_1_1]
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/dAF7GsmpHw.mp4
 
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
 ```shell
 npx wdio --mochaOpts.grep <page id> 
 e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI_1
+Demo:https://img-v3.getdemo.dev/screenshot/jqNYsEBnhT.mp4
 
 npx wdio --mochaOpts.grep <group id>
 e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
+Demo:https://img-v3.getdemo.dev/screenshot/b54baoyxkZ.mp4
 
 npx wdio --mochaOpts.grep <test id>
 e.g. npx wdio --mochaOpts.grep LI_1_1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1
+Demo:https://img-v3.getdemo.dev/screenshot/VrNYwvWog7.mp4
 // Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1.
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 or you can even run the test cases based on a specific keyword:
-```npx wdio --mochaOpts.grep <keyword>
+```npx wdio --mochaOpts.grep <any keyword>
 e.g. npx wdio --mochaOpts.grep smoke
+Demo: https://img-v3.getdemo.dev/screenshot/vju9IYLTiO.mp4
 ```
+##### Possible error
+ ```
+@wdio/runner: Error: Failed to create session.
+session not created: This version of ChromeDriver only supports Chrome version 96
+```
+If this error occurrs that means your `wdio-chromedriver-service` and `chromedriver` dependencies are outdated and those need to be updated.
+Easiest way to update the dependency is provided in the demo.
 
+Demo: https://img-v3.getdemo.dev/screenshot/xL5B0R3Gar.mp4
+
+  
+ 
 <br/>
 
 ## Support us
