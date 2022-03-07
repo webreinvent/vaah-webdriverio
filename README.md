@@ -9,10 +9,15 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 
 ## Setup
 ##### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
+Demo: https://img-v3.getdemo.dev/screenshot/spjG338m6A.mp4
+
 
 ##### Step 2: Configure `wdio.env.sample.js`
 - Rename `wdio.env.sample.js` to `wdio.env.js`
 - Move `wdio.env.js` to the `root` folder of your project or where `wdio.conf.js` exist
+
+Demo: https://img-v3.getdemo.dev/screenshot/HwjLwZEoOk.mp4
+
 
 ##### Step 3: Include `wdio.env.js`
 In `wdio.conf.js`, include `wdio.env.js` and update following variables:
@@ -28,12 +33,18 @@ exports.config = {
 }
 
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/eNboGGqmrh.mp4
+
+
 In `env.js` tester should set the base URL based on their test environment. // Make sure that the URL ends with '/'.
 ````js
 case 'localhost':
         params.base_url = null // Instead of null insert your base URL inside " ".
         break;
 ````
+Demo: https://img-v3.getdemo.dev/screenshot/BiI0D6ygq3.mp4
+
+
 
 ##### Step 4: Extend `pageobjects` and variables in `constructor`
 Extend all your `pageobjects` to `const Page = require('./../vaah-webdriverio/Page');`, 
@@ -63,6 +74,9 @@ class Login extends Page {
 }
 module.exports = new Login();
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
+
+
 
 ##### Step 5: Writing test cases
 In `specs` folder create a file `login.e2e.js` and following code for example:
@@ -95,6 +109,8 @@ describe(login.groupId(), () => {
  
 });
 ````   
+Demo: https://img-v3.getdemo.dev/screenshot/OdRIb4yXIr.mp4
+Note: This is just an example of where to write the test script. The test script may differ.
 
 ```markdown
 | Selector | In Selector.js|Use|Description|
@@ -109,11 +125,14 @@ describe(login.groupId(), () => {
 |role|`role(name) { return this.attr('role', name); }`|`sl.role("navigation").click()`|This will select the element having attribute `role="navigation"` and will click on it.|
 ```
 Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
+
 To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
 
+Demo: https://img-v3.getdemo.dev/screenshot/37DZHpTEcH.mp4
+
+Note: Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
+
 ```js
-
-
  class Elements {  
   constructor() {  
     this.login= {
@@ -126,6 +145,9 @@ module.exports = new Elements();
 ```
 `this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
  
+ Demo: https://img-v3.getdemo.dev/screenshot/bt9XOVsbUS.mp4
+
+
  ```js
  class Elements {  
   constructor() {  
@@ -144,6 +166,7 @@ module.exports = new Elements();
 ```
 When using the above pageobject then you can write the selectors in the following manner:
 
+
 ```markdown
 |Selector|In Selector.js|Use with pageobject|
 |--|--|--|--|
@@ -156,6 +179,10 @@ When using the above pageobject then you can write the selectors in the followin
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk(elements.login.signin_password, "SuperSecretPassword")` or `sl.dusk(elements.login.signin_password).setValue("SuperSecretPassword");`|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
 ```
+Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
+
+Note: Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
+
 
 I have written an example on how to write a test script for logging in using the page object:
 
@@ -179,7 +206,9 @@ describe(login.groupId(), () => {
  }); //-----------------------------------------------------------  });
 ```
 
-> Written with [StackEdit](https://stackedit.io/).
+Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
+
+
 ##### Step 6: Run test 
 Now, you can run the test via:
 ```sh
