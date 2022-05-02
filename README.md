@@ -153,24 +153,26 @@ module.exports = new Elements();
  class Elements {  
   constructor() {  
     this.login= {
-signin_email: "signin-email_or_username",  
-signin_password: "signin-password",
-button_signin: "signin-signin",
- remember_me_checkbox: "checkbox",
+    signin_email: "signin-email_or_username",  
+    signin_password: "signin-password",
+    button_signin: "signin-signin",
+     remember_me_checkbox: "checkbox",
  }
 this.home={
-main_heading:"h1",
-sub_heading:"h2",
-}
+    main_heading:"h1",
+    sub_heading:"h2",
+    }
 }}
 module.exports = new Elements();
 ```
+
+
 When using the above pageobject then you can write the selectors in the following manner:
 
 
 
-|Selector|In Selector.js|Use with pageobject|
-|--|--|--|--|
+| Selector | In Selector.js | Use with pageobject |
+|--|--|--|
 |id|`id(id) { return $("#"+id); }`|`sl.id(elements.login.button_signin).click();`|
 |class|`class(name) { return $("."+name); }`|`sl.class(elements.login.button_signin).click();`|
 |$|`$(selector){return $(selector);}`|`expect(sl.$(elements.login.remember_me_checkbox)).toBeSelected();`|
@@ -179,6 +181,8 @@ When using the above pageobject then you can write the selectors in the followin
 |wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio(elements.login.signin_email, "tomsmith");` or `sl.wdio(elements.login.signin_email).setValue("tomsmith")`|
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk(elements.login.signin_password, "SuperSecretPassword")` or `sl.dusk(elements.login.signin_password).setValue("SuperSecretPassword");`|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
+
+
 
 Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
 
