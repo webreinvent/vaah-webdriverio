@@ -168,7 +168,7 @@ module.exports = new Elements();
 When using the above pageobject then you can write the selectors in the following manner:
 
 
-```markdown
+
 |Selector|In Selector.js|Use with pageobject|
 |--|--|--|--|
 |id|`id(id) { return $("#"+id); }`|`sl.id(elements.login.button_signin).click();`|
@@ -179,7 +179,7 @@ When using the above pageobject then you can write the selectors in the followin
 |wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio(elements.login.signin_email, "tomsmith");` or `sl.wdio(elements.login.signin_email).setValue("tomsmith")`|
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk(elements.login.signin_password, "SuperSecretPassword")` or `sl.dusk(elements.login.signin_password).setValue("SuperSecretPassword");`|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
-```
+
 Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
 
 Note: Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
