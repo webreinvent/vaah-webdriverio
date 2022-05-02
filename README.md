@@ -112,7 +112,7 @@ describe(login.groupId(), () => {
 Demo: https://img-v3.getdemo.dev/screenshot/OdRIb4yXIr.mp4
 Note: This is just an example of where to write the test script. The test script may differ.
 
-```markdown
+
 | Selector | In Selector.js|Use|Description|
 |--|--|--|--|
 |  id|`id(id)  {  return $("#"+id);  } `|`sl.id("submit").click;`|This will select the element with attribute id='submit' and will click on it.|
@@ -123,7 +123,8 @@ Note: This is just an example of where to write the test script. The test script
 |wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio("username", "tomsmith")`|This will select the element having attribute `data-wdio='username'` and then will inser the value as "tomsmith" in it. Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.|
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk("username", "tomsmith")`|This will select the element having attribute `dusk='username'` and then will inser the value as "tomsmith" in it.|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role("navigation").click()`|This will select the element having attribute `role="navigation"` and will click on it.|
-```
+
+
 Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
 
 To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
