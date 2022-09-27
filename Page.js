@@ -9,26 +9,24 @@ module.exports = class Page {
 
     constructor() {
         this.base_url = env.base_url;
-        this.page = {
-            id: null,
-            name: null,
-            path: null,
-            url: null,
+        this.params = {
+            page: {
+                id: null,
+                name: null,
+                path: null,
+                url: null,
+            },
+            group: {
+                count: null,
+                name: null,
+            },
+            test: {
+                count: null,
+                name: null,
+                data: null,
+                expect: null,
+            }
         };
-
-        this.group = {
-            count: null,
-            title: null,
-        };
-
-        this.test = {
-            count: null,
-            title: null,
-            data: null,
-            expect: null,
-        };
-
-
 
     }
 
@@ -39,34 +37,34 @@ module.exports = class Page {
     //-------------------------------------------------
     highlight(str)
     {
-        return chalk.bgYellowBright.black(str);
+        return chalk.magenta(str);
     }
     //-------------------------------------------------
-    pageId()
+    pageId(params)
     {
 
         return `
-[PAGE ID: ${this.highlight(this.page.id)}] Page: `+this.page.name+` URL: `+this.page.url;
+[PAGE ID: ${this.highlight(params.page.id)}] Page: `+params.page.name+` URL: `+params.page.url;
     }
     //-------------------------------------------------
-    groupId()
+    groupId(params)
     {
         let id = chalk.red(`
 ---------------------------------------------------------------`);
-        id += this.pageId();
-        id += ` 
-[GROUP ID: `+this.highlight(this.page.id+"_"+this.group.count)+"] "+this.group.name;
+        id += this.pageId(params);
+        id += `
+[GROUP ID: `+this.highlight(params.page.id+"_"+params.group.count)+"] "+params.group.name;
 
         return id;
     }
     //-------------------------------------------------
-    testId()
+    testId(params)
     {
-        let id = `[TEST ID: `+this.highlight(this.page.id+"_"+this.group.count+"_"+this.test.count)+"] "+this.test.name;
-        if(this.test.expect)
+        let id = `[TEST ID: `+this.highlight(params.page.id+"_"+params.group.count+"_"+params.test.count)+"] "+params.test.name;
+        if(params.test.expect)
         {
             id += `
-    ${chalk.blue('Expect:')} ${this.test.expect}`;
+    ${chalk.blue('Expect:')} ${params.test.expect}`;
         }
 
 
