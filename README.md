@@ -168,11 +168,11 @@ Note: Due to limitations this section is not showing in tabular format. Please c
 ```js
  class Elements {  
     constructor() {  
-      this.login= {
-        signin_email: "signin-email_or_username",  
-        signin_password: "signin-password",
-        button_signin: "signin-signin",
-        remember_me_checkbox: "checkbox",
+        this.login= {
+          signin_email: "signin-email_or_username",  
+          signin_password: "signin-password",
+          button_signin: "signin-signin",
+          remember_me_checkbox: "checkbox",
  }}}
  module.exports = new Elements();
 ```
@@ -184,17 +184,17 @@ Note: Due to limitations this section is not showing in tabular format. Please c
  ```js
  class Elements {  
     constructor() {  
-      this.login= {
-        signin_email: "signin-email_or_username",  
-        signin_password: "signin-password",
-        button_signin: "signin-signin",
-        remember_me_checkbox: "checkbox",
-      }
-      this.home={
-        main_heading:"h1",
-        sub_heading:"h2",
-      }
-}}
+        this.login= {
+          signin_email: "signin-email_or_username",  
+          signin_password: "signin-password",
+          button_signin: "signin-signin",
+          remember_me_checkbox: "checkbox",
+        }
+        this.home={
+          main_heading:"h1",
+          sub_heading:"h2",
+        }
+ }}
  module.exports = new Elements();
 ```
 
