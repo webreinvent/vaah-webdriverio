@@ -76,9 +76,40 @@ module.exports = new Login();
 ```
 Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
 
+#### step 5: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
+| Asserts | In Asserts.js|example|
+|--|--|--|--|
+```js
+const env = require('./../../../wdio.env');
+
+class Assert{
+
+    async pause()
+    {
+        if(env.is_human)
+        {
+            browser.pause(env.is_human_pause*1000);
+        }
+    }
+
+    async pageTitle(text)
+    {
+        return expect(browser).toHaveTitleContaining(text);
+
+    }
+
+    async text(selector, text) {
+        await expect(selector).toHaveTextContaining(text);
+        await this.pause();
+    }
 
 
-##### Step 5: Writing test cases
+};
+
+module.exports = new Assert()
+```` 
+
+##### Step 6: Writing test cases
 In `specs` folder create a file `login.e2e.js` and following code for example:
 ```js
 const sl = require('../vaah-webdriverio/Selector');
@@ -97,13 +128,14 @@ describe(login.groupId(), () => {
         data: "You logged into a secure area!",
     }
 
-    it(login.testId(), () => {
+    it(login.testId(), async () => {
         login.open();
-        assert.pageTitle("The Internet");
+        browser.maximizeWindow();
+        await assert.pageTitle("The Internet");
         sl.name("username", "tomsmith"); // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
         sl.name("password", "SuperSecretPassword!");
         sl.class('radius').click();
-        assert.text(sl.id('flash'), login.test.data);
+        await assert.text(sl.id('flash'), login.test.data);
     });
     //-----------------------------------------------------------
  
@@ -199,22 +231,23 @@ describe(login.groupId(), () => {
  //-----------------------------------------------------------  login.test = {  count: 1, // Test counter which will be used to generate Test ID  
   name: 'Tester should be ble to run login test successfully',  
   expect: "Alert message 'You logged into a secure area!' should appear",  
-  data: "You logged into a secure area!",  
- }  
- it(login.testId(), () => {  
+  data: "You logged into a secure area!",
+ };
+ it(login.testId(), async () => {  
   login.open();  
-  assert.pageTitle("The Internet");  
+  browser.maximizeWindow();
+  await assert.pageTitle("The Internet");  
   sl.wdio(elements.login.signin_email, "tomsmith"); // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email` and will also insert the value "tomsmith".  
   sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
   sl.class(elements.login.button_signin).click();  
-  assert.text(sl.id('flash'), login.test.data);  
+  await assert.text(sl.id('flash'), login.test.data);  
  }); //-----------------------------------------------------------  });
 ```
 
 Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
 
 
-##### Step 6: Run test 
+##### Step 7: Run test 
 Now, you can run the test via:
 ```sh
 npx wdio --spec ./tests/wdio/specs/login.e2e.js
@@ -231,7 +264,7 @@ Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
 
 The Demo shows how an passed an failed test cases will be represented.
 
-##### Step 7: Result
+##### Step 8: Result
 
 <img src="https://raw.githubusercontent.com/webreinvent/vaah-webdriverio/master/assets/img/result.png" width="70%" />
 
