@@ -167,14 +167,14 @@ Note: Due to limitations this section is not showing in tabular format. Please c
 
 ```js
  class Elements {  
-  constructor() {  
-    this.login= {
-signin_email: "signin-email_or_username",  
-signin_password: "signin-password",
-button_signin: "signin-signin",
- remember_me_checkbox: "checkbox",
+    constructor() {  
+      this.login= {
+        signin_email: "signin-email_or_username",  
+        signin_password: "signin-password",
+        button_signin: "signin-signin",
+        remember_me_checkbox: "checkbox",
  }}}
-module.exports = new Elements();
+ module.exports = new Elements();
 ```
 `this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
  
@@ -183,19 +183,19 @@ module.exports = new Elements();
 
  ```js
  class Elements {  
-  constructor() {  
-    this.login= {
-    signin_email: "signin-email_or_username",  
-    signin_password: "signin-password",
-    button_signin: "signin-signin",
-     remember_me_checkbox: "checkbox",
- }
-this.home={
-    main_heading:"h1",
-    sub_heading:"h2",
-    }
+    constructor() {  
+      this.login= {
+        signin_email: "signin-email_or_username",  
+        signin_password: "signin-password",
+        button_signin: "signin-signin",
+        remember_me_checkbox: "checkbox",
+      }
+      this.home={
+        main_heading:"h1",
+        sub_heading:"h2",
+      }
 }}
-module.exports = new Elements();
+ module.exports = new Elements();
 ```
 
 
@@ -228,7 +228,7 @@ const sl = require('../vaah-webdriverio/Selector');const assert = require('../va
 const elements = require('../data/elements');
 login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
 describe(login.groupId(), () => {  
- //-----------------------------------------------------------  login.test = {  count: 1, // Test counter which will be used to generate Test ID  
+    //----------------------------------login.test = {  count: 1, // Test counter which will be used to generate Test ID  
     name: 'Tester should be ble to run login test successfully',  
     expect: "Alert message 'You logged into a secure area!' should appear",  
     data: "You logged into a secure area!",
