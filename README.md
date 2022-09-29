@@ -101,15 +101,14 @@ class Assert{
         await expect(selector).toHaveTextContaining(text);
         await this.pause();
     }
-
-
+    
 };
 
 module.exports = new Assert()
 ```` 
 
 ##### Step 6: Writing test cases
-In `specs` folder create a file `login.e2e.js` and following code for example:
+In `specs` folder create a file `login.e2e.js` and write following code for example:
 ```js
 const sl = require('../vaah-webdriverio/Selector');
 const assert = require('../vaah-webdriverio/Assert');
@@ -232,23 +231,24 @@ const elements = require('../data/elements');
 login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
 
 describe(login.groupId(), () => {  
-    //----------------------------------login.test = {  count: 1, // Test counter which will be used to generate Test ID  
-    name: 'Tester should be ble to run login test successfully',  
-    expect: "Alert message 'You logged into a secure area!' should appear",  
-    data: "You logged into a secure area!",
-  };
+    login.test = {  count: 1, // Test counter which will be used to generate Test ID  
+        name: 'Tester should be ble to run login test successfully',  
+        expect: "Alert message 'You logged into a secure area!' should appear",  
+        data: "You logged into a secure area!",
+    };
 
-  it(login.testId(), async () => {  
-    login.open();  
-    browser.maximizeWindow();
-    await assert.pageTitle("The Internet");  
-    sl.wdio(elements.login.signin_email, "tomsmith"); 
-    /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js as `signin_email`
-      and will also insert the value "tomsmith".*/  
-    sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
-    sl.class(elements.login.button_signin).click();  
-    await assert.text(sl.id('flash'), login.test.data);  
-  }); //-----------------------------------------------------------  });
+    it(login.testId(), async () => {  
+        login.open();  
+        browser.maximizeWindow();
+        await assert.pageTitle("The Internet");  
+        sl.wdio(elements.login.signin_email, "tomsmith"); 
+        /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js 
+          as `signin_email` and will also insert the value "tomsmith".*/  
+        sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
+        sl.class(elements.login.button_signin).click();  
+        await assert.text(sl.id('flash'), login.test.data);  
+    }); 
+});
 ```
 
 Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
