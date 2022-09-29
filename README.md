@@ -77,8 +77,7 @@ module.exports = new Login();
 Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
 
 #### step 5: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
-| Asserts | In Asserts.js|example|
-|--|--|--|--|
+Example:
 ```js
 const env = require('./../../../wdio.env');
 
@@ -132,7 +131,8 @@ describe(login.groupId(), () => {
         login.open();
         browser.maximizeWindow();
         await assert.pageTitle("The Internet");
-        sl.name("username", "tomsmith"); // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
+        sl.name("username", "tomsmith"); 
+        // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
         sl.name("password", "SuperSecretPassword!");
         sl.class('radius').click();
         await assert.text(sl.id('flash'), login.test.data);
@@ -229,19 +229,20 @@ const elements = require('../data/elements');
 login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
 describe(login.groupId(), () => {  
  //-----------------------------------------------------------  login.test = {  count: 1, // Test counter which will be used to generate Test ID  
-  name: 'Tester should be ble to run login test successfully',  
-  expect: "Alert message 'You logged into a secure area!' should appear",  
-  data: "You logged into a secure area!",
- };
- it(login.testId(), async () => {  
-  login.open();  
-  browser.maximizeWindow();
-  await assert.pageTitle("The Internet");  
-  sl.wdio(elements.login.signin_email, "tomsmith"); // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email`  and will also insert the value "tomsmith".  
-  sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
-  sl.class(elements.login.button_signin).click();  
-  await assert.text(sl.id('flash'), login.test.data);  
- }); //-----------------------------------------------------------  });
+    name: 'Tester should be ble to run login test successfully',  
+    expect: "Alert message 'You logged into a secure area!' should appear",  
+    data: "You logged into a secure area!",
+  };
+  it(login.testId(), async () => {  
+    login.open();  
+    browser.maximizeWindow();
+    await assert.pageTitle("The Internet");  
+    sl.wdio(elements.login.signin_email, "tomsmith"); 
+    // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email` and will also insert the value "tomsmith".  
+    sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
+    sl.class(elements.login.button_signin).click();  
+    await assert.text(sl.id('flash'), login.test.data);  
+  }); //-----------------------------------------------------------  });
 ```
 
 Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
@@ -266,30 +267,29 @@ describe(page.groupId(params), () => {
 
 //----------------------------------------------------------------------------------------
 
-params.test = {
-count: 1.1,
-name: "Visit About Us page and check for title",
-expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
-};
-it(page.testId(params), async () =>{
-await page.open();
-browser.maximizeWindow();
-await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+    params.test = {
+    count: 1.1,
+    name: "Visit About Us page and check for title",
+    expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
+  };
+  it(page.testId(params), async () =>{
+    page.open();
+    browser.maximizeWindow();
+    await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+  });
 
-});
-
-params.test = {
-count: 1.2,
-name: "Validating seems interesting button",
-expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
-};
-it(page.testId(params), async () => {
-page.open();
-browser.maximizeWindow();
-//await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-sl.wdio(elements.about_us.button_interesting).click();
-await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
-});
+    params.test = {
+    count: 1.2,
+    name: "Validating seems interesting button",
+    expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
+  };
+  it(page.testId(params), async () => {
+    page.open();
+    browser.maximizeWindow();
+    await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+    sl.wdio(elements.about_us.button_interesting).click();
+    await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
+  });
 ``` 
 Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
 
