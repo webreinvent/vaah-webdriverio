@@ -247,6 +247,52 @@ describe(login.groupId(), () => {
 Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
 
 
+Note: The test_count_id should be unique so that there will be no conflict between the test scripts.
+Example:
+ ```js
+const sl = require('../vaah-webdriverio/Selector');
+const assert = require('../vaah-webdriverio/Assert');
+const page = require('../pageobjects/about-us.page');
+const elements = require('../data/elements');
+const assert_data = require('../data/assert-data');
+
+
+let params = page.params;
+
+params.group.count = 1;
+params.group.name = 'About-Us';
+
+describe(page.groupId(params), () => {
+
+//----------------------------------------------------------------------------------------
+
+params.test = {
+count: 1.1,
+name: "Visit About Us page and check for title",
+expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
+};
+it(page.testId(params), async () =>{
+await page.open();
+browser.maximizeWindow();
+await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+
+});
+
+params.test = {
+count: 1.2,
+name: "Validating seems interesting button",
+expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
+};
+it(page.testId(params), async () => {
+page.open();
+browser.maximizeWindow();
+//await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+sl.wdio(elements.about_us.button_interesting).click();
+await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
+});
+``` 
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
+
 ##### Step 7: Run test 
 Now, you can run the test via:
 ```sh
