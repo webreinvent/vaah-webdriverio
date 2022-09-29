@@ -238,7 +238,8 @@ describe(login.groupId(), () => {
     browser.maximizeWindow();
     await assert.pageTitle("The Internet");  
     sl.wdio(elements.login.signin_email, "tomsmith"); 
-    // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email` and will also insert the value "tomsmith".  
+    /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js as `signin_email`
+      and will also insert the value "tomsmith".*/  
     sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
     sl.class(elements.login.button_signin).click();  
     await assert.text(sl.id('flash'), login.test.data);  
