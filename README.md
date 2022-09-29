@@ -231,7 +231,8 @@ const elements = require('../data/elements');
 login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
 
 describe(login.groupId(), () => {  
-    login.test = {  count: 1, // Test counter which will be used to generate Test ID  
+    login.test = {  
+        count: 1, // Test counter which will be used to generate Test ID  
         name: 'Tester should be ble to run login test successfully',  
         expect: "Alert message 'You logged into a secure area!' should appear",  
         data: "You logged into a secure area!",
