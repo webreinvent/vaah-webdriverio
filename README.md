@@ -268,28 +268,29 @@ describe(page.groupId(params), () => {
 //----------------------------------------------------------------------------------------
 
     params.test = {
-    count: 1.1,
-    name: "Visit About Us page and check for title",
-    expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
-  };
-  it(page.testId(params), async () =>{
-    page.open();
-    browser.maximizeWindow();
-    await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-  });
+        count: 1.1,
+        name: "Visit About Us page and check for title",
+        expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
+    };
+    it(page.testId(params), async () => {
+        page.open();
+        browser.maximizeWindow();
+        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+    });
 
     params.test = {
-    count: 1.2,
-    name: "Validating seems interesting button",
-    expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
-  };
-  it(page.testId(params), async () => {
-    page.open();
-    browser.maximizeWindow();
-    await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-    sl.wdio(elements.about_us.button_interesting).click();
-    await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
-  });
+        count: 1.2,
+        name: "Validating seems interesting button",
+        expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
+    };
+    it(page.testId(params), async () => {
+        page.open();
+        browser.maximizeWindow();
+        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+        sl.wdio(elements.about_us.button_interesting).click();
+        await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
+    });
+});
 ``` 
 Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
 
