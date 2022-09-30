@@ -320,7 +320,8 @@ The Demo shows how a passed and failed test cases will be represented.
 
 ##### Step 8: Result
 
-<img src="F:\xampp8018\htdocs\satyajeet.s001\vaah-webdriverio\assets\img\result.png" width="70%"/>
+<img src="https://user-images.githubusercontent.com/114494381/193214928-bc3bed84-65ca-4f4c-bf68-9f39ff8ab089.png" width="70%" style="max-width: 100%;">
+
 
 It contains:
 ```
