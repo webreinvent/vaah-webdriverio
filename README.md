@@ -120,7 +120,7 @@ login.group.name = 'Login';
 describe(login.groupId(), () => {
     //-----------------------------------------------------------
     login.test = {
-        count: 1, // Test counter which will be used to generate Test ID
+        count: 1.1, // Test counter which will be used to generate Test ID
         name: 'Tester should be ble to run login test successfully',
         expect: "Alert message 'You logged into a secure area!' should appear",
         data: "You logged into a secure area!",
@@ -306,7 +306,7 @@ Now, you can run the test via:
 ```sh
 npx wdio --spec ./tests/wdio/specs/login.e2e.js
 ```
-Demo: https://img-v3.getdemo.dev/screenshot/wDDnDsxdrt.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/chrome_uNW2UpI0dH.mp4
 
 
 or run all tests via:
@@ -316,19 +316,19 @@ npx wdio run ./wdio.conf.js
 ```
 Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
 
-The Demo shows how an passed an failed test cases will be represented.
+The Demo shows how a passed and failed test cases will be represented.
 
 ##### Step 8: Result
 
-<img src="https://raw.githubusercontent.com/webreinvent/vaah-webdriverio/master/assets/img/result.png" width="70%" />
+<img src="F:\xampp8018\htdocs\satyajeet.s001\vaah-webdriverio\assets\img\result.png" width="70%"/>
 
 It contains:
 ```
 [PAGE ID: LI]
 [GROUP ID: LI_1]
-[TEST ID: LI_1_1]
+[TEST ID: LI_1_1.1]
 ```
-Demo: https://img-v3.getdemo.dev/screenshot/dAF7GsmpHw.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_0r5SfdxoR8.mp4
 
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
@@ -342,9 +342,9 @@ e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under th
 Demo:https://img-v3.getdemo.dev/screenshot/b54baoyxkZ.mp4
 
 npx wdio --mochaOpts.grep <test id>
-e.g. npx wdio --mochaOpts.grep LI_1_1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1
-Demo:https://img-v3.getdemo.dev/screenshot/VrNYwvWog7.mp4
-// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1.
+e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1.1
+Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_NhXad1pY4Z.mp4
+// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 or you can even run the test cases based on a specific keyword:
