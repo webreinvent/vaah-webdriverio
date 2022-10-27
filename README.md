@@ -76,10 +76,39 @@ module.exports = new Login();
 ```
 Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
 
+#### step 5: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
+Example:
+```js
+const env = require('./../../../wdio.env');
 
+class Assert{
 
-##### Step 5: Writing test cases
-In `specs` folder create a file `login.e2e.js` and following code for example:
+    async pause()
+    {
+        if(env.is_human)
+        {
+            browser.pause(env.is_human_pause*1000);
+        }
+    }
+
+    async pageTitle(text)
+    {
+        return expect(browser).toHaveTitleContaining(text);
+
+    }
+
+    async text(selector, text) {
+        await expect(selector).toHaveTextContaining(text);
+        await this.pause();
+    }
+    
+};
+
+module.exports = new Assert()
+```` 
+
+##### Step 6: Writing test cases
+In `specs` folder create a file `login.e2e.js` and write following code for example:
 ```js
 const sl = require('../vaah-webdriverio/Selector');
 const assert = require('../vaah-webdriverio/Assert');
@@ -91,25 +120,28 @@ login.group.name = 'Login';
 describe(login.groupId(), () => {
     //-----------------------------------------------------------
     login.test = {
-        count: 1, // Test counter which will be used to generate Test ID
+        count: 1.1, // Test counter which will be used to generate Test ID
         name: 'Tester should be ble to run login test successfully',
         expect: "Alert message 'You logged into a secure area!' should appear",
         data: "You logged into a secure area!",
     }
 
-    it(login.testId(), () => {
+    it(login.testId(), async () => {
         login.open();
-        assert.pageTitle("The Internet");
-        sl.name("username", "tomsmith"); // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
+        browser.maximizeWindow();
+        await assert.pageTitle("The Internet");
+        sl.name("username", "tomsmith"); 
+        // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
         sl.name("password", "SuperSecretPassword!");
         sl.class('radius').click();
-        assert.text(sl.id('flash'), login.test.data);
+        await assert.text(sl.id('flash'), login.test.data);
     });
     //-----------------------------------------------------------
  
 });
 ````   
 Demo: https://img-v3.getdemo.dev/screenshot/OdRIb4yXIr.mp4
+
 Note: This is just an example of where to write the test script. The test script may differ.
 
 
@@ -135,14 +167,14 @@ Note: Due to limitations this section is not showing in tabular format. Please c
 
 ```js
  class Elements {  
-  constructor() {  
-    this.login= {
-signin_email: "signin-email_or_username",  
-signin_password: "signin-password",
-button_signin: "signin-signin",
- remember_me_checkbox: "checkbox",
+    constructor() {  
+        this.login= {
+          signin_email: "signin-email_or_username",  
+          signin_password: "signin-password",
+          button_signin: "signin-signin",
+          remember_me_checkbox: "checkbox",
  }}}
-module.exports = new Elements();
+ module.exports = new Elements();
 ```
 `this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
  
@@ -151,19 +183,19 @@ module.exports = new Elements();
 
  ```js
  class Elements {  
-  constructor() {  
-    this.login= {
-    signin_email: "signin-email_or_username",  
-    signin_password: "signin-password",
-    button_signin: "signin-signin",
-     remember_me_checkbox: "checkbox",
- }
-this.home={
-    main_heading:"h1",
-    sub_heading:"h2",
-    }
-}}
-module.exports = new Elements();
+    constructor() {  
+        this.login= {
+          signin_email: "signin-email_or_username",  
+          signin_password: "signin-password",
+          button_signin: "signin-signin",
+          remember_me_checkbox: "checkbox",
+        }
+        this.home={
+          main_heading:"h1",
+          sub_heading:"h2",
+        }
+ }}
+ module.exports = new Elements();
 ```
 
 
@@ -192,34 +224,89 @@ Note: Due to limitations this section is not showing in tabular format. Please c
 I have written an example on how to write a test script for logging in using the page object:
 
  ```js
-const sl = require('../vaah-webdriverio/Selector');const assert = require('../vaah-webdriverio/Assert');const login = require('../pageobjects/login.page');  
+const sl = require('../vaah-webdriverio/Selector');
+const assert = require('../vaah-webdriverio/Assert');
+const login = require('../pageobjects/login.page');  
 const elements = require('../data/elements');
 login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
+
 describe(login.groupId(), () => {  
- //-----------------------------------------------------------  login.test = {  count: 1, // Test counter which will be used to generate Test ID  
-  name: 'Tester should be ble to run login test successfully',  
-  expect: "Alert message 'You logged into a secure area!' should appear",  
-  data: "You logged into a secure area!",  
- }  
- it(login.testId(), () => {  
-  login.open();  
-  assert.pageTitle("The Internet");  
-  sl.wdio(elements.login.signin_email, "tomsmith"); // This will select the element with attribute as `data-wdio='signin-email_or_username'` which is stored in the elements.js as `signin_email` and will also insert the value "tomsmith".  
-  sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
-  sl.class(elements.login.button_signin).click();  
-  assert.text(sl.id('flash'), login.test.data);  
- }); //-----------------------------------------------------------  });
+    login.test = {  
+        count: 1, // Test counter which will be used to generate Test ID  
+        name: 'Tester should be ble to run login test successfully',  
+        expect: "Alert message 'You logged into a secure area!' should appear",  
+        data: "You logged into a secure area!",
+    };
+
+    it(login.testId(), async () => {  
+        login.open();  
+        browser.maximizeWindow();
+        await assert.pageTitle("The Internet");  
+        sl.wdio(elements.login.signin_email, "tomsmith"); 
+        /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js 
+          as `signin_email` and will also insert the value "tomsmith".*/  
+        sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
+        sl.class(elements.login.button_signin).click();  
+        await assert.text(sl.id('flash'), login.test.data);  
+    }); 
+});
 ```
 
 Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
 
 
-##### Step 6: Run test 
+Note: The test_count_id should be unique so that there will be no conflict between the test scripts.
+Example:
+ ```js
+const sl = require('../vaah-webdriverio/Selector');
+const assert = require('../vaah-webdriverio/Assert');
+const page = require('../pageobjects/about-us.page');
+const elements = require('../data/elements');
+const assert_data = require('../data/assert-data');
+
+
+let params = page.params;
+
+params.group.count = 1;
+params.group.name = 'About-Us';
+
+describe(page.groupId(params), () => {
+
+//----------------------------------------------------------------------------------------
+
+    params.test = {
+        count: 1.1,
+        name: "Visit About Us page and check for title",
+        expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
+    };
+    it(page.testId(params), async () => {
+        page.open();
+        browser.maximizeWindow();
+        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+    });
+
+    params.test = {
+        count: 1.2,
+        name: "Validating seems interesting button",
+        expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
+    };
+    it(page.testId(params), async () => {
+        page.open();
+        browser.maximizeWindow();
+        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
+        sl.wdio(elements.about_us.button_interesting).click();
+        await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
+    });
+});
+``` 
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
+
+##### Step 7: Run test 
 Now, you can run the test via:
 ```sh
 npx wdio --spec ./tests/wdio/specs/login.e2e.js
 ```
-Demo: https://img-v3.getdemo.dev/screenshot/wDDnDsxdrt.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/chrome_uNW2UpI0dH.mp4
 
 
 or run all tests via:
@@ -229,19 +316,20 @@ npx wdio run ./wdio.conf.js
 ```
 Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
 
-The Demo shows how an passed an failed test cases will be represented.
+The Demo shows how a passed and failed test cases will be represented.
 
-##### Step 7: Result
+##### Step 8: Result
 
-<img src="https://raw.githubusercontent.com/webreinvent/vaah-webdriverio/master/assets/img/result.png" width="70%" />
+<img src="https://user-images.githubusercontent.com/114494381/193214928-bc3bed84-65ca-4f4c-bf68-9f39ff8ab089.png" width="70%" style="max-width: 100%;">
+
 
 It contains:
 ```
 [PAGE ID: LI]
 [GROUP ID: LI_1]
-[TEST ID: LI_1_1]
+[TEST ID: LI_1_1.1]
 ```
-Demo: https://img-v3.getdemo.dev/screenshot/dAF7GsmpHw.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_0r5SfdxoR8.mp4
 
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
@@ -255,9 +343,9 @@ e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under th
 Demo:https://img-v3.getdemo.dev/screenshot/b54baoyxkZ.mp4
 
 npx wdio --mochaOpts.grep <test id>
-e.g. npx wdio --mochaOpts.grep LI_1_1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1
-Demo:https://img-v3.getdemo.dev/screenshot/VrNYwvWog7.mp4
-// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1.
+e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1.1
+Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_NhXad1pY4Z.mp4
+// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 or you can even run the test cases based on a specific keyword:
