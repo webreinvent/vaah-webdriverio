@@ -147,7 +147,7 @@ Note: This is just an example of where to write the test script. The test script
 
 | Selector | In Selector.js|Use|Description|
 |--|--|--|--|
-|testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "satyajeet.s001@webreinvent.com")`|This will select the element having attribute `data-testid='royal_email'` and then will insert the value as "satyajeet.s001@webreinvent.com" in it.|
+|testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "demo@test.com")`|This will select the element having attribute `data-testid='royal_email'` and then will insert the value as "demo@test.com" in it.|
 |id|`id(id)  {  return $("#"+id);  } `|`sl.id("submit").click;`|This will select the element with attribute id='submit' and will click on it.|
 |class|`class(name) { return $("."+name); }`|`sl.class("submit").click;`|This will select the element with attribute `id='submit'` and will click on it.
 |$|`$(selector){return $(selector);}`|`sl.$("h1");`|This will select the element having attribute as `h1`. Mostly used during assertion.|
@@ -206,7 +206,7 @@ When using the above pageobject then you can write the selectors in the followin
 
 | Selector | In Selector.js | Use with pageobject |
 |--|--|--|
-|testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "tomsmith");` or `sl.testid("royal_email").setValue("tomsmith")`|
+|testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "demo@test.com");` or `sl.testid("royal_email").setValue("demo@test.com")`|
 |id|`id(id) { return $("#"+id); }`|`sl.id(elements.login.button_signin).click();`|
 |class|`class(name) { return $("."+name); }`|`sl.class(elements.login.button_signin).click();`|
 |$|`$(selector){return $(selector);}`|`expect(sl.$(elements.login.remember_me_checkbox)).toBeSelected();`|
@@ -223,7 +223,7 @@ Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
 Note:
 
 1.For selector 'testid', if attribute or locator "data-testid" is present in the html code when we are inspecting or locating an element then we should give the first priority to the locator or attribute 'data-testid'.
-   e.g. sl.testid("royal_email", "satyajeet.s001@webreinvent.com");
+   e.g. sl.testid("royal_email", "demo@test.com");
 
 2.Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
 ```
