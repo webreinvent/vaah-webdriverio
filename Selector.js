@@ -61,6 +61,16 @@ class El{
         return this.attr('role', name);
     }
     //-----------------------------------------------------
+    testid(name,value=null)
+    {
+        let el = this.attr('data-testid', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
 
 }
 
