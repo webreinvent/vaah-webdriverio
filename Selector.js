@@ -71,6 +71,18 @@ class El{
         return el;
     }
     //-----------------------------------------------------
+    dynamic(selector_name, selector_type='dusk'){
+        let el;
+        switch (selector_type)
+        {
+            case 'dusk':
+                el = this.dusk(selector_name);
+                break;
+
+        }
+        return el;
+    }
+    //-----------------------------------------------------
 
 }
 

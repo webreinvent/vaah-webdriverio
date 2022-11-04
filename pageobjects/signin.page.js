@@ -1,7 +1,5 @@
 const Page = require('./../Page');
-
-const data = require("../data/signin");
-const {supportsColor} = require("chalk");
+const Sl = require('./../Selector');
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -27,11 +25,34 @@ class SigninPage extends Page {
     }
 
     //---------------------------------------------------------
-    async invalidLogin( email, password, assert ){
-        await super.select(data.selector_type, data.selectors.emailtextfield).setValue(email);
-        await super.select(data.selector_type, data.selectors.passtextfield).setValue(password);
-        await super.select(data.selector_type, data.selectors.submit).click();
-        await expect(sl.role("alertdialog")).toHaveTextContaining(assert);
+    async fillForm(email, password, data)
+    {
+        await Sl.dynamic(data.selectors.email, data.selector_type).setValue(email);
+        await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
+    }
+    //---------------------------------------------------------
+    async clickSubmit(data)
+    {
+        await Sl.dynamic(data.selectors.submit, data.selector_type).click();
+    }
+    //---------------------------------------------------------
+    async fillAndSubmit(email, password, data)
+    {
+        await this.fillForm(email, password, data)
+        await this.clickSubmit(data)
+
+    }
+    //---------------------------------------------------------
+    async submitAndAssert(email, password, data, assert)
+    {
+        await this.fillAndSubmit(email, password, data)
+        await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
+    }
+    //---------------------------------------------------------
+    async emptyPassword(email, password, data, assert)
+    {
+        await this.fillAndSubmit(email, password, data)
+        await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
     }
     //---------------------------------------------------------
 

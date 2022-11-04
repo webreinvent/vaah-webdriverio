@@ -1,31 +1,17 @@
 class Signin{
 
 
+
     constructor() {
 
-        this.testids = {
-            button: "submit"
-        };
-
-        this.asserts = {
-            button: "submit"
-        };
-
-        this.selector_type = 'dusk';
-
+        this.selector_type = 'data-testid';
         this.selectors = {
-            emailtextfield: "signin-email_or_username",
-            passtextfield: "signin-password",
-            submit: "signin-signin"
-        };
-
-        this.alert_message = {
-            invalid_alert_message: "vaahcms-user.no_user_exist"
+            email: 'signin-email_or_username',
+            password: 'signin-password',
+            submit: 'signin-signin'
         }
 
-
     }
-
 
 }
 

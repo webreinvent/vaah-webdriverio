@@ -4,7 +4,6 @@ let color  = require("cli-color");
 
 
 const env = require('./../../../wdio.env');
-const sl = require("Selector");
 
 /**
  * main page object containing all methods, selectors and functionality
@@ -79,16 +78,5 @@ ${color.blue('Expects:')} ${params.test.expect}`;
         return id;
     }
     //-------------------------------------------------
-    select(type, value){
-        let el;
-        switch(type)
-        {
-            case 'dusk':
-                el = sl.dusk(value)
-                break;
-        }
-
-        return el;
-    }
     //-------------------------------------------------
 }
