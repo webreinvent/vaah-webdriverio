@@ -11,6 +11,7 @@ describe('Signin', async () => {
             Data,
             "vaahcms-user.no_user_exist"
         );
+        browser.refresh();
     })
 
     it('Valid Email And Empty Password Validation', async () => {
@@ -21,6 +22,19 @@ describe('Signin', async () => {
             Data,
             "Invalid credentials"
         );
+        browser.refresh();
+        await browser.pause(3000);
     })
+
+    it('Validate with empty Email text-field', async () => {
+        await Page.open()
+        await Page.submitAndAssert(
+            '',
+            'webreinvent',
+            Data,
+            "vaahcms-login.email_or_username_required"
+        );
+    })
+
 
 })
