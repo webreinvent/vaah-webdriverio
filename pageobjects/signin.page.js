@@ -25,6 +25,8 @@ class SigninPage extends Page {
     }
 
     //---------------------------------------------------------
+
+
     async fillForm(email, password, data)
     {
         await Sl.dynamic(data.selectors.email, data.selector_type).setValue(email);
@@ -49,13 +51,13 @@ class SigninPage extends Page {
         await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
     }
     //---------------------------------------------------------
-    async emptyPassword(email, password, data, assert)
+
+    async submitAndLogout(email, password, data)
     {
         await this.fillAndSubmit(email, password, data)
-        await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
+        await Sl.role("menuitem").moveTo(data);
+        await Sl.$('=Logout').click(data);
     }
-    //---------------------------------------------------------
-
 }
 
 module.exports = new SigninPage();

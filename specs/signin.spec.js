@@ -1,40 +1,30 @@
 const Page = require('../pageobjects/signin.page')
 const Data = require('../data/signin')
+const Sl = require("./../Selector");
+const assert = require("./../Assert");
 const selector_type = 'dusk';
 
+let params = Data.params;
+
+params.group = Data.groups[0];
+
 describe('Signin', async () => {
-    it('Invalid Login', async () => {
+
+    params.test = Data.groups[0].tests[0];
+
+    console.log(params);
+
+    it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            'test@gmzail.com',
-            'password',
+            params.email,
+            params.password,
             Data,
-            "vaahcms-user.no_user_exist"
+            params.test.assert
         );
-        browser.refresh();
+        //browser.refresh();
+        //await browser.pause(3000);
+       await assert.refresh();
     })
-
-    it('Valid Email And Empty Password Validation', async () => {
-        await Page.open()
-        await Page.submitAndAssert(
-            'we@webreinvent.com',
-            '',
-            Data,
-            "Invalid credentials"
-        );
-        browser.refresh();
-        await browser.pause(3000);
-    })
-
-    it('Validate with empty Email text-field', async () => {
-        await Page.open()
-        await Page.submitAndAssert(
-            '',
-            'webreinvent',
-            Data,
-            "vaahcms-login.email_or_username_required"
-        );
-    })
-
 
 })
