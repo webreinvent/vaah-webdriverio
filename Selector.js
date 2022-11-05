@@ -46,6 +46,16 @@ class El{
         return el;
     }
     //-----------------------------------------------------
+    icon(name,value=null)
+    {
+        let el = this.attr('data-icon', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
     dusk(name,value=null)
     {
         let el = this.attr('dusk', name);
