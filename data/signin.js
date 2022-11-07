@@ -4,6 +4,7 @@ class Signin{
 
     constructor() {
         this.selector_type = 'dusk';
+
         this.params = {
             group:{
                 count: null,
@@ -24,11 +25,11 @@ class Signin{
 
         this.groups = [
             {
-                count: 0,
+                count: 1,
                 name:"Validation",
                 tests: [
                     {
-                        count: 0,
+                        count: 1.1,
                         name: "Invalid Credentials",
                         expect: "User should not be able to signin and an error message should be displayed",
                         title: "Validate with invalid credentials",
@@ -37,22 +38,25 @@ class Signin{
                         assert: "No user exist"
                     },
                     {
-                        count: 1,
+                        count: 1.2,
                         name: "Invalid email and Valid Password",
                         expect: "User should not be able to signin and an error message should be displayed",
-                        email: "sanu@gmail.com",
+                        email: "satyajeet@gmail.com",
                         password: "admin@vaahcms",
                         assert: "No user exist"
                     },
                     {
-                        count: 2,
+                        count: 1.3,
                         name: "Valid email and Invalid Password",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
                         password: "123456",
                         assert: "Invalid credentials"
                     },
-                    {
+                ]
+            }
+        ]
+                    /*{
                         count: 3,
                         name: "Valid Credentials",
                         expect: "User should be able to signin and signout from the application successfully.",
@@ -157,7 +161,7 @@ class Signin{
                     },
                 ]
             }
-            ]
+            ]*/
 
         /*this.tests = {
             group:{

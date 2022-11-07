@@ -34,28 +34,24 @@ class SigninPage extends Page {
         await browser.refresh();
         await browser.pause(2000);
     }
+
     //---------------------------------------------------------
-    async browseBack()
-    {
-        await browser.back();
-    }
-    //---------------------------------------------------------
-    async browseForward()
-    {
-        await browser.forward();
-    }
+
     async assertion(assert)
     {
         await expect(Sl.$('h3')).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
+
     async fillForm(email, password, data)
     {
         await Sl.dynamic(data.selectors.email, data.selector_type).setValue(email);
         await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
     }
+
     //---------------------------------------------------------
+
     async fillAndRemoveEmail(email,data)
     {
         const emailTextField = await Sl.dynamic(data.selectors.email, data.selector_type);
@@ -63,36 +59,47 @@ class SigninPage extends Page {
         await browser.pause(2000);
         emailTextField.clearValue();
     }
+
     //---------------------------------------------------------
+
     async fillAndRemovePassword(password,data) {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
         await browser.pause(2000);
         passwordTextField.clearValue();
     }
+
     //---------------------------------------------------------
+
     async submitFunctionality(data,assert)
     {
         await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
     }
+
     //---------------------------------------------------------
+
     async clickSubmit(data)
     {
         await Sl.dynamic(data.selectors.submit, data.selector_type).click();
     }
+
     //---------------------------------------------------------
+
     async fillAndSubmit(email, password, data)
     {
         await this.fillForm(email, password, data)
         await this.clickSubmit(data)
 
     }
+
     //---------------------------------------------------------
+
     async submitAndAssert(email, password, data, assert)
     {
         await this.fillAndSubmit(email, password, data)
         await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
     }
+
     //---------------------------------------------------------
 
     async submitAndLogout(email, password, data, assert)
@@ -119,6 +126,7 @@ class SigninPage extends Page {
     }
 
     //---------------------------------------------------------
+
     async signOutAndBrowseBack(email, password, data,assert)
     {
         await this.fillForm(email, password, data)
@@ -131,17 +139,6 @@ class SigninPage extends Page {
 
     }
 
-    //---------------------------------------------------------
-    async signInClosingWindow(email, password, data)
-    {
-        await this.fillForm(email, password, data)
-        await this.clickSubmit(data)
-        await browser.pause(2000)
-        const title = browser.getTitle();
-        console.log(title);
-        browser.closeWindow()
-
-    }
     //---------------------------------------------------------
 
     async forgotPassword(assert)
