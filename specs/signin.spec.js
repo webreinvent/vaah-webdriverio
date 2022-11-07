@@ -1,10 +1,9 @@
 const Page = require('../pageobjects/signin.page')
 const Data = require('../data/signin')
-const Sl = require("./../Selector");
-const assert = require("./../Assert");
-const selector_type = 'dusk';
+const color  = require("cli-color");
 
 let params = Data.params;
+let inputs;
 
 params.group = Data.groups[0];
 
@@ -12,19 +11,24 @@ describe(Page.groupId(params), async () => {
 
     params.test = Data.groups[0].tests[0];
 
-    console.log(params);
+    console.log(color.red('params.test'), params.test);
 
     it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[0];
+
+        console.log(color.green('params.test'), inputs);
+
         await Page.open()
         await Page.submitAndAssert(
-            /*params.test.email,
-            params.test.password,
+            inputs.email,
+            inputs.password,
             Data,
-            params.test.assert*/
-            params.group.tests[0].email,
+            inputs.assert
+            /*Data.groups[0].tests[0].email,
             params.group.tests[0].password,
             Data,
-            params.group.tests[0].assert
+            params.group.tests[0].assert*/
         );
        await Page.refresh();
     })
@@ -33,12 +37,18 @@ describe(Page.groupId(params), async () => {
     params.test = Data.groups[0].tests[1];
 
     it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[1];
+
+        console.log(color.green('params.test'), inputs);
+
+
         await Page.open()
         await Page.submitAndAssert(
-            params.group.tests[1].email,
-            params.group.tests[1].password,
+            inputs.email,
+            inputs.password,
             Data,
-            params.group.tests[1].assert
+            inputs.assert
         );
         await Page.refresh();
     })
@@ -76,7 +86,7 @@ describe(Page.groupId(params), async () => {
 
     it(Page.testId(params), async () => {
         await Page.open()
-        await Page.assertion(
+        await Page.h3_assertion(
             params.group.tests[4].assert
         )
         await Page.refresh();
@@ -227,6 +237,21 @@ describe(Page.groupId(params), async () => {
 
     //------------------------------------------------------------------------------------------------------------------
     params.test = Data.groups[0].tests[16];
+
+    it(Page.testId(params), async () => {
+        await Page.open()
+        await Page.signOutAndBrowseBack(
+            params.group.tests[16].email,
+            params.group.tests[16].password,
+            Data,
+            params.group.tests[16].assert
+        );
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[17];
 
     it(Page.testId(params), async () => {
         await Page.open()
