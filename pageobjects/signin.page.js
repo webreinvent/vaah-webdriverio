@@ -37,10 +37,18 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async assertion(assert)
+    async h3_assertion(assert)
     {
         await expect(Sl.$('h3')).toHaveTextContaining(assert);
     }
+
+    //---------------------------------------------------------
+
+    async h2_assertion(assert)
+    {
+        await expect(Sl.$('h2')).toHaveTextContaining(assert);
+    }
+
 
     //---------------------------------------------------------
 
@@ -102,27 +110,32 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitAndLogout(email, password, data, assert)
+    async moveAndLogout(data)
     {
-        await this.fillAndSubmit(email, password, data)
-        await expect(Sl.$('h2')).toHaveTextContaining(assert);
         await Sl.role("menuitem").moveTo(data);
         await Sl.$('=Logout').click(data);
     }
 
     //---------------------------------------------------------
 
+    async submitAndLogout(email, password, data, assert)
+    {
+        await this.fillAndSubmit(email, password, data)
+        await this.h2_assertion(assert)
+        await this.moveAndLogout(data);
+    }
+
+    //---------------------------------------------------------
+
     async signInAndBrowseBack(email, password, data,assert)
     {
-        await this.fillForm(email, password, data)
-        await this.clickSubmit(data)
+        await this.fillAndSubmit(email, password, data)
         await browser.pause(2000);
         await browser.back();
         await browser.pause(2000);
         await browser.forward();
-        await expect(Sl.$('h2')).toHaveTextContaining(assert);
-        await Sl.role("menuitem").moveTo(data);
-        await Sl.$('=Logout').click(data);
+        await this.h2_assertion(assert)
+        await this.moveAndLogout(data);
 
     }
 
@@ -130,13 +143,11 @@ class SigninPage extends Page {
 
     async signOutAndBrowseBack(email, password, data,assert)
     {
-        await this.fillForm(email, password, data)
-        await this.clickSubmit(data)
-        await Sl.role("menuitem").moveTo(data);
-        await Sl.$('=Logout').click(data);
+        await this.fillAndSubmit(email, password, data)
+        await this.moveAndLogout(data);
         await browser.pause(2000);
         await browser.back();
-        await expect(Sl.$('h3')).toHaveTextContaining(assert);
+        await this.h3_assertion(assert);
 
     }
 
@@ -145,7 +156,7 @@ class SigninPage extends Page {
     async forgotPassword(assert)
     {
         await Sl.$('=Forgot Password?').click();
-        await expect(Sl.$('h3')).toHaveTextContaining(assert);
+        await this.h3_assertion(assert);
     }
 
     //---------------------------------------------------------

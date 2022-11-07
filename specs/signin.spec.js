@@ -10,15 +10,11 @@ params.group = Data.groups[0];
 describe(Page.groupId(params), async () => {
 
     params.test = Data.groups[0].tests[0];
-
     console.log(color.red('params.test'), params.test);
 
     it(Page.testId(params), async () => {
-
         inputs = Data.groups[0].tests[0];
-
         console.log(color.green('params.test'), inputs);
-
         await Page.open()
         await Page.submitAndAssert(
             inputs.email,
@@ -39,10 +35,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
 
         inputs = Data.groups[0].tests[1];
-
         console.log(color.green('params.test'), inputs);
-
-
         await Page.open()
         await Page.submitAndAssert(
             inputs.email,
@@ -251,7 +244,7 @@ describe(Page.groupId(params), async () => {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    params.test = Data.groups[0].tests[17];
+    /*params.test = Data.groups[0].tests[17];
 
     it(Page.testId(params), async () => {
         await Page.open()
@@ -262,7 +255,7 @@ describe(Page.groupId(params), async () => {
             params.group.tests[16].assert
         );
         await Page.refresh();
-    })
+    })*/
 
     //------------------------------------------------------------------------------------------------------------------
 

@@ -156,6 +156,13 @@ class Signin{
                         assert: "Sign In"
 
                     },
+                    /*{
+                        count: 2.9,
+                        name: "Verifythe copyright text and symbol",
+                        expect: "Copyright text and symbol should be present under the footer section.",
+                        assert: "© 2022."
+
+                    },*/
                 ]
             }
             ]
