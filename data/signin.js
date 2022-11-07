@@ -53,11 +53,8 @@ class Signin{
                         password: "123456",
                         assert: "Invalid credentials"
                     },
-                ]
-            }
-        ]
-                    /*{
-                        count: 3,
+                    {
+                        count: 1.4,
                         name: "Valid Credentials",
                         expect: "User should be able to signin and signout from the application successfully.",
                         email: "we@webreinvent.com",
@@ -65,31 +62,31 @@ class Signin{
                         assert: ["Welcome to Vaah" , "cms"]
                     },
                     {
-                        count: 4,
+                        count: 1.5,
                         name: "Verfiy Heading of the SignIn Page",
                         expect: "Heading of the signin page should be correct",
                         assert: "Sign In"
                     },
                     {
-                        count: 5,
+                        count: 1.6,
                         name: "Verify forgot password link functionality",
                         expect: "User should be able to click on forgot password link and forgot password page should be displayed",
                         assert: "Forgot Password?"
                     },
                     {
-                        count: 6,
+                        count: 1.7,
                         name: "Verify user is able to remove text from email textfield",
                         expect: "User should be able to remove text from email textfield",
                         email: "we@webreinvent.com",
                     },
                     {
-                        count: 7,
-                        name: "Verify user is able to remove text from email textfield",
-                        expect: "User should be able to remove text from email textfield",
+                        count: 1.8,
+                        name: "Verify user is able to remove text from password textfield",
+                        expect: "User should be able to remove text from password textfield",
                         password: "admin@vaahcms"
                     },
                     {
-                        count: 8,
+                        count: 1.9,
                         name: "Verify user is able to signin using alphabetic characters in emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
@@ -97,7 +94,7 @@ class Signin{
                         assert: "No user exist"
                     },
                     {
-                        count: 9,
+                        count: 2.1,
                         name: "Verify user is able to signin using numeric characters in emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
@@ -105,7 +102,7 @@ class Signin{
                         assert: "No user exist"
                     },
                     {
-                        count: 10,
+                        count: 2.2,
                         name: "Verify user is able to signin with blank emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
@@ -113,7 +110,7 @@ class Signin{
                         assert: "The email or username field is required."
                     },
                     {
-                        count: 11,
+                        count: 2.3,
                         name: "Verify user is able to signin with blank passwordtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
@@ -121,7 +118,7 @@ class Signin{
                         assert: "Invalid credentials"
                     },
                     {
-                        count: 12,
+                        count: 2.4,
                         name: "Verify user is able to signin with both email and password textfields blank",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
@@ -129,20 +126,20 @@ class Signin{
                         assert: "The email or username field is required."
                     },
                     {
-                        count: 13,
+                        count: 2.5,
                         name: "Verify by clicking on the eye icon password should be shown for Password text-field",
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
                         password: "1323456",
                     },
                     {
-                        count: 14,
+                        count: 2.6,
                         name: "Verify that the labelled text present in Submit button is properly displayed",
                         expect: "Labelled text should be properly displayed.",
                         assert: "Sign In"
                     },
                     {
-                        count: 15,
+                        count: 2.7,
                         name: "Verify logging into the application and browsing back",
                         expect: " User should not get logged out.",
                         email: "we@webreinvent.com",
@@ -151,7 +148,7 @@ class Signin{
 
                     },
                     {
-                        count: 16,
+                        count: 2.8,
                         name: "Verify logging out from the application and browsing back ",
                         expect: " User should not get logged in again..",
                         email: "we@webreinvent.com",
@@ -161,7 +158,7 @@ class Signin{
                     },
                 ]
             }
-            ]*/
+            ]
 
         /*this.tests = {
             group:{

@@ -8,7 +8,7 @@ let params = Data.params;
 
 params.group = Data.groups[0];
 
-describe('Signin', async () => {
+describe(Page.groupId(params), async () => {
 
     params.test = Data.groups[0].tests[0];
 
@@ -17,10 +17,14 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
+            /*params.test.email,
             params.test.password,
             Data,
-            params.test.assert
+            params.test.assert*/
+            params.group.tests[0].email,
+            params.group.tests[0].password,
+            Data,
+            params.group.tests[0].assert
         );
        await Page.refresh();
     })
@@ -31,10 +35,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[1].email,
+            params.group.tests[1].password,
             Data,
-            params.test.assert
+            params.group.tests[1].assert
         );
         await Page.refresh();
     })
@@ -45,10 +49,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[2].email,
+            params.group.tests[2].password,
             Data,
-            params.test.assert
+            params.group.tests[2].assert
         );
         await Page.refresh();
     })
@@ -59,10 +63,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndLogout(
-            params.test.email,
-            params.test.password,
+            params.group.tests[3].email,
+            params.group.tests[3].password,
             Data,
-            params.test.assert
+            params.group.tests[3].assert
         );
         await Page.refresh();
     })
@@ -73,7 +77,7 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.assertion(
-            params.test.assert
+            params.group.tests[4].assert
         )
         await Page.refresh();
     })
@@ -84,7 +88,7 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.forgotPassword(
-            params.test.assert
+            params.group.tests[5].assert
         )
         await Page.refresh();
     })
@@ -95,8 +99,7 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.fillAndRemoveEmail(
-            params.test.email,
-            params.test.password,
+            params.group.tests[6].email,
             Data
         )
         await Page.refresh();
@@ -108,7 +111,7 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.fillAndRemovePassword(
-            params.test.password,
+            params.group.tests[7].password,
             Data
         )
         await Page.refresh();
@@ -120,10 +123,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[8].email,
+            params.group.tests[8].password,
             Data,
-            params.test.assert
+            params.group.tests[8].assert
         );
         await Page.refresh();
     })
@@ -134,10 +137,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[9].email,
+            params.group.tests[9].password,
             Data,
-            params.test.assert
+            params.group.tests[9].assert
         );
         await Page.refresh();
     })
@@ -148,10 +151,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[10].email,
+            params.group.tests[10].password,
             Data,
-            params.test.assert
+            params.group.tests[10].assert
         );
         await Page.refresh();
     })
@@ -162,10 +165,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[11].email,
+            params.group.tests[11].password,
             Data,
-            params.test.assert
+            params.group.tests[11].assert
         );
         await Page.refresh();
     })
@@ -176,10 +179,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.submitAndAssert(
-            params.test.email,
-            params.test.password,
+            params.group.tests[12].email,
+            params.group.tests[12].password,
             Data,
-            params.test.assert
+            params.group.tests[12].assert
         );
         await Page.refresh();
     })
@@ -190,7 +193,7 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.eyeButton(
-            params.test.password,
+            params.group.tests[13].password,
             Data,
         );
         await Page.refresh();
@@ -203,7 +206,7 @@ describe('Signin', async () => {
         await Page.open()
         await Page.submitFunctionality(
             Data,
-            params.test.assert
+            params.group.tests[14].assert
         );
         await Page.refresh();
     })
@@ -214,10 +217,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.signInAndBrowseBack(
-            params.test.email,
-            params.test.password,
+            params.group.tests[15].email,
+            params.group.tests[15].password,
             Data,
-            params.test.assert
+            params.group.tests[15].assert
         );
         await Page.refresh();
     })
@@ -228,10 +231,10 @@ describe('Signin', async () => {
     it(Page.testId(params), async () => {
         await Page.open()
         await Page.signOutAndBrowseBack(
-            params.test.email,
-            params.test.password,
+            params.group.tests[16].email,
+            params.group.tests[16].password,
             Data,
-            params.test.assert
+            params.group.tests[16].assert
         );
         await Page.refresh();
     })

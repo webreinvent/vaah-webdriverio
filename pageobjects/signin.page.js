@@ -111,6 +111,7 @@ class SigninPage extends Page {
     }
 
     //---------------------------------------------------------
+
     async signInAndBrowseBack(email, password, data,assert)
     {
         await this.fillForm(email, password, data)
@@ -146,6 +147,7 @@ class SigninPage extends Page {
         await Sl.$('=Forgot Password?').click();
         await expect(Sl.$('h3')).toHaveTextContaining(assert);
     }
+
     //---------------------------------------------------------
 
     async eyeButton(password,data,assert)
@@ -157,3 +159,5 @@ class SigninPage extends Page {
 }
 
 module.exports = new SigninPage();
+
+//----------------------------------------------------------------------------------------------------------------------
