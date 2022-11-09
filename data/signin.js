@@ -42,7 +42,11 @@ class Signin{
                         title: "Validate with invalid credentials",
                         email: "sanu@gmail.com",
                         password: "12345",
-                        assert: "No user exist"
+                        assert: {
+                            error_msg: "No user exist",
+                            signInPageTitle: "Sign In",
+                        }
+
                     },
                     {
                         count: 1.2,
@@ -50,7 +54,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeet@gmail.com",
                         password: "admin@vaahcms",
-                        assert: "No user exist"
+                        assert: {
+                            error_msg: "No user exist",
+                            signInPageTitle: "Sign In",
+                        }
                     },
                     {
                         count: 1.3,
@@ -58,7 +65,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
                         password: "123456",
-                        assert: "Invalid credentials"
+                        assert: {
+                            error_msg: "Invalid credentials",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 1.4,
@@ -66,7 +76,10 @@ class Signin{
                         expect: "User should be able to signin and signout from the application successfully.",
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
-                        assert: ["Welcome to Vaah" , "cms"]
+                        assert: {
+                            homePageTitle: ["Welcome to Vaah" , "cms"],
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 1.5,
@@ -98,7 +111,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
                         password: "12345",
-                        assert: "No user exist"
+                        assert: {
+                            error_msg: "No user exist",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.1,
@@ -106,7 +122,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
                         password: "12345",
-                        assert: "No user exist"
+                        assert: {
+                            error_msg: "No user exist",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.2,
@@ -114,7 +133,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "admin@vaahcms",
-                        assert: "The email or username field is required."
+                        assert: {
+                            error_msg: "The email or username field is required.",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.3,
@@ -122,7 +144,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
                         password: "",
-                        assert: "Invalid credentials"
+                        assert: {
+                            error_msg: "Invalid credentials",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.4,
@@ -130,7 +155,10 @@ class Signin{
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "",
-                        assert: "The email or username field is required."
+                        assert: {
+                            error_msg: "The email or username field is required.",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.5,
@@ -138,12 +166,16 @@ class Signin{
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
                         password: "1323456",
+                        assert_signInPageTitle: "Sign In"
                     },
                     {
                         count: 2.6,
                         name: "Verify that the labelled text present in Submit button is properly displayed",
                         expect: "Labelled text should be properly displayed.",
-                        assert: "Sign In"
+                        assert: {
+                            submitButton_labelledText: "Sign In",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 2.7,
@@ -151,7 +183,10 @@ class Signin{
                         expect: " User should not get logged out.",
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
-                        assert: ["Welcome to Vaah" , "cms"]
+                        assert: {
+                            homePageTitle: ["Welcome to Vaah" , "cms"],
+                            signInPageTitle: "Sign In"
+                        }
 
                     },
                     {
@@ -160,7 +195,10 @@ class Signin{
                         expect: " User should not get logged in again..",
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
-                        assert: "Sign In"
+                        assert: {
+                            homePageTitle: ["Welcome to Vaah" , "cms"],
+                            signInPageTitle: "Sign In",
+                        }
 
                     },
                     /*{

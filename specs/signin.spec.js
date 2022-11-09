@@ -20,7 +20,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
             /*Data.groups[0].tests[0].email,
             params.group.tests[0].password,
             Data,
@@ -41,7 +42,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -56,7 +58,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -71,7 +74,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.homePageTitle,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -136,7 +140,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -151,7 +156,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -166,7 +172,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -181,7 +188,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -196,7 +204,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -210,6 +219,7 @@ describe(Page.groupId(params), async () => {
         await Page.eyeButton(
             inputs.password,
             Data,
+            inputs.assert_signInPageTitle
         );
         await Page.refresh();
     })
@@ -222,7 +232,8 @@ describe(Page.groupId(params), async () => {
         await Page.open()
         await Page.submitFunctionality(
             Data,
-            inputs.assert
+            inputs.assert.submitButton_labelledText,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -237,7 +248,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.homePageTitle,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })
@@ -252,7 +264,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.homePageTitle,
+            inputs.assert.signInPageTitle
         );
         await Page.refresh();
     })

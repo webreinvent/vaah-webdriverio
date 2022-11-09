@@ -79,9 +79,10 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitFunctionality(data,assert)
+    async submitFunctionality(data,assert,assertsignin)
     {
         await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
+        await this.h3_assertion(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -102,10 +103,11 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitAndAssert(email, password, data, assert)
+    async submitAndAssert(email, password, data, assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
         await expect(Sl.role(Data.selectors.alert_box)).toHaveTextContaining(assert);
+        await this.h3_assertion(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -118,36 +120,42 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitAndLogout(email, password, data, assert)
+    async submitAndLogout(email, password, data, assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
         await this.h2_assertion(assert)
         await this.moveAndLogout(data);
+        await this.h3_assertion(assertsignin);
     }
 
     //---------------------------------------------------------
 
-    async signInAndBrowseBack(email, password, data,assert)
+    async signInAndBrowseBack(email, password, data,assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
         await browser.pause(2000);
         await browser.back();
+        await this.h3_assertion(assertsignin);
         await browser.pause(2000);
         await browser.forward();
-        await this.h2_assertion(assert)
+        await this.h2_assertion(assert);
         await this.moveAndLogout(data);
 
     }
 
     //---------------------------------------------------------
 
-    async signOutAndBrowseBack(email, password, data,assert)
+    async signOutAndBrowseBack(email, password, data,assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
+        await this.h2_assertion(assert)
         await this.moveAndLogout(data);
+        await this.h3_assertion(assertsignin);
         await browser.pause(2000);
         await browser.back();
-        await this.h3_assertion(assert);
+
+
+
 
     }
 
@@ -166,6 +174,7 @@ class SigninPage extends Page {
         await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
         await browser.pause(2000);
         await Sl.icon(Data.selectors.eye_icon).click();
+        await this.h3_assertion(assert);
     }
 }
 
