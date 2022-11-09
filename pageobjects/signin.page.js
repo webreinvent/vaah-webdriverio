@@ -39,14 +39,14 @@ class SigninPage extends Page {
 
     async h3_assertion(assert)
     {
-        await expect(Sl.$('h3')).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.h3)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async h2_assertion(assert)
     {
-        await expect(Sl.$('h2')).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.h2)).toHaveTextContaining(assert);
     }
 
 
@@ -105,15 +105,15 @@ class SigninPage extends Page {
     async submitAndAssert(email, password, data, assert)
     {
         await this.fillAndSubmit(email, password, data)
-        await expect(Sl.role("alertdialog")).toHaveTextContaining(assert);
+        await expect(Sl.role(Data.selectors.alert_box)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async moveAndLogout(data)
     {
-        await Sl.role("menuitem").moveTo(data);
-        await Sl.$('=Logout').click(data);
+        await Sl.role(Data.selectors.menu_item).moveTo(data);
+        await Sl.$(Data.selectors.logout_button).click(data);
     }
 
     //---------------------------------------------------------
@@ -155,7 +155,7 @@ class SigninPage extends Page {
 
     async forgotPassword(assert)
     {
-        await Sl.$('=Forgot Password?').click();
+        await Sl.$(Data.selectors.forgot_pasword).click();
         await this.h3_assertion(assert);
     }
 
@@ -165,7 +165,7 @@ class SigninPage extends Page {
     {
         await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
         await browser.pause(2000);
-        await Sl.icon("eye").click();
+        await Sl.icon(Data.selectors.eye_icon).click();
     }
 }
 

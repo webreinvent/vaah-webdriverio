@@ -14,7 +14,14 @@ class Signin{
         this.selectors = {
             email: 'signin-email_or_username',
             password: 'signin-password',
-            submit: 'signin-signin'
+            submit: 'signin-signin',
+            h3: 'h3',
+            h2: 'h2',
+            alert_box: 'alertdialog',
+            menu_item: 'menuitem',
+            logout_button: '=Logout',
+            eye_icon: 'eye',
+            forgot_pasword: '=Forgot Password?'
         }
         this.params.page = {
             id: "SL",
