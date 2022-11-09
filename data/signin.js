@@ -22,7 +22,8 @@ class Signin{
             menu_item: 'menuitem',
             logout_button: '=Logout',
             eye_icon: 'eye',
-            forgot_password: '=Forgot Password?'
+            forgot_password: '=Forgot Password?',
+            copyright: '=VaahCMS'
         }
         this.params.page = {
             id: "SL",
@@ -177,13 +178,12 @@ class Signin{
                         expect: "Sub-Heading of the signin page should be correct",
                         assert: "Please Sign In to continue"
                     },
-                    /*{
-                        count: 1.2,
-                        name: "Verify copyright text and symbol",
-                        expect: "Copyright text and symbol should be present under the footer section. of the signIn page.",
-
-                        assert_copyrightText: "© 2022."
-                    }*/
+                    {
+                        count: 1.3,
+                        name: "Verify linksin footer section",
+                        expect: "Links should be present under the footer section. of the signIn page.",
+                        assert: "VaahCMS"
+                    }
 
                 ]
             },

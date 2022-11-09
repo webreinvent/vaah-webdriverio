@@ -220,6 +220,19 @@ describe(Page.groupId(params), async () => {
     })
 
     //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[1].tests[2];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[1].tests[2];
+        await Page.open()
+        await Page.linkText(
+            inputs.assert
+        )
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
     params.group = Data.groups[2];
     params.test = Data.groups[2].tests[0];
     console.log(color.red('params.test'), params.test);

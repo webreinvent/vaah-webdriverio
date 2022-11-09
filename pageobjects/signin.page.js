@@ -183,12 +183,12 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    /*async copyRight(assert)
+    async linkText(assert)
     {
         //await this.h3_assertion(assertsignin);
-        await expect(Sl.$(Data.selectors.p)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.copyright)).toHaveTextContaining(assert);
 
-    }*/
+    }
 }
 
 module.exports = new SigninPage();
