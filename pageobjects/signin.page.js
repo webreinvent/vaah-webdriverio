@@ -13,8 +13,8 @@ class SigninPage extends Page {
         super();
         this.params.page.id = "SI";
         this.params.page.name = "Sign-In";
-        this.params.page.path = "/";
-        this.params.page.url = this.base_url+this.params.page.path;
+        //this.params.page.path = "";
+        this.params.page.url = this.base_url;
     }
 
     //---------------------------------------------------------
@@ -40,6 +40,13 @@ class SigninPage extends Page {
     async h3_assertion(assert)
     {
         await expect(Sl.$(Data.selectors.h3)).toHaveTextContaining(assert);
+    }
+
+    //---------------------------------------------------------
+
+    async p_assertion(assert)
+    {
+        await expect(Sl.$(Data.selectors.p)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -173,6 +180,15 @@ class SigninPage extends Page {
         await Sl.icon(Data.selectors.eye_icon).click();
         await this.h3_assertion(assert);
     }
+
+    //---------------------------------------------------------
+
+    /*async copyRight(assert)
+    {
+        //await this.h3_assertion(assertsignin);
+        await expect(Sl.$(Data.selectors.p)).toHaveTextContaining(assert);
+
+    }*/
 }
 
 module.exports = new SigninPage();

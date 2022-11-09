@@ -1,6 +1,7 @@
 const Page = require('../pageobjects/signin.page')
 const Data = require('../data/signin')
 const color  = require("cli-color");
+const Sl = require("./../Selector");
 
 let params = Data.params;
 let inputs;
@@ -27,7 +28,7 @@ describe(Page.groupId(params), async () => {
             Data,
             params.group.tests[0].assert*/
         );
-       await Page.refresh();
+        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,6 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
 
         inputs = Data.groups[0].tests[1];
-        console.log(color.green('params.test'), inputs);
         await Page.open()
         await Page.submitAndAssert(
             inputs.email,
@@ -86,9 +86,13 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[4];
         await Page.open()
-        await Page.h3_assertion(
-            inputs.assert
-        )
+        await Page.submitAndAssert(
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
+        );
         await Page.refresh();
     })
 
@@ -98,9 +102,13 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[5];
         await Page.open()
-        await Page.forgotPassword(
-            inputs.assert
-        )
+        await Page.submitAndAssert(
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
+        );
         await Page.refresh();
     })
 
@@ -110,10 +118,13 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[6];
         await Page.open()
-        await Page.fillAndRemoveEmail(
+        await Page.submitAndAssert(
             inputs.email,
-            Data
-        )
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
+        );
         await Page.refresh();
     })
 
@@ -123,10 +134,13 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[7];
         await Page.open()
-        await Page.fillAndRemovePassword(
+        await Page.submitAndAssert(
+            inputs.email,
             inputs.password,
-            Data
-        )
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.signInPageTitle
+        );
         await Page.refresh();
     })
 
@@ -152,98 +166,6 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[9];
         await Page.open()
-        await Page.submitAndAssert(
-            inputs.email,
-            inputs.password,
-            Data,
-            inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[10];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[10];
-        await Page.open()
-        await Page.submitAndAssert(
-            inputs.email,
-            inputs.password,
-            Data,
-            inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[11];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[11];
-        await Page.open()
-        await Page.submitAndAssert(
-            inputs.email,
-            inputs.password,
-            Data,
-            inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[12];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[12];
-        await Page.open()
-        await Page.submitAndAssert(
-            inputs.email,
-            inputs.password,
-            Data,
-            inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[13];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[13];
-        await Page.open()
-        await Page.eyeButton(
-            inputs.password,
-            Data,
-            inputs.assert_signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[14];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[14];
-        await Page.open()
-        await Page.submitFunctionality(
-            Data,
-            inputs.assert.submitButton_labelledText,
-            inputs.assert.signInPageTitle
-        );
-        await Page.refresh();
-    })
-
-    //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[15];
-
-    it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[15];
-        await Page.open()
         await Page.signInAndBrowseBack(
             inputs.email,
             inputs.password,
@@ -255,10 +177,10 @@ describe(Page.groupId(params), async () => {
     })
 
     //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[0].tests[16];
+    params.test = Data.groups[0].tests[10];
 
     it(Page.testId(params), async () => {
-        inputs = Data.groups[0].tests[16];
+        inputs = Data.groups[0].tests[10];
         await Page.open()
         await Page.signOutAndBrowseBack(
             inputs.email,
@@ -271,20 +193,104 @@ describe(Page.groupId(params), async () => {
     })
 
     //------------------------------------------------------------------------------------------------------------------
-
-    /*params.test = Data.groups[0].tests[17];
+    params.group = Data.groups[1];
+    params.test = Data.groups[1].tests[0];
+    console.log(color.red('params.test'), params.test);
 
     it(Page.testId(params), async () => {
+        inputs = Data.groups[1].tests[0];
         await Page.open()
-        await Page.signOutAndBrowseBack(
-            params.group.tests[16].email,
-            params.group.tests[16].password,
+        await Page.h3_assertion(
+            inputs.assert
+        )
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[1].tests[1];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[1].tests[1];
+        await Page.open()
+        await Page.p_assertion(
+            inputs.assert
+        )
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.group = Data.groups[2];
+    params.test = Data.groups[2].tests[0];
+    console.log(color.red('params.test'), params.test);
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[0];
+        await Page.open()
+        await Page.forgotPassword(
+            inputs.assert
+        )
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[2].tests[1];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[1];
+        await Page.open()
+        await Page.fillAndRemoveEmail(
+            inputs.email,
+            Data
+        )
+        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[2].tests[2];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[2];
+        await Page.open()
+        await Page.fillAndRemovePassword(
+            inputs.password,
+            Data
+        )
+        await Page.refresh();
+    })
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[2].tests[3];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[3];
+        await Page.open()
+        await Page.eyeButton(
+            inputs.password,
             Data,
-            params.group.tests[16].assert
+            inputs.assert_signInPageTitle
         );
         await Page.refresh();
-    })*/
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[2].tests[4];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[2].tests[4];
+        await Page.open()
+        await Page.submitFunctionality(
+            Data,
+            inputs.assert.submitButton_labelledText,
+            inputs.assert.signInPageTitle
+        );
+        await Page.refresh();
+    })
+
+
 
     //------------------------------------------------------------------------------------------------------------------
 
 })
+

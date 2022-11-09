@@ -17,6 +17,7 @@ class Signin{
             submit: 'signin-signin',
             h3: 'h3',
             h2: 'h2',
+            p: 'p',
             alert_box: 'alertdialog',
             menu_item: 'menuitem',
             logout_button: '=Logout',
@@ -46,7 +47,6 @@ class Signin{
                             error_msg: "No user exist",
                             signInPageTitle: "Sign In",
                         }
-
                     },
                     {
                         count: 1.2,
@@ -83,30 +83,6 @@ class Signin{
                     },
                     {
                         count: 1.5,
-                        name: "Verfiy Heading of the SignIn Page",
-                        expect: "Heading of the signin page should be correct",
-                        assert: "Sign In"
-                    },
-                    {
-                        count: 1.6,
-                        name: "Verify forgot password link functionality",
-                        expect: "User should be able to click on forgot password link and forgot password page should be displayed",
-                        assert: "Forgot Password?"
-                    },
-                    {
-                        count: 1.7,
-                        name: "Verify user is able to remove text from email textfield",
-                        expect: "User should be able to remove text from email textfield",
-                        email: "we@webreinvent.com",
-                    },
-                    {
-                        count: 1.8,
-                        name: "Verify user is able to remove text from password textfield",
-                        expect: "User should be able to remove text from password textfield",
-                        password: "admin@vaahcms"
-                    },
-                    {
-                        count: 1.9,
                         name: "Verify user is able to signin using alphabetic characters in emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
@@ -117,7 +93,7 @@ class Signin{
                         }
                     },
                     {
-                        count: 2.1,
+                        count: 1.6,
                         name: "Verify user is able to signin using numeric characters in emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
@@ -128,7 +104,7 @@ class Signin{
                         }
                     },
                     {
-                        count: 2.2,
+                        count: 1.7,
                         name: "Verify user is able to signin with blank emailtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
@@ -139,7 +115,7 @@ class Signin{
                         }
                     },
                     {
-                        count: 2.3,
+                        count: 1.8,
                         name: "Verify user is able to signin with blank passwordtextfield",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
@@ -150,7 +126,7 @@ class Signin{
                         }
                     },
                     {
-                        count: 2.4,
+                        count: 1.9,
                         name: "Verify user is able to signin with both email and password textfields blank",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
@@ -161,7 +137,81 @@ class Signin{
                         }
                     },
                     {
-                        count: 2.5,
+                        count: 2.1,
+                        name: "Verify logging into the application and browsing back",
+                        expect: " User should not get logged out.",
+                        email: "we@webreinvent.com",
+                        password: "admin@vaahcms",
+                        assert: {
+                            homePageTitle: ["Welcome to Vaah", "cms"],
+                            signInPageTitle: "Sign In"
+                        }
+
+                    },
+                    {
+                        count: 2.2,
+                        name: "Verify logging out from the application and browsing back ",
+                        expect: " User should not get logged in again..",
+                        email: "we@webreinvent.com",
+                        password: "admin@vaahcms",
+                        assert: {
+                            homePageTitle: ["Welcome to Vaah", "cms"],
+                            signInPageTitle: "Sign In",
+                        }
+                    },
+                        ]
+            },
+            {
+                count: 2,
+                name: "UI",
+                tests: [
+                    {
+                        count: 1.1,
+                        name: "Verfiy Heading of the SignIn Page",
+                        expect: "Heading of the signin page should be correct",
+                        assert: "Sign In"
+                    },
+                    {
+                        count: 1.2,
+                        name: "Verfiy Sub-Heading of the SignIn Page",
+                        expect: "Sub-Heading of the signin page should be correct",
+                        assert: "Please Sign In to continue"
+                    },
+                    /*{
+                        count: 1.2,
+                        name: "Verify copyright text and symbol",
+                        expect: "Copyright text and symbol should be present under the footer section. of the signIn page.",
+
+                        assert_copyrightText: "© 2022."
+                    }*/
+
+                ]
+            },
+            {
+                count: 3,
+                name: "functionality",
+                tests: [
+                    {
+                        count: 1.1,
+                        name: "Verify forgot password link functionality",
+                        expect: "User should be able to click on forgot password link and forgot password page should be displayed",
+                        assert: "Forgot Password?"
+                    },
+                    {
+                        count: 1.2,
+                        name: "Verify user is able to remove text from email textfield",
+                        expect: "User should be able to remove text from email textfield",
+                        email: "we@webreinvent.com",
+                    },
+                    {
+                        count: 1.3,
+                        name: "Verify user is able to remove text from password textfield",
+                        expect: "User should be able to remove text from password textfield",
+                        password: "admin@vaahcms"
+                    },
+
+                    {
+                        count: 1.4,
                         name: "Verify by clicking on the eye icon password should be shown for Password text-field",
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
@@ -169,49 +219,17 @@ class Signin{
                         assert_signInPageTitle: "Sign In"
                     },
                     {
-                        count: 2.6,
+                        count: 1.5,
                         name: "Verify that the labelled text present in Submit button is properly displayed",
                         expect: "Labelled text should be properly displayed.",
                         assert: {
                             submitButton_labelledText: "Sign In",
                             signInPageTitle: "Sign In"
                         }
-                    },
-                    {
-                        count: 2.7,
-                        name: "Verify logging into the application and browsing back",
-                        expect: " User should not get logged out.",
-                        email: "we@webreinvent.com",
-                        password: "admin@vaahcms",
-                        assert: {
-                            homePageTitle: ["Welcome to Vaah" , "cms"],
-                            signInPageTitle: "Sign In"
-                        }
-
-                    },
-                    {
-                        count: 2.8,
-                        name: "Verify logging out from the application and browsing back ",
-                        expect: " User should not get logged in again..",
-                        email: "we@webreinvent.com",
-                        password: "admin@vaahcms",
-                        assert: {
-                            homePageTitle: ["Welcome to Vaah" , "cms"],
-                            signInPageTitle: "Sign In",
-                        }
-
-                    },
-                    /*{
-                        count: 2.9,
-                        name: "Verifythe copyright text and symbol",
-                        expect: "Copyright text and symbol should be present under the footer section.",
-                        assert: "© 2022."
-
-                    },*/
+                    }
                 ]
             }
             ]
-
         /*this.tests = {
             group:{
                 count: 1,
