@@ -154,16 +154,13 @@ class SigninPage extends Page {
         await browser.pause(2000);
         await browser.back();
 
-
-
-
     }
 
     //---------------------------------------------------------
 
     async forgotPassword(assert)
     {
-        await Sl.$(Data.selectors.forgot_pasword).click();
+        await Sl.$(Data.selectors.forgot_password).click();
         await this.h3_assertion(assert);
     }
 

@@ -21,7 +21,7 @@ class Signin{
             menu_item: 'menuitem',
             logout_button: '=Logout',
             eye_icon: 'eye',
-            forgot_pasword: '=Forgot Password?'
+            forgot_password: '=Forgot Password?'
         }
         this.params.page = {
             id: "SL",
