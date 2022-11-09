@@ -186,7 +186,7 @@ class SigninPage extends Page {
     async linkText(assert)
     {
         //await this.h3_assertion(assertsignin);
-        await expect(Sl.$(Data.selectors.copyright)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.linkText)).toHaveTextContaining(assert);
 
     }
 }

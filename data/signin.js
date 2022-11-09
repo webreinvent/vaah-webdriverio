@@ -23,7 +23,7 @@ class Signin{
             logout_button: '=Logout',
             eye_icon: 'eye',
             forgot_password: '=Forgot Password?',
-            copyright: '=VaahCMS'
+            linkText: '=VaahCMS'
         }
         this.params.page = {
             id: "SL",
