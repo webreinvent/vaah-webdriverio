@@ -200,14 +200,20 @@ class Signin{
                         name: "Verify user is able to remove text from email text-field",
                         expect: "User should be able to remove text from email text-field",
                         email: "we@webreinvent.com",
-                        assert: ""
+                        assert: {
+                            text_value: "we@webreinvent.com",
+                            blank_value: ""
+                        }
                     },
                     {
                         count: 1.3,
                         name: "Verify user is able to remove text from password text-field",
                         expect: "User should be able to remove text from password text-field",
                         password: "admin@vaahcms",
-                        assert: ""
+                        assert: {
+                            text_value: "admin@vaahcms",
+                            blank_value: ""
+                        }
                     },
 
                     {
@@ -216,7 +222,10 @@ class Signin{
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
                         password: "1323456",
-                        assert_signInPageTitle: "Sign In"
+                        assert: {
+                            password_value: "1323456",
+                            signInPageTitle: "Sign In"
+                        }
                     },
                     {
                         count: 1.5,

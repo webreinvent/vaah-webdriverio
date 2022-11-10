@@ -66,26 +66,24 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndRemoveEmail(email,data,assert)
+    async fillAndRemoveEmail(email,data,assertvalue,assert)
     {
         const emailTextField = await Sl.dynamic(data.selectors.email, data.selector_type);
         emailTextField.setValue(email);
-        //const text = await emailTextField.getText();
-        //await browser.pause(2000);
+        await expect(emailTextField).toHaveValueContaining(assertvalue);
         emailTextField.clearValue();
-        //const blank = await emailTextField.getText();
-        await expect(emailTextField).toHaveTextContaining(assert);
+        await expect(emailTextField).toHaveValueContaining(assert);
 
     }
 
     //---------------------------------------------------------
 
-    async fillAndRemovePassword(password,data,assert) {
+    async fillAndRemovePassword(password,data,assertvalue,assert) {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
-        await browser.pause(2000);
+        await expect(passwordTextField).toHaveValueContaining(assertvalue);
         passwordTextField.clearValue();
-        await expect(passwordTextField).toHaveTextContaining(assert);
+        await expect(passwordTextField).toHaveValueContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -162,7 +160,6 @@ class SigninPage extends Page {
         await this.homePageHeading(assert)
         await this.moveAndLogout(data);
         await this.heading(assertsignin);
-        await browser.pause(2000);
         await browser.back();
 
     }
@@ -177,12 +174,15 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async eyeButton(password,data,assert)
+    async eyeButton(password,data,assertsignin,assert)
     {
-        await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
-        await browser.pause(2000);
+        const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
+        passwordTextField.setValue(password);
+        await this.heading(assertsignin);
         await Sl.icon(Data.selectors.eye_icon).click();
-        await this.heading(assert);
+        await browser.pause(2000);
+        await expect(passwordTextField).toHaveValueContaining(assert)
+
     }
 
     //---------------------------------------------------------

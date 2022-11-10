@@ -255,7 +255,8 @@ describe(Page.groupId(params), async () => {
         await Page.fillAndRemoveEmail(
             inputs.email,
             Data,
-            inputs.assert
+            inputs.assert.text_value,
+            inputs.assert.blank_value
         )
         await Page.refresh();
     })
@@ -269,7 +270,8 @@ describe(Page.groupId(params), async () => {
         await Page.fillAndRemovePassword(
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.text_value,
+            inputs.assert.blank_value
         )
         await Page.refresh();
     })
@@ -284,7 +286,8 @@ describe(Page.groupId(params), async () => {
         await Page.eyeButton(
             inputs.password,
             Data,
-            inputs.assert_signInPageTitle
+            inputs.assert.signInPageTitle,
+            inputs.assert.password_value
         );
         await Page.refresh();
     })
