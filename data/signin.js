@@ -26,7 +26,7 @@ class Signin{
         }
 
         this.params.page = {
-            id: "SL",
+            id: "SI",
             name: "Sign In",
             url: '/'
         }
