@@ -176,6 +176,7 @@ class SigninPage extends Page {
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
+        await browser.pause(2000);
         await this.heading(assertsignin);
         await Sl.icon(Data.selectors.eye_icon).click();
         await browser.pause(2000);
