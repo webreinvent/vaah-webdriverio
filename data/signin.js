@@ -178,8 +178,8 @@ class Signin{
                     },
                     {
                         count: 1.3,
-                        name: "Verify links in footer section",
-                        expect: "Links should be present under the footer section. of the signIn page.",
+                        name: "Verify VaahCMS link in footer section",
+                        expect: "VaahCMS link should be present under the footer section. of the signIn page.",
                         assert: "VaahCMS"
                     }
 
