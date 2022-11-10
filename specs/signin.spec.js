@@ -254,7 +254,8 @@ describe(Page.groupId(params), async () => {
         await Page.open()
         await Page.fillAndRemoveEmail(
             inputs.email,
-            Data
+            Data,
+            inputs.assert
         )
         await Page.refresh();
     })
@@ -267,7 +268,8 @@ describe(Page.groupId(params), async () => {
         await Page.open()
         await Page.fillAndRemovePassword(
             inputs.password,
-            Data
+            Data,
+            inputs.assert
         )
         await Page.refresh();
     })

@@ -200,12 +200,14 @@ class Signin{
                         name: "Verify user is able to remove text from email text-field",
                         expect: "User should be able to remove text from email text-field",
                         email: "we@webreinvent.com",
+                        assert: ""
                     },
                     {
                         count: 1.3,
                         name: "Verify user is able to remove text from password text-field",
                         expect: "User should be able to remove text from password text-field",
-                        password: "admin@vaahcms"
+                        password: "admin@vaahcms",
+                        assert: ""
                     },
 
                     {

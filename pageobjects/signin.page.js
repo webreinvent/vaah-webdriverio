@@ -66,21 +66,26 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndRemoveEmail(email,data)
+    async fillAndRemoveEmail(email,data,assert)
     {
         const emailTextField = await Sl.dynamic(data.selectors.email, data.selector_type);
         emailTextField.setValue(email);
-        await browser.pause(2000);
+        //const text = await emailTextField.getText();
+        //await browser.pause(2000);
         emailTextField.clearValue();
+        //const blank = await emailTextField.getText();
+        await expect(emailTextField).toHaveTextContaining(assert);
+
     }
 
     //---------------------------------------------------------
 
-    async fillAndRemovePassword(password,data) {
+    async fillAndRemovePassword(password,data,assert) {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
         await browser.pause(2000);
         passwordTextField.clearValue();
+        await expect(passwordTextField).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
