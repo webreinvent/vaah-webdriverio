@@ -286,8 +286,7 @@ describe(Page.groupId(params), async () => {
         await Page.eyeButton(
             inputs.password,
             Data,
-            inputs.assert.sign_in_page_title,
-            inputs.assert.password_value
+            inputs.assert
         );
         await Page.refresh();
     })
@@ -300,8 +299,7 @@ describe(Page.groupId(params), async () => {
         await Page.open()
         await Page.submitFunctionality(
             Data,
-            inputs.assert.submit_button_labelled_text,
-            inputs.assert.sign_in_page_title
+            inputs.assert
         );
         await Page.refresh();
     })

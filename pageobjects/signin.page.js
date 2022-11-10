@@ -50,7 +50,7 @@ class SigninPage extends Page {
 
     async homePageHeading(assert)
     {
-        await expect(Sl.$(Data.selectors.home_page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.heading)).toHaveTextContaining(assert);
     }
 
 
@@ -86,10 +86,9 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitFunctionality(data,assert,assertsignin)
+    async submitFunctionality(data,assert)
     {
         await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
-        await this.heading(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -172,14 +171,12 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async eyeButton(password,data,assertsignin,assert)
+    async eyeButton(password,data,assert)
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
         await browser.pause(2000);
-        await this.heading(assertsignin);
         await Sl.icon(Data.selectors.eye_icon).click();
-        await browser.pause(2000);
         await expect(passwordTextField).toHaveValueContaining(assert)
 
     }

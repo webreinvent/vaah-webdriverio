@@ -15,7 +15,7 @@ class Signin{
             password: 'signin-password',
             submit: 'signin-signin',
             page_heading: 'h3',
-            home_page_heading: 'h2',
+            heading: 'h2',
             page_subheading: 'p',
             alert_box: 'alertdialog',
             menu_item: 'menuitem',
@@ -222,19 +222,15 @@ class Signin{
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
                         password: "1323456",
-                        assert: {
-                            password_value: "1323456",
-                            sign_in_page_title: "Sign In"
-                        }
+                        assert: "1323456"
                     },
+
                     {
                         count: 1.5,
                         name: "Verify that the labelled text present in Submit button is properly displayed",
                         expect: "Labelled text should be properly displayed.",
-                        assert: {
-                            submit_button_labelled_text: "Sign In",
-                            sign_in_page_title: "Sign In"
-                        }
+                        assert: "Sign In"
+
                     }
                 ]
             }
