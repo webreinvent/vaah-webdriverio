@@ -200,7 +200,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[0];
         await Page.open()
-        await Page.h3_assertion(
+        await Page.heading(
             inputs.assert
         )
         await Page.refresh();
@@ -213,7 +213,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[1];
         await Page.open()
-        await Page.p_assertion(
+        await Page.subheading(
             inputs.assert
         )
         await Page.refresh();

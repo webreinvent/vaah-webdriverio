@@ -40,7 +40,6 @@ class Signin{
                         count: 1.1,
                         name: "Invalid Credentials",
                         expect: "User should not be able to signin and an error message should be displayed",
-                        title: "Validate with invalid credentials",
                         email: "sanu@gmail.com",
                         password: "12345",
                         assert: {
@@ -83,7 +82,7 @@ class Signin{
                     },
                     {
                         count: 1.5,
-                        name: "Verify user is able to signin using alphabetic characters in emailtextfield",
+                        name: "Verify user is able to signin using alphabetic characters in email text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
                         password: "12345",
@@ -94,7 +93,7 @@ class Signin{
                     },
                     {
                         count: 1.6,
-                        name: "Verify user is able to signin using numeric characters in emailtextfield",
+                        name: "Verify user is able to signin using numeric characters in email text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
                         password: "12345",
@@ -105,7 +104,7 @@ class Signin{
                     },
                     {
                         count: 1.7,
-                        name: "Verify user is able to signin with blank emailtextfield",
+                        name: "Verify user is able to signin with blank email text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "admin@vaahcms",
@@ -116,7 +115,7 @@ class Signin{
                     },
                     {
                         count: 1.8,
-                        name: "Verify user is able to signin with blank passwordtextfield",
+                        name: "Verify user is able to signin with blank password text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
                         password: "",
@@ -127,7 +126,7 @@ class Signin{
                     },
                     {
                         count: 1.9,
-                        name: "Verify user is able to signin with both email and password textfields blank",
+                        name: "Verify user is able to signin with both email and password text-fields blank",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "",
@@ -151,7 +150,7 @@ class Signin{
                     {
                         count: 2.2,
                         name: "Verify logging out from the application and browsing back ",
-                        expect: " User should not get logged in again..",
+                        expect: " User should not get logged in again.",
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
                         assert: {
@@ -167,13 +166,13 @@ class Signin{
                 tests: [
                     {
                         count: 1.1,
-                        name: "Verfiy Heading of the SignIn Page",
+                        name: "Verify Heading of the SignIn Page",
                         expect: "Heading of the signin page should be correct",
                         assert: "Sign In"
                     },
                     {
                         count: 1.2,
-                        name: "Verfiy Sub-Heading of the SignIn Page",
+                        name: "Verify Sub-Heading of the SignIn Page",
                         expect: "Sub-Heading of the signin page should be correct",
                         assert: "Please Sign In to continue"
                     },
@@ -198,14 +197,14 @@ class Signin{
                     },
                     {
                         count: 1.2,
-                        name: "Verify user is able to remove text from email textfield",
-                        expect: "User should be able to remove text from email textfield",
+                        name: "Verify user is able to remove text from email text-field",
+                        expect: "User should be able to remove text from email text-field",
                         email: "we@webreinvent.com",
                     },
                     {
                         count: 1.3,
-                        name: "Verify user is able to remove text from password textfield",
-                        expect: "User should be able to remove text from password textfield",
+                        name: "Verify user is able to remove text from password text-field",
+                        expect: "User should be able to remove text from password text-field",
                         password: "admin@vaahcms"
                     },
 

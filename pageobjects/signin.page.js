@@ -13,7 +13,6 @@ class SigninPage extends Page {
         super();
         this.params.page.id = "SI";
         this.params.page.name = "Sign-In";
-        //this.params.page.path = "";
         this.params.page.url = this.base_url;
     }
 
@@ -37,21 +36,21 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async h3_assertion(assert)
+    async heading(assert)
     {
         await expect(Sl.$(Data.selectors.login_page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async p_assertion(assert)
+    async subheading(assert)
     {
         await expect(Sl.$(Data.selectors.login_page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async h2_assertion(assert)
+    async homePageHeading(assert)
     {
         await expect(Sl.$(Data.selectors.home_page_heading)).toHaveTextContaining(assert);
     }
@@ -89,7 +88,7 @@ class SigninPage extends Page {
     async submitFunctionality(data,assert,assertsignin)
     {
         await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
-        await this.h3_assertion(assertsignin);
+        await this.heading(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -114,7 +113,7 @@ class SigninPage extends Page {
     {
         await this.fillAndSubmit(email, password, data)
         await expect(Sl.role(Data.selectors.alert_box)).toHaveTextContaining(assert);
-        await this.h3_assertion(assertsignin);
+        await this.heading(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -130,9 +129,9 @@ class SigninPage extends Page {
     async submitAndLogout(email, password, data, assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
-        await this.h2_assertion(assert)
+        await this.homePageHeading(assert)
         await this.moveAndLogout(data);
-        await this.h3_assertion(assertsignin);
+        await this.heading(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -142,10 +141,10 @@ class SigninPage extends Page {
         await this.fillAndSubmit(email, password, data)
         await browser.pause(2000);
         await browser.back();
-        await this.h3_assertion(assertsignin);
+        await this.heading(assertsignin);
         await browser.pause(2000);
         await browser.forward();
-        await this.h2_assertion(assert);
+        await this.homePageHeading(assert);
         await this.moveAndLogout(data);
 
     }
@@ -155,9 +154,9 @@ class SigninPage extends Page {
     async signOutAndBrowseBack(email, password, data,assert,assertsignin)
     {
         await this.fillAndSubmit(email, password, data)
-        await this.h2_assertion(assert)
+        await this.homePageHeading(assert)
         await this.moveAndLogout(data);
-        await this.h3_assertion(assertsignin);
+        await this.heading(assertsignin);
         await browser.pause(2000);
         await browser.back();
 
@@ -168,7 +167,7 @@ class SigninPage extends Page {
     async forgotPassword(assert)
     {
         await Sl.$(Data.selectors.forgot_password).click();
-        await this.h3_assertion(assert);
+        await this.heading(assert);
     }
 
     //---------------------------------------------------------
@@ -178,7 +177,7 @@ class SigninPage extends Page {
         await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
         await browser.pause(2000);
         await Sl.icon(Data.selectors.eye_icon).click();
-        await this.h3_assertion(assert);
+        await this.heading(assert);
     }
 
     //---------------------------------------------------------
