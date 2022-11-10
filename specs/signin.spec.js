@@ -22,7 +22,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
             /*Data.groups[0].tests[0].email,
             params.group.tests[0].password,
             Data,
@@ -43,7 +43,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -59,7 +59,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -74,8 +74,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert.homePageTitle,
-            inputs.assert.signInPageTitle
+            inputs.assert.home_page_title,
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -91,7 +91,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -107,7 +107,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -123,7 +123,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -139,7 +139,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -155,7 +155,7 @@ describe(Page.groupId(params), async () => {
             inputs.password,
             Data,
             inputs.assert.error_msg,
-            inputs.assert.signInPageTitle
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -170,8 +170,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert.homePageTitle,
-            inputs.assert.signInPageTitle
+            inputs.assert.home_page_title,
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -186,8 +186,8 @@ describe(Page.groupId(params), async () => {
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert.homePageTitle,
-            inputs.assert.signInPageTitle
+            inputs.assert.home_page_title,
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })
@@ -286,7 +286,7 @@ describe(Page.groupId(params), async () => {
         await Page.eyeButton(
             inputs.password,
             Data,
-            inputs.assert.signInPageTitle,
+            inputs.assert.sign_in_page_title,
             inputs.assert.password_value
         );
         await Page.refresh();
@@ -300,8 +300,8 @@ describe(Page.groupId(params), async () => {
         await Page.open()
         await Page.submitFunctionality(
             Data,
-            inputs.assert.submitButton_labelledText,
-            inputs.assert.signInPageTitle
+            inputs.assert.submit_button_labelled_text,
+            inputs.assert.sign_in_page_title
         );
         await Page.refresh();
     })

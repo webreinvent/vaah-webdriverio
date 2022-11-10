@@ -1,8 +1,6 @@
 const Page = require('./../Page');
 const Sl = require('./../Selector');
 const Data = require("../data/signin");
-const assert = require("assert");
-const getText = require("webdriverio/build/commands/element/getText");
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -38,14 +36,14 @@ class SigninPage extends Page {
 
     async heading(assert)
     {
-        await expect(Sl.$(Data.selectors.login_page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async subheading(assert)
     {
-        await expect(Sl.$(Data.selectors.login_page_subheading)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -189,7 +187,7 @@ class SigninPage extends Page {
 
     async linkText(assert)
     {
-        await expect(Sl.$(Data.selectors.linkText)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.link_text)).toHaveTextContaining(assert);
 
     }
 }

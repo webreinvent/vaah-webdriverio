@@ -14,15 +14,15 @@ class Signin{
             email: 'signin-email_or_username',
             password: 'signin-password',
             submit: 'signin-signin',
-            login_page_heading: 'h3',
+            page_heading: 'h3',
             home_page_heading: 'h2',
-            login_page_subheading: 'p',
+            page_subheading: 'p',
             alert_box: 'alertdialog',
             menu_item: 'menuitem',
             logout_button: '=Logout',
             eye_icon: 'eye',
             forgot_password: '=Forgot Password?',
-            linkText: '=VaahCMS'
+            link_text: '=VaahCMS'
         }
 
         this.params.page = {
@@ -44,7 +44,7 @@ class Signin{
                         password: "12345",
                         assert: {
                             error_msg: "No user exist",
-                            signInPageTitle: "Sign In",
+                            sign_in_page_title: "Sign In",
                         }
                     },
                     {
@@ -55,7 +55,7 @@ class Signin{
                         password: "admin@vaahcms",
                         assert: {
                             error_msg: "No user exist",
-                            signInPageTitle: "Sign In",
+                            sign_in_page_title: "Sign In",
                         }
                     },
                     {
@@ -66,7 +66,7 @@ class Signin{
                         password: "123456",
                         assert: {
                             error_msg: "Invalid credentials",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -76,8 +76,8 @@ class Signin{
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
                         assert: {
-                            homePageTitle: ["Welcome to Vaah" , "cms"],
-                            signInPageTitle: "Sign In"
+                            home_page_title: ["Welcome to Vaah" , "cms"],
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -88,7 +88,7 @@ class Signin{
                         password: "12345",
                         assert: {
                             error_msg: "No user exist",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -99,7 +99,7 @@ class Signin{
                         password: "12345",
                         assert: {
                             error_msg: "No user exist",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -110,7 +110,7 @@ class Signin{
                         password: "admin@vaahcms",
                         assert: {
                             error_msg: "The email or username field is required.",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -121,7 +121,7 @@ class Signin{
                         password: "",
                         assert: {
                             error_msg: "Invalid credentials",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -132,7 +132,7 @@ class Signin{
                         password: "",
                         assert: {
                             error_msg: "The email or username field is required.",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -142,8 +142,8 @@ class Signin{
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
                         assert: {
-                            homePageTitle: ["Welcome to Vaah", "cms"],
-                            signInPageTitle: "Sign In"
+                            home_page_title: ["Welcome to Vaah", "cms"],
+                            sign_in_page_title: "Sign In"
                         }
 
                     },
@@ -154,8 +154,8 @@ class Signin{
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
                         assert: {
-                            homePageTitle: ["Welcome to Vaah", "cms"],
-                            signInPageTitle: "Sign In",
+                            home_page_title: ["Welcome to Vaah", "cms"],
+                            sign_in_page_title: "Sign In",
                         }
                     },
                         ]
@@ -224,7 +224,7 @@ class Signin{
                         password: "1323456",
                         assert: {
                             password_value: "1323456",
-                            signInPageTitle: "Sign In"
+                            sign_in_page_title: "Sign In"
                         }
                     },
                     {
@@ -232,8 +232,8 @@ class Signin{
                         name: "Verify that the labelled text present in Submit button is properly displayed",
                         expect: "Labelled text should be properly displayed.",
                         assert: {
-                            submitButton_labelledText: "Sign In",
-                            signInPageTitle: "Sign In"
+                            submit_button_labelled_text: "Sign In",
+                            sign_in_page_title: "Sign In"
                         }
                     }
                 ]
