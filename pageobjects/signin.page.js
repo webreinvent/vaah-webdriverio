@@ -39,21 +39,21 @@ class SigninPage extends Page {
 
     async h3_assertion(assert)
     {
-        await expect(Sl.$(Data.selectors.h3)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.login_page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async p_assertion(assert)
     {
-        await expect(Sl.$(Data.selectors.p)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.login_page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async h2_assertion(assert)
     {
-        await expect(Sl.$(Data.selectors.h2)).toHaveTextContaining(assert);
+        await expect(Sl.$(Data.selectors.home_page_heading)).toHaveTextContaining(assert);
     }
 
 
@@ -185,7 +185,6 @@ class SigninPage extends Page {
 
     async linkText(assert)
     {
-        //await this.h3_assertion(assertsignin);
         await expect(Sl.$(Data.selectors.linkText)).toHaveTextContaining(assert);
 
     }

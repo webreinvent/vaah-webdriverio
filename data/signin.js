@@ -1,7 +1,5 @@
 class Signin{
 
-
-
     constructor() {
         this.selector_type = 'dusk';
 
@@ -11,13 +9,14 @@ class Signin{
                 name: null,
             }
         }
+
         this.selectors = {
             email: 'signin-email_or_username',
             password: 'signin-password',
             submit: 'signin-signin',
-            h3: 'h3',
-            h2: 'h2',
-            p: 'p',
+            login_page_heading: 'h3',
+            home_page_heading: 'h2',
+            login_page_subheading: 'p',
             alert_box: 'alertdialog',
             menu_item: 'menuitem',
             logout_button: '=Logout',
@@ -25,10 +24,10 @@ class Signin{
             forgot_password: '=Forgot Password?',
             linkText: '=VaahCMS'
         }
+
         this.params.page = {
             id: "SL",
             name: "Sign In",
-            path: "/solutions",
             url: '/'
         }
 
@@ -189,7 +188,7 @@ class Signin{
             },
             {
                 count: 3,
-                name: "functionality",
+                name: "Functionality",
                 tests: [
                     {
                         count: 1.1,
