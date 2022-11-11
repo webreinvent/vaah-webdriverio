@@ -288,10 +288,10 @@ describe(Page.groupId(params), async () => {
     })*/
 
     //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[2].tests[4];
+    params.test = Data.groups[2].tests[3];
 
     it(Page.testId(params), async () => {
-        inputs = Data.groups[2].tests[4];
+        inputs = Data.groups[2].tests[3];
         await Page.open()
         await Page.signInButtonText(
             Data,

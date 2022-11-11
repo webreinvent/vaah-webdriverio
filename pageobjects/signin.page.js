@@ -170,7 +170,7 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async eyeButton(password,data,assert)
+    /*async eyeButton(password,data,assert)
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
@@ -178,7 +178,7 @@ class SigninPage extends Page {
         await Sl.icon(Data.selectors.eye_icon).click();
         await expect(passwordTextField).toHaveValueContaining(assert)
 
-    }
+    }*/
 
     //---------------------------------------------------------
 
