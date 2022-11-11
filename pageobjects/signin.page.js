@@ -34,21 +34,21 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async heading(assert)
+    async pageHeading(assert)
     {
         await expect(Sl.$(Data.selectors.page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async subheading(assert)
+    async pageSubHeading(assert)
     {
         await expect(Sl.$(Data.selectors.page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async homePageHeading(assert)
+    async heading(assert)
     {
         await expect(Sl.$(Data.selectors.heading)).toHaveTextContaining(assert);
     }
@@ -86,34 +86,34 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitFunctionality(data,assert)
+    async signInButtonText(data,assert)
     {
         await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async clickSubmit(data)
+    async clickSignIn(data)
     {
         await Sl.dynamic(data.selectors.submit, data.selector_type).click();
     }
 
     //---------------------------------------------------------
 
-    async fillAndSubmit(email, password, data)
+    async fillAndSignIn(email, password, data)
     {
         await this.fillForm(email, password, data)
-        await this.clickSubmit(data)
+        await this.clickSignIn(data)
 
     }
 
     //---------------------------------------------------------
 
-    async submitAndAssert(email, password, data, assert,assertsignin)
+    async signInAndAssert(email, password, data, assert,assertsignin)
     {
-        await this.fillAndSubmit(email, password, data)
+        await this.fillAndSignIn(email, password, data)
         await expect(Sl.role(Data.selectors.alert_box)).toHaveTextContaining(assert);
-        await this.heading(assertsignin);
+        await this.pageHeading(assertsignin);
     }
 
     //---------------------------------------------------------
@@ -126,25 +126,24 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async submitAndLogout(email, password, data, assert,assertsignin)
+    async signInAndSignOut(email, password, data, assert)
     {
-        await this.fillAndSubmit(email, password, data)
-        await this.homePageHeading(assert)
+        await this.fillAndSignIn(email, password, data)
+        await this.heading(assert)
         await this.moveAndLogout(data);
-        await this.heading(assertsignin);
     }
 
     //---------------------------------------------------------
 
     async signInAndBrowseBack(email, password, data,assert,assertsignin)
     {
-        await this.fillAndSubmit(email, password, data)
+        await this.fillAndSignIn(email, password, data)
         await browser.pause(2000);
         await browser.back();
-        await this.heading(assertsignin);
+        await this.pageHeading(assertsignin);
         await browser.pause(2000);
         await browser.forward();
-        await this.homePageHeading(assert);
+        await this.heading(assert);
         await this.moveAndLogout(data);
 
     }
@@ -153,11 +152,11 @@ class SigninPage extends Page {
 
     async signOutAndBrowseBack(email, password, data,assert,assertsignin)
     {
-        await this.fillAndSubmit(email, password, data)
-        await this.homePageHeading(assert)
+        await this.fillAndSignIn(email, password, data)
+        await this.heading(assert)
         await this.moveAndLogout(data);
-        await this.heading(assertsignin);
         await browser.back();
+        await this.pageHeading(assertsignin);
 
     }
 
@@ -166,7 +165,7 @@ class SigninPage extends Page {
     async forgotPassword(assert)
     {
         await Sl.$(Data.selectors.forgot_password).click();
-        await this.heading(assert);
+        await this.pageHeading(assert);
     }
 
     //---------------------------------------------------------

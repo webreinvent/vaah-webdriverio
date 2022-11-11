@@ -1,7 +1,6 @@
 const Page = require('../pageobjects/signin.page')
 const Data = require('../data/signin')
 const color  = require("cli-color");
-const Sl = require("./../Selector");
 
 let params = Data.params;
 let inputs;
@@ -17,7 +16,7 @@ describe(Page.groupId(params), async () => {
         inputs = Data.groups[0].tests[0];
         console.log(color.green('params.test'), inputs);
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -38,7 +37,7 @@ describe(Page.groupId(params), async () => {
 
         inputs = Data.groups[0].tests[1];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -54,7 +53,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[2];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -70,12 +69,11 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[3];
         await Page.open()
-        await Page.submitAndLogout(
+        await Page.signInAndSignOut(
             inputs.email,
             inputs.password,
             Data,
-            inputs.assert.home_page_title,
-            inputs.assert.sign_in_page_title
+            inputs.assert
         );
         await Page.refresh();
     })
@@ -86,7 +84,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[4];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -102,7 +100,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[5];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -118,7 +116,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[6];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -134,7 +132,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[7];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -150,7 +148,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[8];
         await Page.open()
-        await Page.submitAndAssert(
+        await Page.signInAndAssert(
             inputs.email,
             inputs.password,
             Data,
@@ -195,12 +193,11 @@ describe(Page.groupId(params), async () => {
     //------------------------------------------------------------------------------------------------------------------
     params.group = Data.groups[1];
     params.test = Data.groups[1].tests[0];
-    console.log(color.red('params.test'), params.test);
 
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[0];
         await Page.open()
-        await Page.heading(
+        await Page.pageHeading(
             inputs.assert
         )
         await Page.refresh();
@@ -213,7 +210,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[1].tests[1];
         await Page.open()
-        await Page.subheading(
+        await Page.pageSubHeading(
             inputs.assert
         )
         await Page.refresh();
@@ -235,7 +232,6 @@ describe(Page.groupId(params), async () => {
     //------------------------------------------------------------------------------------------------------------------
     params.group = Data.groups[2];
     params.test = Data.groups[2].tests[0];
-    console.log(color.red('params.test'), params.test);
 
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[0];
@@ -278,7 +274,7 @@ describe(Page.groupId(params), async () => {
 
 
     //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[2].tests[3];
+    /*params.test = Data.groups[2].tests[3];
 
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[3];
@@ -289,7 +285,7 @@ describe(Page.groupId(params), async () => {
             inputs.assert
         );
         await Page.refresh();
-    })
+    })*/
 
     //------------------------------------------------------------------------------------------------------------------
     params.test = Data.groups[2].tests[4];
@@ -297,7 +293,7 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[4];
         await Page.open()
-        await Page.submitFunctionality(
+        await Page.signInButtonText(
             Data,
             inputs.assert
         );

@@ -47,9 +47,10 @@ class Signin{
                             sign_in_page_title: "Sign In",
                         }
                     },
+
                     {
                         count: 1.2,
-                        name: "Invalid email and Valid Password",
+                        name: "Invalid email or username and Valid Password",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeet@gmail.com",
                         password: "admin@vaahcms",
@@ -58,9 +59,10 @@ class Signin{
                             sign_in_page_title: "Sign In",
                         }
                     },
+
                     {
                         count: 1.3,
-                        name: "Valid email and Invalid Password",
+                        name: "Valid email or username and Invalid Password",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "we@webreinvent.com",
                         password: "123456",
@@ -69,42 +71,44 @@ class Signin{
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 1.4,
                         name: "Valid Credentials",
-                        expect: "User should be able to signin and signout from the application successfully.",
+                        expect: "User should be able to signin into the application successfully.",
                         email: "we@webreinvent.com",
                         password: "admin@vaahcms",
-                        assert: {
-                            home_page_title: ["Welcome to Vaah" , "cms"],
-                            sign_in_page_title: "Sign In"
-                        }
+                        assert: ["Welcome to Vaah" , "cms"]
+
                     },
+
                     {
                         count: 1.5,
-                        name: "Verify user is able to signin using alphabetic characters in email text-field",
+                        name: "Verify user is able to signin using alphabetic characters in email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
-                        password: "12345",
+                        password: "admin@vaahcms",
                         assert: {
                             error_msg: "No user exist",
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 1.6,
-                        name: "Verify user is able to signin using numeric characters in email text-field",
+                        name: "Verify user is able to signin using numeric characters in email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
-                        password: "12345",
+                        password: "admin@vaahcms",
                         assert: {
                             error_msg: "No user exist",
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 1.7,
-                        name: "Verify user is able to signin with blank email text-field",
+                        name: "Verify user is able to signin with blank email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "admin@vaahcms",
@@ -113,6 +117,7 @@ class Signin{
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 1.8,
                         name: "Verify user is able to signin with blank password text-field",
@@ -124,9 +129,10 @@ class Signin{
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 1.9,
-                        name: "Verify user is able to signin with both email and password text-fields blank",
+                        name: "Verify user is able to signin with both email or username and password text-fields blank",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
                         password: "",
@@ -135,6 +141,7 @@ class Signin{
                             sign_in_page_title: "Sign In"
                         }
                     },
+
                     {
                         count: 2.1,
                         name: "Verify logging into the application and browsing back",
@@ -147,6 +154,7 @@ class Signin{
                         }
 
                     },
+
                     {
                         count: 2.2,
                         name: "Verify logging out from the application and browsing back ",
@@ -160,6 +168,7 @@ class Signin{
                     },
                         ]
             },
+
             {
                 count: 2,
                 name: "UI",
@@ -167,34 +176,37 @@ class Signin{
                     {
                         count: 1.1,
                         name: "Verify Heading of the SignIn Page",
-                        expect: "Heading of the signin page should be correct",
+                        expect: "Heading of the signin page should be present.",
                         assert: "Sign In"
                     },
+
                     {
                         count: 1.2,
                         name: "Verify Sub-Heading of the SignIn Page",
-                        expect: "Sub-Heading of the signin page should be correct",
+                        expect: "Sub-Heading of the signin page should be present.",
                         assert: "Please Sign In to continue"
                     },
+
                     {
                         count: 1.3,
-                        name: "Verify VaahCMS link in footer section",
-                        expect: "VaahCMS link should be present under the footer section. of the signIn page.",
+                        name: "Verify VaahCMS link is present in footer section",
+                        expect: "VaahCMS link should be present under the footer section of the signIn page.",
                         assert: "VaahCMS"
                     }
-
                 ]
             },
+
             {
                 count: 3,
                 name: "Functionality",
                 tests: [
                     {
                         count: 1.1,
-                        name: "Verify forgot password link functionality",
-                        expect: "User should be able to click on forgot password link and forgot password page should be displayed",
+                        name: "Verify forgot password link functionality.",
+                        expect: "User should be able to click on forgot password link and forgot password page should be displayed.",
                         assert: "Forgot Password?"
                     },
+
                     {
                         count: 1.2,
                         name: "Verify user is able to remove text from email text-field",
@@ -205,6 +217,7 @@ class Signin{
                             blank_value: ""
                         }
                     },
+
                     {
                         count: 1.3,
                         name: "Verify user is able to remove text from password text-field",
@@ -227,10 +240,9 @@ class Signin{
 
                     {
                         count: 1.5,
-                        name: "Verify that the labelled text present in Submit button is properly displayed",
-                        expect: "Labelled text should be properly displayed.",
+                        name: "Verify that the labelled text present in Sign In button.",
+                        expect: "Labelled text should be present in Sign In button.",
                         assert: "Sign In"
-
                     }
                 ]
             }
