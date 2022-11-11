@@ -1,6 +1,7 @@
 const Page = require('./../Page');
 const Sl = require('./../Selector');
 const Data = require("../data/signin");
+const assert = require("assert");
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -170,15 +171,17 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    /*async eyeButton(password,data,assert)
+    async eyeButton(password,data,assert,assertext)
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
+        await expect(passwordTextField).toHaveAttributeContaining(Data.attribute_name,assert)
         await browser.pause(2000);
         await Sl.icon(Data.selectors.eye_icon).click();
-        await expect(passwordTextField).toHaveValueContaining(assert)
+        await expect(passwordTextField).toHaveAttributeContaining(Data.attribute_name,assertext)
 
-    }*/
+
+    }
 
     //---------------------------------------------------------
 

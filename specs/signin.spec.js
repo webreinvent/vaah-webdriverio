@@ -274,7 +274,7 @@ describe(Page.groupId(params), async () => {
 
 
     //------------------------------------------------------------------------------------------------------------------
-    /*params.test = Data.groups[2].tests[3];
+    params.test = Data.groups[2].tests[3];
 
     it(Page.testId(params), async () => {
         inputs = Data.groups[2].tests[3];
@@ -282,16 +282,17 @@ describe(Page.groupId(params), async () => {
         await Page.eyeButton(
             inputs.password,
             Data,
-            inputs.assert
+            inputs.assert.type_password,
+            inputs.assert.type_text
         );
         await Page.refresh();
-    })*/
+    })
 
     //------------------------------------------------------------------------------------------------------------------
-    params.test = Data.groups[2].tests[3];
+    params.test = Data.groups[2].tests[4];
 
     it(Page.testId(params), async () => {
-        inputs = Data.groups[2].tests[3];
+        inputs = Data.groups[2].tests[4];
         await Page.open()
         await Page.signInButtonText(
             Data,

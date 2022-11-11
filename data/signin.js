@@ -2,6 +2,7 @@ class Signin{
 
     constructor() {
         this.selector_type = 'dusk';
+        this.attribute_name= 'type'
 
         this.params = {
             group:{
@@ -229,17 +230,20 @@ class Signin{
                         }
                     },
 
-                    /*{
+                    {
                         count: 1.4,
                         name: "Verify by clicking on the eye icon password should be shown for Password text-field",
                         expect: "Password should be shown when user click on the eye icon.",
                         email: "",
                         password: "1323456",
-                        assert: "1323456"
-                    },*/
+                         assert: {
+                            type_password: "password",
+                            type_text: "text"
+                        }
+                    },
 
                     {
-                        count: 1.4,
+                        count: 1.5,
                         name: "Verify that the labelled text present in Sign In button.",
                         expect: "Labelled text should be present in Sign In button.",
                         assert: "Sign In"
