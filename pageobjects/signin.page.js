@@ -35,23 +35,23 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async pageHeading(assert)
+    async pageHeading(data,assert)
     {
-        await expect(Sl.$(Data.selectors.page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async pageSubHeading(assert)
+    async pageSubHeading(data,assert)
     {
-        await expect(Sl.$(Data.selectors.page_subheading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
-    async heading(assert)
+    async heading(data,assert)
     {
-        await expect(Sl.$(Data.selectors.heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.heading)).toHaveTextContaining(assert);
     }
 
 
@@ -113,16 +113,16 @@ class SigninPage extends Page {
     async signInAndAssert(email, password, data, assert,assertsignin)
     {
         await this.fillAndSignIn(email, password, data)
-        await expect(Sl.role(Data.selectors.alert_box)).toHaveTextContaining(assert);
-        await this.pageHeading(assertsignin);
+        await expect(Sl.role(data.selectors.alert_box)).toHaveTextContaining(assert);
+        await this.pageHeading(data,assertsignin);
     }
 
     //---------------------------------------------------------
 
     async moveAndLogout(data)
     {
-        await Sl.role(Data.selectors.menu_item).moveTo(data);
-        await Sl.$(Data.selectors.logout_button).click(data);
+        await Sl.role(data.selectors.menu_item).moveTo();
+        await Sl.$(data.selectors.logout_button).click();
     }
 
     //---------------------------------------------------------
@@ -130,7 +130,7 @@ class SigninPage extends Page {
     async signInAndSignOut(email, password, data, assert)
     {
         await this.fillAndSignIn(email, password, data)
-        await this.heading(assert)
+        await this.heading(data,assert)
         await this.moveAndLogout(data);
     }
 
@@ -141,10 +141,10 @@ class SigninPage extends Page {
         await this.fillAndSignIn(email, password, data)
         await browser.pause(2000);
         await browser.back();
-        await this.pageHeading(assertsignin);
+        await this.pageHeading(data,assertsignin);
         await browser.pause(2000);
         await browser.forward();
-        await this.heading(assert);
+        await this.heading(data,assert);
         await this.moveAndLogout(data);
 
     }
@@ -154,19 +154,19 @@ class SigninPage extends Page {
     async signOutAndBrowseBack(email, password, data,assert,assertsignin)
     {
         await this.fillAndSignIn(email, password, data)
-        await this.heading(assert)
+        await this.heading(data,assert)
         await this.moveAndLogout(data);
         await browser.back();
-        await this.pageHeading(assertsignin);
+        await this.pageHeading(data,assertsignin);
 
     }
 
     //---------------------------------------------------------
 
-    async forgotPassword(assert)
+    async forgotPassword(data,assert)
     {
-        await Sl.$(Data.selectors.forgot_password).click();
-        await this.pageHeading(assert);
+        await Sl.$(data.selectors.forgot_password).click();
+        await this.pageHeading(data,assert);
     }
 
     //---------------------------------------------------------
@@ -175,19 +175,19 @@ class SigninPage extends Page {
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
-        await expect(passwordTextField).toHaveAttributeContaining(Data.attribute_name,assert)
+        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
         await browser.pause(2000);
-        await Sl.icon(Data.selectors.eye_icon).click();
-        await expect(passwordTextField).toHaveAttributeContaining(Data.attribute_name,assertext)
+        await Sl.icon(data.selectors.eye_icon).click();
+        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assertext)
 
 
     }
 
     //---------------------------------------------------------
 
-    async linkText(assert)
+    async linkText(data,assert)
     {
-        await expect(Sl.$(Data.selectors.link_text)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.link_text)).toHaveTextContaining(assert);
 
     }
 }

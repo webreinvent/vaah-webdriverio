@@ -198,6 +198,7 @@ describe(Page.groupId(params), async () => {
         inputs = Data.groups[1].tests[0];
         await Page.open()
         await Page.pageHeading(
+            Data,
             inputs.assert
         )
         await Page.refresh();
@@ -211,6 +212,7 @@ describe(Page.groupId(params), async () => {
         inputs = Data.groups[1].tests[1];
         await Page.open()
         await Page.pageSubHeading(
+            Data,
             inputs.assert
         )
         await Page.refresh();
@@ -224,6 +226,7 @@ describe(Page.groupId(params), async () => {
         inputs = Data.groups[1].tests[2];
         await Page.open()
         await Page.linkText(
+            Data,
             inputs.assert
         )
         await Page.refresh();
@@ -237,6 +240,7 @@ describe(Page.groupId(params), async () => {
         inputs = Data.groups[2].tests[0];
         await Page.open()
         await Page.forgotPassword(
+            Data,
             inputs.assert
         )
         await Page.refresh();
