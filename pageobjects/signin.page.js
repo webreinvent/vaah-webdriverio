@@ -57,7 +57,7 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillForm(email, password, data)
+    async fillForm(email,password,data)
     {
         await Sl.dynamic(data.selectors.email, data.selector_type).setValue(email);
         await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
@@ -65,11 +65,11 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndRemoveEmail(email,data,assertvalue,assert)
+    async fillAndRemoveEmail(email,data,assert_value,assert)
     {
         const emailTextField = await Sl.dynamic(data.selectors.email, data.selector_type);
         emailTextField.setValue(email);
-        await expect(emailTextField).toHaveValueContaining(assertvalue);
+        await expect(emailTextField).toHaveValueContaining(assert_value);
         emailTextField.clearValue();
         await expect(emailTextField).toHaveValueContaining(assert);
 
@@ -77,15 +77,15 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndRemovePassword(password,data,assertvalue,assert) {
+    async fillAndRemovePassword(password,data,assert_value,assert) {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
-        await expect(passwordTextField).toHaveValueContaining(assertvalue);
+        await expect(passwordTextField).toHaveValueContaining(assert_value);
         passwordTextField.clearValue();
         await expect(passwordTextField).toHaveValueContaining(assert);
     }
 
-    //---------------------------------------------------------
+    //--------------------------------------------------------
 
     async signInButtonText(data,assert)
     {
@@ -101,20 +101,20 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndSignIn(email, password, data)
+    async fillAndSignIn(email,password,data)
     {
-        await this.fillForm(email, password, data)
+        await this.fillForm(email,password,data)
         await this.clickSignIn(data)
 
     }
 
     //---------------------------------------------------------
 
-    async signInAndAssert(email, password, data, assert,assertsignin)
+    async signInAndAssert(email,password,data,assert,assert_signin)
     {
-        await this.fillAndSignIn(email, password, data)
+        await this.fillAndSignIn(email,password,data)
         await expect(Sl.role(data.selectors.alert_box)).toHaveTextContaining(assert);
-        await this.pageHeading(data,assertsignin);
+        await this.pageHeading(data,assert_signin);
     }
 
     //---------------------------------------------------------
@@ -127,21 +127,21 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async signInAndSignOut(email, password, data, assert)
+    async signInAndSignOut(email,password,data,assert)
     {
-        await this.fillAndSignIn(email, password, data)
+        await this.fillAndSignIn(email,password,data)
         await this.heading(data,assert)
         await this.moveAndLogout(data);
     }
 
     //---------------------------------------------------------
 
-    async signInAndBrowseBack(email, password, data,assert,assertsignin)
+    async signInAndBrowseBack(email,password,data,assert,assert_signin)
     {
         await this.fillAndSignIn(email, password, data)
         await browser.pause(2000);
         await browser.back();
-        await this.pageHeading(data,assertsignin);
+        await this.pageHeading(data,assert_signin);
         await browser.pause(2000);
         await browser.forward();
         await this.heading(data,assert);
@@ -151,13 +151,13 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async signOutAndBrowseBack(email, password, data,assert,assertsignin)
+    async signOutAndBrowseBack(email,password,data,assert,assert_signin)
     {
-        await this.fillAndSignIn(email, password, data)
+        await this.fillAndSignIn(email,password,data)
         await this.heading(data,assert)
         await this.moveAndLogout(data);
         await browser.back();
-        await this.pageHeading(data,assertsignin);
+        await this.pageHeading(data,assert_signin);
 
     }
 
@@ -171,14 +171,14 @@ class SigninPage extends Page {
 
     //---------------------------------------------------------
 
-    async eyeButton(password,data,assert,assertext)
+    async eyeButton(password,data,assert,assert_text)
     {
         const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
         passwordTextField.setValue(password);
         await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
         await browser.pause(2000);
         await Sl.icon(data.selectors.eye_icon).click();
-        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assertext)
+        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert_text)
 
 
     }
