@@ -1,6 +1,7 @@
 class Signup{
 
     constructor() {
+        this.selector_type = 'placeholder';
 
         this.params = {
             group:{
@@ -10,6 +11,12 @@ class Signup{
         }
 
         this.selectors = {
+            first_name: 'First Name',
+            last_name: 'Last Name',
+            email: 'Work email address',
+            password: 'Password',
+            signUp: 'span=Sign Up',
+            alert_msg: 'p',
             page_heading: 'h3',
         }
 
@@ -35,10 +42,49 @@ class Signup{
                         expect: "User should not be able to signup and an error message should be displayed",
                         first_name: "",
                         last_name : "Test",
-                        email : "demo@gmail.com",
+                        email : "demotest@gmail.com",
                         password: "testing",
                         assert: {
-                            error_msg: " Please fill out this field. ",
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 1.3,
+                        name: "Verify user is able to signup by leaving last name text-field blank",
+                        expect: "User should not be able to signup and an error message should be displayed",
+                        first_name: "Demo",
+                        last_name : "",
+                        email : "demotest@gmail.com",
+                        password: "testing",
+                        assert: {
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 1.4,
+                        name: "Verify user is able to signup by leaving email text-field blank",
+                        expect: "User should not be able to signup and an error message should be displayed",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "",
+                        password: "testing",
+                        assert: {
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 1.5,
+                        name: "Verify user is able to signup by leaving password text-field blank",
+                        expect: "User should not be able to signup and an error message should be displayed",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest@gmail.com",
+                        password: "",
+                        assert: {
+                            error_msg: "Please fill out this field.",
                             sign_up_page_heading: "Sign up to your account"
                         }
                     },
