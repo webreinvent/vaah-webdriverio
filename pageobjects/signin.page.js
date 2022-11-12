@@ -1,7 +1,5 @@
 const Page = require('./../Page');
 const Sl = require('./../Selector');
-const Data = require("../data/signin");
-const assert = require("assert");
 
 /**
  * sub page containing specific selectors and methods for a specific page

@@ -13,6 +13,7 @@ module.exports = class Page {
 
     constructor() {
         this.base_url = env.base_url;
+        this.signup_url = env.signup_url
         this.params = {
             page: {
                 id: null,
