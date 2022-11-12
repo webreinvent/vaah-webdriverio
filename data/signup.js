@@ -2,6 +2,7 @@ class Signup{
 
     constructor() {
         this.selector_type = 'placeholder';
+        //this.attribute_name = ''
 
         this.params = {
             group:{
@@ -87,6 +88,30 @@ class Signup{
                             error_msg: "Please fill out this field.",
                             sign_up_page_heading: "Sign up to your account"
                         }
+                    },
+                    {
+                        count: 1.6,
+                        name: "Verify that the placeholder text is present in first name text-field",
+                        expect: "Placeholder text should be present in the first name text-field.",
+                        assert: "First Name"
+                    },
+                    {
+                        count: 1.7,
+                        name: "Verify that the placeholder text is present in last name text-field",
+                        expect: "Placeholder text should be present in the last name text-field.",
+                        assert: "Last Name"
+                    },
+                    {
+                        count: 1.8,
+                        name: "Verify that the placeholder text is present in email text-field",
+                        expect: "Placeholder text should be present in the email text field.",
+                        assert: "Work email address"
+                    },
+                    {
+                        count: 1.9,
+                        name: "Verify that the placeholder text is present in password text-field",
+                        expect: "Placeholder text should be present in the password text field.",
+                        assert: "Password"
                     },
                     ]
             }

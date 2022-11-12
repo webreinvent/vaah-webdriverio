@@ -37,6 +37,34 @@ class SignupPage extends Page {
         await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
     }
 
+    //---------------------------------------------------------
+
+    async firstNamePlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.first_name)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async lastNamePlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.last_name)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async emailPlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.email)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async passwordPlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.password)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
     //--------------------------------------------------------
 
     async signUpButtonText(data,assert)

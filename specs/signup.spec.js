@@ -19,7 +19,6 @@ describe(Page.groupId(params), async () => {
             Data,
             inputs.assert
         )
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -38,7 +37,6 @@ describe(Page.groupId(params), async () => {
             inputs.assert.error_msg,
             inputs.assert.sign_up_page_heading
         );
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -57,7 +55,6 @@ describe(Page.groupId(params), async () => {
             inputs.assert.error_msg,
             inputs.assert.sign_up_page_heading
         );
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -76,7 +73,6 @@ describe(Page.groupId(params), async () => {
             inputs.assert.error_msg,
             inputs.assert.sign_up_page_heading
         );
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -95,7 +91,58 @@ describe(Page.groupId(params), async () => {
             inputs.assert.error_msg,
             inputs.assert.sign_up_page_heading
         );
-        await Page.refresh();
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[5];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[5];
+        await Page.open()
+        await Page.firstNamePlaceholderText(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[6];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[6];
+        await Page.open()
+        await Page.lastNamePlaceholderText(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[7];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[7];
+        await Page.open()
+        await Page.emailPlaceholderText(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[8];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[8];
+        await Page.open()
+        await Page.passwordPlaceholderText(
+            Data,
+            inputs.assert
+        );
     })
 
     //------------------------------------------------------------------------------------------------------------------
