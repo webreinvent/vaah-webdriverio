@@ -146,5 +146,52 @@ describe(Page.groupId(params), async () => {
     })
 
     //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[9];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[9];
+        await Page.open()
+        await Page.signUpWithValidData(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[10];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[10];
+        await Page.open()
+        await Page.signUpWithBlankTextfields(
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.sign_up_page_heading
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[11];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[11];
+        await Page.open()
+        await Page.signUpWithValidData(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert
+        );
+    })
 
 })

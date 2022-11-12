@@ -44,7 +44,7 @@ class Signup{
                         first_name: "",
                         last_name : "Test",
                         email : "demotest@gmail.com",
-                        password: "testing",
+                        password: "testing123",
                         assert: {
                             error_msg: "Please fill out this field.",
                             sign_up_page_heading: "Sign up to your account"
@@ -57,7 +57,7 @@ class Signup{
                         first_name: "Demo",
                         last_name : "",
                         email : "demotest@gmail.com",
-                        password: "testing",
+                        password: "testing123",
                         assert: {
                             error_msg: "Please fill out this field.",
                             sign_up_page_heading: "Sign up to your account"
@@ -70,7 +70,7 @@ class Signup{
                         first_name: "Demo",
                         last_name : "Test",
                         email : "",
-                        password: "testing",
+                        password: "testing123",
                         assert: {
                             error_msg: "Please fill out this field.",
                             sign_up_page_heading: "Sign up to your account"
@@ -113,6 +113,36 @@ class Signup{
                         expect: "Placeholder text should be present in the password text field.",
                         assert: "Password"
                     },
+                    {
+                        count: 2.1,
+                        name: "Verify user is able to signup by filling all the mandatory fields",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest12345@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+                    {
+                        count: 2.2,
+                        name: "Verify user is able to signup by leaving all the mandatory fields blank",
+                        expect: "User should not be able to signup and an error message should be displayed",
+                        assert: {
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 2.3,
+                        name: "Verify user is able to signup using alphabetic characters in first name text-field",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demote24@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+
                     ]
             }
             ]

@@ -113,6 +113,24 @@ class SignupPage extends Page {
     }
 
     //---------------------------------------------------------
+
+    async signUpWithValidData(first_name,last_name,email,password,data,assert)
+    {
+        await this.fillAndSignUp(first_name,last_name,email,password,data)
+        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+
+    }
+
+    //---------------------------------------------------------
+
+    async signUpWithBlankTextfields(data,assert,assert_signup)
+    {
+        await this.clickSignUp(data)
+        await browser.pause(2000);
+        await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
+        await this.formHeading(data,assert_signup);
+
+    }
 }
 
 module.exports = new SignupPage();
