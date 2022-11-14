@@ -18,7 +18,11 @@ class Signup{
             password: 'Password',
             signUp: 'span=Sign Up',
             alert_msg: 'p',
+            alert_box: 'alertdialog',
             page_heading: 'h3',
+            first_name_label_text: 'label=First Name',
+            last_name_label_text: 'label=Last Name',
+            email_label_text: 'label=Email'
         }
 
         this.params.page = {
@@ -119,7 +123,7 @@ class Signup{
                         expect: "User should be able to signup for the application successfully and signin page should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
-                        email : "demotest12345@gmail.com",
+                        email : "demotest"+Math.random()*100+"@gmail.com",
                         password: "testing123",
                         assert: "Sign in to your account"
                     },
@@ -134,15 +138,134 @@ class Signup{
                     },
                     {
                         count: 2.3,
-                        name: "Verify user is able to signup using alphabetic characters in first name text-field",
+                        name: "Verify user is able to signup by entering alphabetic characters in first name text-field",
                         expect: "User should be able to signup for the application successfully and signin page should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
-                        email : "demote24@gmail.com",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
                         password: "testing123",
                         assert: "Sign in to your account"
                     },
-
+                    {
+                        count: 2.4,
+                        name: "Verify user is able to signup by entering only space in first name text-field",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: " ",
+                        last_name : "Test",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "First name field is required",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 2.5,
+                        name: "Verify that the label text 'First Name' is present above the first name text-field",
+                        expect: "Label text 'First Name' should be present above the first name text-field",
+                        assert: "First Name"
+                    },
+                    {
+                        count: 2.6,
+                        name: "Verify user is able to remove text from the first name text-field",
+                        expect: "User should be able to remove text from the first name text-field",
+                        first_name: "Demo",
+                        assert: {
+                            text_value: "Demo",
+                            blank_value: ""
+                        }
+                    },
+                    {
+                        count: 2.7,
+                        name: "Verify user is able to signup by entering alphabetic characters in last name text-field",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+                    {
+                        count: 2.8,
+                        name: "Verify user is able to signup by entering only space in last name text-field",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : " ",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Last name field is required",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 2.9,
+                        name: "Verify that the label text 'Last Name' is present above the last name text-field",
+                        expect: "Label text 'Last Name' should be present above the last name text-field",
+                        assert: "Last Name"
+                    },
+                    {
+                        count: 3.1,
+                        name: "Verify user is able to remove text from the last name text-field",
+                        expect: "User should be able to remove text from the last name text-field",
+                        last_name: "Test",
+                        assert: {
+                            text_value: "Test",
+                            blank_value: ""
+                        }
+                    },
+                    {
+                        count: 3.2,
+                        name: "Verify that the label text 'Email' is present above the email text-field",
+                        expect: "Label text 'Email' should be present above the email text-field",
+                        assert: "Email"
+                    },
+                    {
+                        count: 3.3,
+                        name: "Verify user is able to signup by entering only space in email text-field",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : " ",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 3.4,
+                        name: "Verify user is able to signup by entering valid email in email text-field",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+                    {
+                        count: 3.5,
+                        name: "Verify if the email field accepts '+' sign in the email address.",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demo+1tes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+                    {
+                        count: 3.6,
+                        name: "Verify the email id field With the missing '@' sign and domain in the email address",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Please include an '@' in the email address.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
                     ]
             }
             ]

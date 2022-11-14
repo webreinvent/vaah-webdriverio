@@ -244,8 +244,8 @@ class Signin{
 
                     {
                         count: 1.5,
-                        name: "Verify that the labelled text present in Sign In button.",
-                        expect: "Labelled text should be present in Sign In button.",
+                        name: "Verify that the label text present in Sign In button.",
+                        expect: "Label text should be present in Sign In button.",
                         assert: "Sign In"
                     }
                 ]
