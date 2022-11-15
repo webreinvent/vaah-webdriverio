@@ -238,7 +238,6 @@ describe(Page.groupId(params), async () => {
             inputs.assert.text_value,
             inputs.assert.blank_value
         )
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------
@@ -303,7 +302,6 @@ describe(Page.groupId(params), async () => {
             inputs.assert.text_value,
             inputs.assert.blank_value
         )
-        await Page.refresh();
     })
 
     //------------------------------------------------------------------------------------------------------------------

@@ -266,6 +266,7 @@ class Signup{
                             sign_up_page_heading: "Sign up to your account"
                         }
                     },
+
                     ]
             }
             ]

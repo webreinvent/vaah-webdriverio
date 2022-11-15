@@ -132,6 +132,7 @@ class SignupPage extends Page {
     {
         await Sl.attr(data.selector_type, data.selectors.first_name).setValue(first_name);
         await Sl.attr(data.selector_type, data.selectors.last_name).setValue(last_name);
+        await browser.pause(1000);
         await Sl.attr(data.selector_type, data.selectors.email).setValue(email);
         await Sl.attr(data.selector_type, data.selectors.password).setValue(password);
     }
