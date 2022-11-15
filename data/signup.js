@@ -2,7 +2,7 @@ class Signup{
 
     constructor() {
         this.selector_type = 'placeholder';
-        //this.attribute_name = ''
+        this.attribute_name= 'type'
 
         this.params = {
             group:{
@@ -22,7 +22,8 @@ class Signup{
             page_heading: 'h3',
             first_name_label_text: 'label=First Name',
             last_name_label_text: 'label=Last Name',
-            email_label_text: 'label=Email'
+            email_label_text: 'label=Email',
+            password_label_text: 'label=Password'
         }
 
         this.params.page = {
@@ -354,8 +355,72 @@ class Signup{
                         password: "testing123",
                         assert: "Sign up to your account"
                     },
-
-                    ]
+                    {
+                        count: 4.5,
+                        name: "Verify user is able to signup by entering only space in password text-field",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "sanu"+Math.random()*100+"@gmail.com",
+                        password: " ",
+                        assert: {
+                            error_msg: "Password field is required",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 4.6,
+                        name: "Verify that the label text 'Password' is present above the password text-field",
+                        expect: "Label text 'Password' should be present above the last name text-field",
+                        assert: "Password"
+                    },
+                    {
+                        count: 4.7,
+                        name: "Verify user is able to remove password character from the password text-field",
+                        expect: "User should be able to remove password character from the password text-field",
+                        password: "testing123",
+                        assert: {
+                            text_value: "testing123",
+                            blank_value: ""
+                        }
+                    },
+                    {
+                        count: 4.8,
+                        name: "Verify the password entered in password text-field is in encrypted form.",
+                        expect: "The password entered in password text-field should be in encrypted form. ",
+                        password: "testing123",
+                        assert: "password"
+                    },
+                    {
+                        count: 4.9,
+                        name: "Verify user is able to signup by entering more than 8 characters in password text-field",
+                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "testing123",
+                        assert: "Sign in to your account"
+                    },
+                    {
+                        count: 5.1,
+                        name: "Verify user is able to signup by entering less than 8 characters in password text-field",
+                        expect: "User should not be able to signup for the application and an error message should be displayed",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotes"+Math.random()*100+"@gmail.com",
+                        password: "test",
+                        assert: {
+                            error_msg: "Password should have minimum 8 characters in length.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 5.2,
+                        name: "Verify that the label text present in Sign Up button.",
+                        expect: "Label text should be present in Sign Up button.",
+                        assert: "Sign Up"
+                    }
+                ]
             }
             ]
     }

@@ -515,5 +515,112 @@ describe(Page.groupId(params), async () => {
         );
     })
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[31];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[31];
+        await Page.open()
+        await Page.signUpAndAssertBox(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.sign_up_page_heading
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[32];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[32];
+        await Page.open()
+        await Page.passwordLabelText(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[33];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[33];
+        await Page.open()
+        await Page.fillAndRemovePassword(
+            inputs.password,
+            Data,
+            inputs.assert.text_value,
+            inputs.assert.blank_value
+        )
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[34];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[34];
+        await Page.open()
+        await Page.passwordValueAssert(
+            inputs.password,
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[35];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[35];
+        await Page.open()
+        await Page.signUpWithValidData(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[36];
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[36];
+        await Page.open()
+        await Page.signUpAndAssertBox(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.sign_up_page_heading
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+    params.test = Data.groups[0].tests[37];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[37];
+        await Page.open()
+        await Page.signUpButtonText(
+            Data,
+            inputs.assert
+        );
+    })
 
 })

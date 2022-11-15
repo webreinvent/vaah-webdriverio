@@ -60,6 +60,23 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
+    async passwordLabelText(data,assert)
+    {
+        await expect(Sl.$(data.selectors.password_label_text)).toHaveTextContaining(assert)
+    }
+
+    //---------------------------------------------------------
+
+    async passwordValueAssert(password,data,assert)
+    {
+        const passwordTextField = await Sl.attr(data.selector_type, data.selectors.password)
+        passwordTextField.setValue(password)
+        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
+
+    }
+
+    //---------------------------------------------------------
+
     async fillAndRemoveFirstName(first_name,data,assert_value,assert) {
         const firstNameTextField = await Sl.attr(data.selector_type, data.selectors.first_name)
         firstNameTextField.setValue(first_name);
@@ -78,6 +95,15 @@ class SignupPage extends Page {
         await expect(lastNameTextField).toHaveValueContaining(assert);
     }
 
+    //---------------------------------------------------------
+
+    async fillAndRemovePassword(password,data,assert_value,assert) {
+        const passwordTextField = await Sl.attr(data.selector_type, data.selectors.password)
+        passwordTextField.setValue(password);
+        await expect(passwordTextField).toHaveValueContaining(assert_value);
+        passwordTextField.clearValue();
+        await expect(passwordTextField).toHaveValueContaining(assert);
+    }
 
     //---------------------------------------------------------
 
@@ -104,7 +130,7 @@ class SignupPage extends Page {
 
     async signUpButtonText(data,assert)
     {
-        await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.signUp)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -177,6 +203,7 @@ class SignupPage extends Page {
         await this.formHeading(data,assert_signup);
 
     }
+
 }
 
 module.exports = new SignupPage();
