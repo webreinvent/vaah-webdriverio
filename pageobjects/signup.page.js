@@ -25,13 +25,6 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async refresh()
-    {
-        await browser.refresh();
-        await browser.pause(2000);
-    }
-    //---------------------------------------------------------
-
     async formHeading(data,assert)
     {
         await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);

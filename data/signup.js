@@ -266,6 +266,94 @@ class Signup{
                             sign_up_page_heading: "Sign up to your account"
                         }
                     },
+                    {
+                        count: 3.7,
+                        name: "Verify the email id field With the missing domain after '@' symbol in the email address",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest@",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Please enter a part following '@'.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 3.8,
+                        name: "Verify the email id filed With Two @ sign",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest@@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "A part following '@' should not contain the symbol '@'.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 3.9,
+                        name: "Verify leading dot in the email id text box is invalid.",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : ".demotest@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Email field is incorrect",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 4.1,
+                        name: "Verify trailing dot in the email id text box is invalid.",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demotest@gmail.com.",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "'.' is used at a wrong position in 'gmail.com.'.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 4.2,
+                        name: "Verify multiple dots in the email field.",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "demo..test@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Email field is incorrect",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 4.3,
+                        name: "Verify the email id field With the missing username in the email address",
+                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Please enter a part followed by '@'.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    {
+                        count: 4.4,
+                        name: "Verify the email id text-field With the Missing top-level domain (.com/.net/.org/etc)",
+                        expect: "User should not be able to signup for the application",
+                        first_name: "Demo",
+                        last_name : "Test",
+                        email : "sanu"+Math.random()*100+"@gmail",
+                        password: "testing123",
+                        assert: "Sign up to your account"
+                    },
 
                     ]
             }
