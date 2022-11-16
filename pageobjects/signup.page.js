@@ -15,40 +15,12 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async open (url=null)  {
-        if(url)
-        {
-            this.params.page.url = url
-        }
-        return super.open(this.params.page.url);
-    }
-
-    //---------------------------------------------------------
-
-    async formHeading(data,assert)
+    async clickSignUp(data)
     {
-        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
-    }
-
-    //---------------------------------------------------------
-
-    async firstNamePlaceholderText(data,assert)
-    {
-        await expect(Sl.attr(data.selector_type, data.selectors.first_name)).toHaveAttributeContaining(data.selector_type,assert)
-    }
-
-    //---------------------------------------------------------
-
-    async firstNameLabelText(data,assert)
-    {
-        await expect(Sl.$(data.selectors.first_name_label_text)).toHaveTextContaining(assert)
-    }
-
-    //---------------------------------------------------------
-
-    async lastNameLabelText(data,assert)
-    {
-        await expect(Sl.$(data.selectors.last_name_label_text)).toHaveTextContaining(assert)
+       const button =  await Sl.$(data.selectors.signUp);
+       button.click();
+       await browser.pause(2000);
+       button.click();
     }
 
     //---------------------------------------------------------
@@ -60,19 +32,9 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async passwordLabelText(data,assert)
+    async emailPlaceholderText(data,assert)
     {
-        await expect(Sl.$(data.selectors.password_label_text)).toHaveTextContaining(assert)
-    }
-
-    //---------------------------------------------------------
-
-    async passwordValueAssert(password,data,assert)
-    {
-        const passwordTextField = await Sl.attr(data.selector_type, data.selectors.password)
-        passwordTextField.setValue(password)
-        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
-
+        await expect(Sl.attr(data.selector_type, data.selectors.email)).toHaveAttributeContaining(data.selector_type,assert)
     }
 
     //---------------------------------------------------------
@@ -107,41 +69,11 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async lastNamePlaceholderText(data,assert)
+    async fillAndSignUp(first_name,last_name,email,password,data)
     {
-        await expect(Sl.attr(data.selector_type, data.selectors.last_name)).toHaveAttributeContaining(data.selector_type,assert)
-    }
-
-    //---------------------------------------------------------
-
-    async emailPlaceholderText(data,assert)
-    {
-        await expect(Sl.attr(data.selector_type, data.selectors.email)).toHaveAttributeContaining(data.selector_type,assert)
-    }
-
-    //---------------------------------------------------------
-
-    async passwordPlaceholderText(data,assert)
-    {
-        await expect(Sl.attr(data.selector_type, data.selectors.password)).toHaveAttributeContaining(data.selector_type,assert)
-    }
-
-    //--------------------------------------------------------
-
-    async signUpButtonText(data,assert)
-    {
-        await expect(Sl.$(data.selectors.signUp)).toHaveTextContaining(assert);
-    }
-
-    //---------------------------------------------------------
-
-    async clickSignUp(data)
-    {
-       const button =  await Sl.$(data.selectors.signUp);
-       //await browser.pause(2000);
-       button.click();
-       await browser.pause(2000);
-       button.click();
+        await this.fillForm(first_name,last_name,email,password,data)
+        await this.clickSignUp(data)
+        await browser.pause(2000);
 
     }
 
@@ -158,21 +90,70 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async fillAndSignUp(first_name,last_name,email,password,data)
+    async firstNameLabelText(data,assert)
     {
-        await this.fillForm(first_name,last_name,email,password,data)
-        await this.clickSignUp(data)
-        await browser.pause(2000);
-
+        await expect(Sl.$(data.selectors.first_name_label_text)).toHaveTextContaining(assert)
     }
 
     //---------------------------------------------------------
 
-    async signUpAndAssertMsg(first_name,last_name,email,password,data,assert,assert_signup)
+    async firstNamePlaceholderText(data,assert)
     {
-        await this.fillAndSignUp(first_name,last_name,email,password,data)
-        await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
-        await this.formHeading(data,assert_signup);
+        await expect(Sl.attr(data.selector_type, data.selectors.first_name)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async formHeading(data,assert)
+    {
+        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+    }
+
+    //---------------------------------------------------------
+
+    async lastNameLabelText(data,assert)
+    {
+        await expect(Sl.$(data.selectors.last_name_label_text)).toHaveTextContaining(assert)
+    }
+
+    //---------------------------------------------------------
+
+    async lastNamePlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.last_name)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async open (url=null)  {
+        if(url)
+        {
+            this.params.page.url = url
+        }
+        return super.open(this.params.page.url);
+    }
+
+    //---------------------------------------------------------
+
+    async passwordLabelText(data,assert)
+    {
+        await expect(Sl.$(data.selectors.password_label_text)).toHaveTextContaining(assert)
+    }
+
+    //---------------------------------------------------------
+
+    async passwordPlaceholderText(data,assert)
+    {
+        await expect(Sl.attr(data.selector_type, data.selectors.password)).toHaveAttributeContaining(data.selector_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async passwordValueAssert(password,data,assert)
+    {
+        const passwordTextField = await Sl.attr(data.selector_type, data.selectors.password)
+        passwordTextField.setValue(password)
+        await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
     }
 
     //---------------------------------------------------------
@@ -186,11 +167,18 @@ class SignupPage extends Page {
 
     //---------------------------------------------------------
 
-    async signUpWithValidData(first_name,last_name,email,password,data,assert)
+    async signUpAndAssertMsg(first_name,last_name,email,password,data,assert,assert_signup)
     {
         await this.fillAndSignUp(first_name,last_name,email,password,data)
-        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
+        await this.formHeading(data,assert_signup);
+    }
 
+    //--------------------------------------------------------
+
+    async signUpButtonText(data,assert)
+    {
+        await expect(Sl.$(data.selectors.signUp)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -201,9 +189,18 @@ class SignupPage extends Page {
         await browser.pause(2000);
         await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
         await this.formHeading(data,assert_signup);
-
     }
 
-}
+    //---------------------------------------------------------
 
+    async signUpWithValidData(first_name,last_name,email,password,data,assert)
+    {
+        await this.fillAndSignUp(first_name,last_name,email,password,data)
+        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+    }
+
+    //---------------------------------------------------------
+
+}
 module.exports = new SignupPage();
+//----------------------------------------------------------------------------------------------------------------------

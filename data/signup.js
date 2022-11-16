@@ -190,7 +190,7 @@ class Signup{
                     {
                         count: 2.4,
                         name: "Verify if the email field accepts '+' sign in the email address.",
-                        expect: "User should be able to signup for the application successfully and signin page should be displayed.",
+                        expect: "User should be able to signup for the application successfully,if there is '+' sign in the email address and signin page should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demo+1tes"+Math.random()*100+"@gmail.com",
