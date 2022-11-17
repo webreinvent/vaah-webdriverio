@@ -325,8 +325,7 @@ Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_lbKJIy41Zz.mp4
 
 ##### Step 8: Result
 
-<img src="https://user-images.githubusercontent.com/114494381/193214928-bc3bed84-65ca-4f4c-bf68-9f39ff8ab089.png" width="70%" style="max-width: 100%;">
-
+<img src="https://img-v4.getdemo.dev/screenshot/M0naCi7mJY.png" width="70%" style="max-width: 100%;">
 
 It contains:
 ```
