@@ -1,8 +1,9 @@
 # vaah-webdriverio
-Helpful classes to reduce code &amp; accelerate speed for writing test cases for WebDriver.io 
+Helpful classes to reduce code &amp; accelerate speed for writing test cases for WebDriver.IO 
 
 ## Objectives
 - Reduce code for `selecting` elements and verifying `asserts`
+- Code `re-usability` by writing the test scripts independent of the `data` and `POM`.
 - Generate unique `page id`, `group id` and `test case id`
 - Run `test cases` based on `page id`, `group id` or `test id`
 - Generate a well `formated` report
@@ -47,22 +48,21 @@ Demo: https://img-v3.getdemo.dev/screenshot/BiI0D6ygq3.mp4
 
 
 ##### Step 4: Extend `pageobjects` and variables in `constructor`
-Extend all your `pageobjects` to `const Page = require('./../vaah-webdriverio/Page');`, 
+Extend all your `pageobjects` to `const Page = require('./../Page');`, 
 
-Example: `pageobjects/Login.page.js`: 
+Example: `pageobjects/signup.page.js`: 
 ```js
-const Page = require('./../vaah-webdriverio/Page');
-
-class Login extends Page {
+const Page = require('./../Page');
+const Sl = require('./../Selector');
+class SignupPage extends Page {
 
     constructor() {
         super();
-        this.page.id = "LI"; // Page ID, Please keep this unique for all the pages.
-        this.page.name = "Login";
-        this.page.path = "login";
-        this.page.url = this.base_url + this.page.path;
+        this.params.page.id = "SU";
+        this.params.page.name = "Sign-Up";
+        this.params.page.url = this.signup_url;
     }
-
+    
     open (url=null) {
         if(url)
         {
@@ -70,13 +70,81 @@ class Login extends Page {
         }
         return super.open(this.page.url);
     }
-    
-}
-module.exports = new Login();
-```
-Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
 
-#### step 5: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
+    async signUpButtonText(data,assert)
+    {
+        await expect(Sl.$(data.selectors.signUp)).toHaveTextContaining(assert);
+    }
+
+    async signUpWithValidData(first_name,last_name,email,password,data,assert)
+    {
+        await this.fillAndSignUp(first_name,last_name,email,password,data)
+        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+    }
+    ...
+}
+module.exports = new SignupPage();
+```
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_EZkTiTFfTr.mp4
+
+#### step 5: All the values which are required for the `signup.page.js` and `signup.spec.js` should be present in `signup.js` under `data` and for the values which are required for the test scripts, it should be arranged in `groups` and `tests` in JSON format.
+Example:
+```js
+class Signup{
+
+    constructor() {
+        this.selector_type = 'placeholder';
+
+        this.params = {
+            group:{
+                count: null,
+                name: null,
+            }
+        }
+
+        this.selectors = {
+            first_name: 'First Name',
+            last_name: 'Last Name',
+            email: 'Work email address',
+            password: 'Password',
+        }
+
+        this.params.page = {
+            id: "SU",
+            name: "Sign Up",
+            url: '/'
+        }
+        this.groups = [
+            {
+                count: 1,
+                name:"Validation",
+                tests: [
+                    {
+                        count: 1.1,
+                        name: "Verify user is able to signup by leaving first name text-field blank",
+                        expect: "User should not be able to signup and an error message should be displayed",
+                        first_name: "",
+                        last_name : "Test",
+                        email : "demotest@gmail.com",
+                        password: "testing123",
+                        assert: {
+                            error_msg: "Please fill out this field.",
+                            sign_up_page_heading: "Sign up to your account"
+                        }
+                    },
+                    ...
+                ]
+            }
+        ]
+    }
+}
+module.exports = new Signup();
+
+```` 
+
+Demo : https://img-v4.getdemo.dev/screenshot/phpstorm64_vRYLZTovEt.mp4
+
+#### Note: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
 Example:
 ```js
 const env = require('./../../../wdio.env');
@@ -108,41 +176,43 @@ module.exports = new Assert()
 ```` 
 
 ##### Step 6: Writing test cases
-In `specs` folder create a file `login.e2e.js` and write following code for example:
+In `specs` folder create a file `signup.spec.js` and write following code for example:
 ```js
-const sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert');
-const login = require('../pageobjects/login.page');
+const Page = require('../pageobjects/signup.page')
+const Data = require('../data/signup')
+const color  = require("cli-color");
 
-login.group.count = 1; // Group counter which will be used to generate Group ID
-login.group.name = 'Login';
+let params = Data.params;
+let inputs;
 
-describe(login.groupId(), () => {
-    //-----------------------------------------------------------
-    login.test = {
-        count: 1.1, // Test counter which will be used to generate Test ID
-        name: 'Tester should be ble to run login test successfully',
-        expect: "Alert message 'You logged into a secure area!' should appear",
-        data: "You logged into a secure area!",
-    }
+params.group = Data.groups[0];
 
-    it(login.testId(), async () => {
-        login.open();
-        browser.maximizeWindow();
-        await assert.pageTitle("The Internet");
-        sl.name("username", "tomsmith"); 
-        // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
-        sl.name("password", "SuperSecretPassword!");
-        sl.class('radius').click();
-        await assert.text(sl.id('flash'), login.test.data);
-    });
-    //-----------------------------------------------------------
- 
-});
+describe(Page.groupId(params), async () => {
+
+    params.test = Data.groups[0].tests[0];
+    console.log(color.red('params.test'), params.test);
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[0];
+        await Page.open()
+        await Page.signUpAndAssertMsg(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.sign_up_page_heading
+        );
+    })
+    ...
+})
+
 ````   
-Demo: https://img-v3.getdemo.dev/screenshot/OdRIb4yXIr.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_OIdm0CHdjo.mp4
 
-Note: This is just an example of where to write the test script. The test script may differ.
+#### Note: This is just an example of where to write the test script. The test scripts may differ.
 
 
 | Selector | In Selector.js|Use|Description|
@@ -154,54 +224,23 @@ Note: This is just an example of where to write the test script. The test script
 |attr|`attr(attribute, value){return$('['+attribute+'="'+value+'"]'); }`|`sl.attr('href','#/forgot-password' ).click();`|This will select the element having attribute as `href` and its value as `#/forgot-password`.
 |name|`name(name,value=null) { let el = this.attr('name', name); if(value) { el.setValue(value) } return el; }`|`sl.name("username", "tomsmith");`|This will select the element with attribute `name="username"` and will insert value "tomsmith" in it.|
 |wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio("username", "tomsmith")`|This will select the element having attribute `data-wdio='username'` and then will insert the value as "tomsmith" in it. Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.|
+|icon|`icon(name,value=null) { let el = this.attr('data-icon', name); if(value) { el.setValue(value) } return el; }`|`sl.icon("username", "tomsmith")`|This will select the element having attribute `data-icon='username'` and then will insert the value as "tomsmith" in it. Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.|
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk("username", "tomsmith")`|This will select the element having attribute `dusk='username'` and then will insert the value as "tomsmith" in it.|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role("navigation").click()`|This will select the element having attribute `role="navigation"` and will click on it.|
 
+#### Note: If there is a common `selector_name` and `selector_type` which is being used multiple times, so we can create a `dynamic selector` for that.
+Example: https://img-v4.getdemo.dev/screenshot/phpstorm64_e5bxZaDxd9.mp4
 
 Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
 
-To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
+To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js(signup.js) and paste the below mentioned code.
 
 Demo: https://img-v3.getdemo.dev/screenshot/37DZHpTEcH.mp4
 
 Note: Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
 
-```js
- class Elements {  
-    constructor() {  
-        this.login= {
-          signin_email: "signin-email_or_username",  
-          signin_password: "signin-password",
-          button_signin: "signin-signin",
-          remember_me_checkbox: "checkbox",
- }}}
- module.exports = new Elements();
-```
-`this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
- 
- Demo: https://img-v3.getdemo.dev/screenshot/bt9XOVsbUS.mp4
-
-
- ```js
- class Elements {  
-    constructor() {  
-        this.login= {
-          signin_email: "signin-email_or_username",  
-          signin_password: "signin-password",
-          button_signin: "signin-signin",
-          remember_me_checkbox: "checkbox",
-        }
-        this.home={
-          main_heading:"h1",
-          sub_heading:"h2",
-        }
- }}
- module.exports = new Elements();
-```
-
 
 When using the above pageobject then you can write the selectors in the following manner:
-
 
 
 | Selector | In Selector.js | Use with pageobject |
@@ -217,7 +256,6 @@ When using the above pageobject then you can write the selectors in the followin
 |role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
 
 
-
 Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
  ```
 Note:
@@ -229,92 +267,53 @@ Note:
 ```
 Demo(1): https://img-v4.getdemo.dev/screenshot/chrome_revNZwwQcK.mp4
 
-I have written an example on how to write a test script for logging in using the page object:
+I have written an example on how to write a test script for validation of SignUp using the data and page objects:
 
  ```js
-const sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert');
-const login = require('../pageobjects/login.page');  
-const elements = require('../data/elements');
-login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
+const Page = require('../pageobjects/signup.page')
+const Data = require('../data/signup')
+const color  = require("cli-color");
 
-describe(login.groupId(), () => {  
-    login.test = {  
-        count: 1, // Test counter which will be used to generate Test ID  
-        name: 'Tester should be ble to run login test successfully',  
-        expect: "Alert message 'You logged into a secure area!' should appear",  
-        data: "You logged into a secure area!",
-    };
+let params = Data.params;
+let inputs;
 
-    it(login.testId(), async () => {  
-        login.open();  
-        browser.maximizeWindow();
-        await assert.pageTitle("The Internet");  
-        sl.wdio(elements.login.signin_email, "tomsmith"); 
-        /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js 
-          as `signin_email` and will also insert the value "tomsmith".*/  
-        sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
-        sl.class(elements.login.button_signin).click();  
-        await assert.text(sl.id('flash'), login.test.data);  
-    }); 
-});
+params.group = Data.groups[0];
+
+describe(Page.groupId(params), async () => {
+
+    params.test = Data.groups[0].tests[0];
+    console.log(color.red('params.test'), params.test);
+
+    it(Page.testId(params), async () => {
+
+        inputs = Data.groups[0].tests[0];
+        await Page.open()
+        await Page.signUpAndAssertMsg(
+            inputs.first_name,
+            inputs.last_name,
+            inputs.email,
+            inputs.password,
+            Data,
+            inputs.assert.error_msg,
+            inputs.assert.sign_up_page_heading
+        );
+    })
+})
 ```
 
-Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_LmPxlmbR8G.mp4
 
 
-Note: The test_count_id should be unique so that there will be no conflict between the test scripts.
-Example:
- ```js
-const sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert');
-const page = require('../pageobjects/about-us.page');
-const elements = require('../data/elements');
-const assert_data = require('../data/assert-data');
+#### Note: The test_count_id should be unique so that there will be no conflict between the test scripts.
 
-
-let params = page.params;
-
-params.group.count = 1;
-params.group.name = 'About-Us';
-
-describe(page.groupId(params), () => {
-
-//----------------------------------------------------------------------------------------
-
-    params.test = {
-        count: 1.1,
-        name: "Visit About Us page and check for title",
-        expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
-    };
-    it(page.testId(params), async () => {
-        page.open();
-        browser.maximizeWindow();
-        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-    });
-
-    params.test = {
-        count: 1.2,
-        name: "Validating seems interesting button",
-        expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
-    };
-    it(page.testId(params), async () => {
-        page.open();
-        browser.maximizeWindow();
-        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-        sl.wdio(elements.about_us.button_interesting).click();
-        await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
-    });
-});
-``` 
-Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_f0fQLyAbL9.mp4
 
 ##### Step 7: Run test 
 Now, you can run the test via:
 ```sh
-npx wdio --spec ./tests/wdio/specs/login.e2e.js
+npx wdio --spec ./test/wdio/vaah-webdriverio/specs/signup.spec.js
 ```
-Demo: https://img-v4.getdemo.dev/screenshot/chrome_uNW2UpI0dH.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_2uUgncax8D.mp4
 
 
 or run all tests via:
@@ -322,9 +321,7 @@ or run all tests via:
 ```shell
 npx wdio run ./wdio.conf.js
 ```
-Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
-
-The Demo shows how a passed and failed test cases will be represented.
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_lbKJIy41Zz.mp4
 
 ##### Step 8: Result
 
@@ -333,27 +330,27 @@ The Demo shows how a passed and failed test cases will be represented.
 
 It contains:
 ```
-[PAGE ID: LI]
-[GROUP ID: LI_1]
-[TEST ID: LI_1_1.1]
+[PAGE ID: SU]
+[GROUP ID: SU_1]
+[TEST ID: SU_1_1.1]
 ```
-Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_0r5SfdxoR8.mp4
+Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_yHgMeEiX8f.mp4
 
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
 ```shell
 npx wdio --mochaOpts.grep <page id> 
-e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI_1
-Demo:https://img-v3.getdemo.dev/screenshot/jqNYsEBnhT.mp4
+e.g. npx wdio --mochaOpts.grep SU // This will run all the test cases under the Page with Page ID SU
+Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_MsNMIkuXuD.mp4
 
 npx wdio --mochaOpts.grep <group id>
-e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
-Demo:https://img-v3.getdemo.dev/screenshot/b54baoyxkZ.mp4
+e.g. npx wdio --mochaOpts.grep SU_1 // This will run all the test cases under the Group with Group ID SU_1
+Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_6RI0zswh1w.mp4
 
 npx wdio --mochaOpts.grep <test id>
-e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1.1
-Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_NhXad1pY4Z.mp4
-// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
+e.g. npx wdio --mochaOpts.grep SU_1_1.1 // This will run all the test cases under the Page ID SU having Group ID 1 and Test ID starting with 1.1
+Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_wyve3JMFzO.mp4
+// Note: If you have test case with test ID as SU_1_11, SU_1_12... SU_1_19, these tests will also run if you provide the test ID as SU_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 or you can even run the test cases based on a specific keyword:
