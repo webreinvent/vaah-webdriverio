@@ -71,9 +71,11 @@ class SignupPage extends Page {
         return super.open(this.page.url);
     }
 
-    async signUpButtonText(data,assert)
+    async signUpAndAssertMsg(first_name,last_name,email,password,data,assert,assert_signup)
     {
-        await expect(Sl.$(data.selectors.signUp)).toHaveTextContaining(assert);
+        await this.fillAndSignUp(first_name,last_name,email,password,data)
+        await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
+        await this.formHeading(data,assert_signup);
     }
 
     async signUpWithValidData(first_name,last_name,email,password,data,assert)
