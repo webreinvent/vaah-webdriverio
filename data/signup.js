@@ -190,7 +190,7 @@ class Signup{
                     {
                         count: 2.4,
                         name: "Verify if the email field accepts '+' sign in the email address.",
-                        expect: "User should be able to signup for the application successfully,if there is '+' sign in the email address and signin page should be displayed.",
+                        expect: "User should be able to signup for the application successfully if the email address consists of '+' sign in the email text-field",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demo+1tes"+Math.random()*100+"@gmail.com",
@@ -200,7 +200,7 @@ class Signup{
                     {
                         count: 2.5,
                         name: "Verify the email id field With the missing '@' sign and domain in the email address",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there is missing '@' sign and domain in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demotest",
@@ -214,7 +214,7 @@ class Signup{
                     {
                         count: 2.6,
                         name: "Verify the email id field With the missing domain after '@' symbol in the email address",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there is missing domain after '@' symbol in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demotest@",
@@ -228,7 +228,7 @@ class Signup{
                     {
                         count: 2.7,
                         name: "Verify the email id field With Two @ sign",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there are two '@' sign present in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demotest@@gmail.com",
@@ -242,7 +242,7 @@ class Signup{
                     {
                         count: 2.8,
                         name: "Verify leading dot in the email id text box is invalid.",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there is a leading dot present in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : ".demotest@gmail.com",
@@ -256,7 +256,7 @@ class Signup{
                     {
                         count: 2.9,
                         name: "Verify trailing dot in the email id text box is invalid.",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there is a trailing dot present in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demotest@gmail.com.",
@@ -270,7 +270,7 @@ class Signup{
                     {
                         count: 3.1,
                         name: "Verify multiple dots in the email field.",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if there are multiple dots in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "demo..test@gmail.com",
@@ -284,7 +284,7 @@ class Signup{
                     {
                         count: 3.2,
                         name: "Verify the email id field With the missing username in the email address",
-                        expect: "User should not be able to signup for the application and an error message should be displayed.",
+                        expect: "User should not be able to signup for the application if the username is missing in the email address and an error message should be displayed.",
                         first_name: "Demo",
                         last_name : "Test",
                         email : "@gmail.com",
