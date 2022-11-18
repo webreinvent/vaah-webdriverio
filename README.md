@@ -74,14 +74,14 @@ class SignupPage extends Page {
     async signUpAndAssertMsg(first_name,last_name,email,password,data,assert,assert_signup)
     {
         await this.fillAndSignUp(first_name,last_name,email,password,data)
-        await expect(Sl.$(data.selectors.alert_msg)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.alert_msg)).toHaveTextContaining(assert);
         await this.formHeading(data,assert_signup);
     }
 
     async signUpWithValidData(first_name,last_name,email,password,data,assert)
     {
         await this.fillAndSignUp(first_name,last_name,email,password,data)
-        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.page_heading)).toHaveTextContaining(assert);
     }
     ...
 }
@@ -95,7 +95,7 @@ Example:
 class Signup{
 
     constructor() {
-        this.selector_type = 'placeholder';
+        this.selector_attr = 'placeholder';
 
         this.params = {
             group:{
@@ -104,7 +104,7 @@ class Signup{
             }
         }
 
-        this.selectors = {
+        this.elements = {
             first_name: 'First Name',
             last_name: 'Last Name',
             email: 'Work email address',
