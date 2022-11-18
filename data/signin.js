@@ -54,7 +54,7 @@ class Signin{
                         name: "Invalid email or username and Valid Password",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeet@gmail.com",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             error_msg: "No user exist",
                             sign_in_page_title: "Sign In",
@@ -78,7 +78,7 @@ class Signin{
                         name: "Valid Credentials",
                         expect: "User should be able to signin into the application successfully.",
                         email: "we@webreinvent.com",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: ["Welcome to Vaah" , "cms"]
 
                     },
@@ -88,7 +88,7 @@ class Signin{
                         name: "Verify user is able to signin using alphabetic characters in email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "satyajeetsinghsanu",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             error_msg: "No user exist",
                             sign_in_page_title: "Sign In"
@@ -100,7 +100,7 @@ class Signin{
                         name: "Verify user is able to signin using numeric characters in email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "123456789",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             error_msg: "No user exist",
                             sign_in_page_title: "Sign In"
@@ -112,7 +112,7 @@ class Signin{
                         name: "Verify user is able to signin with blank email or username text-field",
                         expect: "User should not be able to signin and an error message should be displayed",
                         email: "",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             error_msg: "The email or username field is required.",
                             sign_in_page_title: "Sign In"
@@ -148,7 +148,7 @@ class Signin{
                         name: "Verify logging into the application and browsing back",
                         expect: " User should not get logged out.",
                         email: "we@webreinvent.com",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             home_page_title: ["Welcome to Vaah", "cms"],
                             sign_in_page_title: "Sign In"
@@ -161,7 +161,7 @@ class Signin{
                         name: "Verify logging out from the application and browsing back ",
                         expect: " User should not get logged in again.",
                         email: "we@webreinvent.com",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
                             home_page_title: ["Welcome to Vaah", "cms"],
                             sign_in_page_title: "Sign In",
@@ -223,9 +223,9 @@ class Signin{
                         count: 1.3,
                         name: "Verify user is able to remove text from password text-field",
                         expect: "User should be able to remove text from password text-field",
-                        password: "admin@vaahcms",
+                        password: "WebReinvent@2021",
                         assert: {
-                            text_value: "admin@vaahcms",
+                            text_value: "WebReinvent@2021",
                             blank_value: ""
                         }
                     },
