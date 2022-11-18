@@ -11,7 +11,7 @@ class Signin{
             }
         }
 
-        this.selectors = {
+        this.elements = {
             email: 'signin-email_or_username',
             password: 'signin-password',
             submit: 'signin-signin',

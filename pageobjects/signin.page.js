@@ -2,7 +2,7 @@ const Page = require('./../Page');
 const Sl = require('./../Selector');
 
 /**
- * sub page containing specific selectors and methods for a specific page
+ * sub page containing specific elements and methods for a specific page
  */
 class SigninPage extends Page {
 
@@ -17,18 +17,18 @@ class SigninPage extends Page {
 
     async clickSignIn(data)
     {
-        await Sl.dynamic(data.selectors.submit, data.selector_type).click();
+        await Sl.dynamic(data.elements.submit, data.selector_type).click();
     }
 
     //---------------------------------------------------------
 
     async eyeButton(password,data,assert,assert_text)
     {
-        const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
+        const passwordTextField = await Sl.dynamic(data.elements.password, data.selector_type);
         passwordTextField.setValue(password);
         await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert)
         await browser.pause(2000);
-        await Sl.icon(data.selectors.eye_icon).click();
+        await Sl.icon(data.elements.eye_icon).click();
         await expect(passwordTextField).toHaveAttributeContaining(data.attribute_name,assert_text)
     }
 
@@ -36,7 +36,7 @@ class SigninPage extends Page {
 
     async fillAndRemoveEmail(email,data,assert_value,assert)
     {
-        const emailTextField = await Sl.dynamic(data.selectors.email, data.selector_type);
+        const emailTextField = await Sl.dynamic(data.elements.email, data.selector_type);
         emailTextField.setValue(email);
         await expect(emailTextField).toHaveValueContaining(assert_value);
         emailTextField.clearValue();
@@ -46,7 +46,7 @@ class SigninPage extends Page {
     //---------------------------------------------------------
 
     async fillAndRemovePassword(password,data,assert_value,assert) {
-        const passwordTextField = await Sl.dynamic(data.selectors.password, data.selector_type);
+        const passwordTextField = await Sl.dynamic(data.elements.password, data.selector_type);
         passwordTextField.setValue(password);
         await expect(passwordTextField).toHaveValueContaining(assert_value);
         passwordTextField.clearValue();
@@ -65,15 +65,15 @@ class SigninPage extends Page {
 
     async fillForm(email,password,data)
     {
-        await Sl.dynamic(data.selectors.email, data.selector_type).setValue(email);
-        await Sl.dynamic(data.selectors.password, data.selector_type).setValue(password);
+        await Sl.dynamic(data.elements.email, data.selector_type).setValue(email);
+        await Sl.dynamic(data.elements.password, data.selector_type).setValue(password);
     }
 
     //---------------------------------------------------------
 
     async forgotPassword(data,assert)
     {
-        await Sl.$(data.selectors.forgot_password).click();
+        await Sl.$(data.elements.forgot_password).click();
         await this.pageHeading(data,assert);
     }
 
@@ -81,22 +81,22 @@ class SigninPage extends Page {
 
     async heading(data,assert)
     {
-        await expect(Sl.$(data.selectors.heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async linkText(data,assert)
     {
-        await expect(Sl.$(data.selectors.link_text)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.link_text)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async moveAndLogout(data)
     {
-        await Sl.role(data.selectors.menu_item).moveTo();
-        await Sl.$(data.selectors.logout_button).click();
+        await Sl.role(data.elements.menu_item).moveTo();
+        await Sl.$(data.elements.logout_button).click();
     }
 
     //---------------------------------------------------------
@@ -113,14 +113,14 @@ class SigninPage extends Page {
 
     async pageHeading(data,assert)
     {
-        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.page_heading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
 
     async pageSubHeading(data,assert)
     {
-        await expect(Sl.$(data.selectors.page_subheading)).toHaveTextContaining(assert);
+        await expect(Sl.$(data.elements.page_subheading)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------
@@ -136,7 +136,7 @@ class SigninPage extends Page {
     async signInAndAssert(email,password,data,assert,assert_signin)
     {
         await this.fillAndSignIn(email,password,data)
-        await expect(Sl.role(data.selectors.alert_box)).toHaveTextContaining(assert);
+        await expect(Sl.role(data.elements.alert_box)).toHaveTextContaining(assert);
         await this.pageHeading(data,assert_signin);
     }
 
@@ -167,7 +167,7 @@ class SigninPage extends Page {
 
     async signInButtonText(data,assert)
     {
-        await expect(Sl.dynamic(data.selectors.submit, data.selector_type)).toHaveTextContaining(assert);
+        await expect(Sl.dynamic(data.elements.submit, data.selector_type)).toHaveTextContaining(assert);
     }
 
     //---------------------------------------------------------

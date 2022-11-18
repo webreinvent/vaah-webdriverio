@@ -1,7 +1,7 @@
 class Signup{
 
     constructor() {
-        this.selector_type = 'placeholder';
+        this.selector_attr = 'placeholder';
         this.attribute_name= 'type'
 
         this.params = {
@@ -11,7 +11,7 @@ class Signup{
             }
         }
 
-        this.selectors = {
+        this.elements = {
             first_name: 'First Name',
             last_name: 'Last Name',
             email: 'Work email address',
