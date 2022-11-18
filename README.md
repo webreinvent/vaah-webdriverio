@@ -3,7 +3,7 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 
 ## Objectives
 - Reduce code for `selecting` elements and verifying `asserts`
-- Code `re-usability` by writing the test scripts independent of the `data` and `POM`.
+- Code `re-usability` by writing the test scripts independent of the `data` and `POM(Page Object Model)`.
 - Generate unique `page id`, `group id` and `test case id`
 - Run `test cases` based on `page id`, `group id` or `test id`
 - Generate a well `formated` report
@@ -89,7 +89,7 @@ module.exports = new SignupPage();
 ```
 Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_EZkTiTFfTr.mp4
 
-#### step 5: All the values which are required for the `signup.page.js` and `signup.spec.js` should be present in `signup.js` under `data` and for the values which are required for the test scripts, it should be arranged in `groups` and `tests` in JSON format.
+#### step 5: All the values which are required for the `signup.page.js` and `signup.spec.js` should be present in `./test/wdio/vaah-webdriverio/data/signup.js`and for the values which are required for the test scripts, it should be arranged in `groups` and `tests` in JSON format.
 Example:
 ```js
 class Signup{
