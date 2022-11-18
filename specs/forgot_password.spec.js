@@ -14,9 +14,60 @@ describe(Page.groupId(params), async () => {
 
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[0];
-        console.log(color.green('params.test'), inputs);
         await Page.open()
-        await Page.forgotPassword(
+        await Page.pageHeading(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[1];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[1];
+        await Page.open()
+        await Page.pageHeading(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[2];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[2];
+        await Page.open()
+        await Page.pageSubheading(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[3];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[3];
+        await Page.open()
+        await Page.emailPlaceholderText(
+            Data,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[4];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[4];
+        await Page.open()
+        await Page.sendCodeButtonText(
             Data,
             inputs.assert
         );

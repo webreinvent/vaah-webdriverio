@@ -23,18 +23,50 @@ class FpasswordPage extends Page {
 
     //---------------------------------------------------------
 
-    async forgotPassword(data,assert)
+    async forgotPassword(data)
     {
-        await Sl.$(data.selectors.forgot_password).click();
-        await this.pageHeading(data,assert);
+        await Sl.$(data.elements.forgot_password).click();
     }
 
     //---------------------------------------------------------
 
     async pageHeading(data,assert)
     {
-        await expect(Sl.$(data.selectors.page_heading)).toHaveTextContaining(assert);
+        await this.forgotPassword(data)
+        await expect(Sl.$(data.elements.page_heading)).toHaveTextContaining(assert);
     }
+
+    //---------------------------------------------------------
+
+    async pageSubheading(data,assert)
+    {
+        await this.forgotPassword(data)
+        await expect(Sl.$(data.elements.page_subheading)).toHaveTextContaining(assert);
+    }
+
+    //---------------------------------------------------------
+
+    async emailPlaceholderText(data,assert)
+    {
+        await this.forgotPassword(data)
+        await expect(Sl.dusk(data.elements.email)).toHaveAttributeContaining(data.attr_type,assert)
+    }
+
+    //---------------------------------------------------------
+
+    async sendCodeButtonText(data,assert)
+    {
+        await this.forgotPassword(data)
+        await expect(Sl.dusk(data.elements.send_code_button)).toHaveTextContaining(assert)
+    }
+
+    //---------------------------------------------------------
+
+    /*async (data,assert)
+    {
+        await this.forgotPassword(data)
+        await expect(Sl.dusk(data.elements.send_code_button)).toHaveTextContaining(assert)
+    }*/
 
 }
 module.exports = new FpasswordPage();
