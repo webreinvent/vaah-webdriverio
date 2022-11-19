@@ -72,6 +72,83 @@ describe(Page.groupId(params), async () => {
             inputs.assert
         );
     })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[5];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[5];
+        await Page.open()
+        await Page.invalidEmailAssertion(
+            Data,
+            inputs.email,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[6];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[6];
+        await Page.open()
+        await Page.invalidEmailAssertion(
+            Data,
+            inputs.email,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[7];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[7];
+        await Page.open()
+        await Page.invalidEmailAssertion(
+            Data,
+            inputs.email,
+            inputs.assert
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[8];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[8];
+        await Page.open()
+        await Page.validEmail(
+            Data,
+            inputs.email,
+            inputs.assert,
+            inputs.mail_email,
+            inputs.mail_password
+        );
+    })
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[9];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[9];
+        await Page.open()
+        await Page.validEmailreceiver(
+            Data,
+            inputs.email,
+            inputs.assert,
+            inputs.mail_email,
+            inputs.mail_password
+        );
+    })
+
+
+
     //------------------------------------------------------------------------------------------------------------------
 })
 

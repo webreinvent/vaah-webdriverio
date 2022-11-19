@@ -2,6 +2,7 @@ class Fpassword{
 
     constructor() {
         this.attr_type = 'placeholder';
+        this.mailtrap_path = 'https://mailtrap.io/signin';
         this.params = {
             group:{
                 count: null,
@@ -16,6 +17,13 @@ class Fpassword{
             alert_box: 'alertdialog',
             page_heading: 'h3',
             page_subheading: 'p',
+            mail_email: 'user_email',
+            mail_next_button: '=Next',
+            mail_password: 'user_password',
+            mail_login_button: 'commit',
+            mail_recent_email: '=Reset Password Email',
+            mail_senders_email: 'span=Speaker <invite@speaker.com>',
+            mail_receiver_email: 'span=<satyajeet.s001@webreinvent.com>'
         }
 
         this.params.page = {
@@ -59,12 +67,54 @@ class Fpassword{
                         expect: "Label text should be present in 'send code' button of the forgot password page.",
                         assert: "Send code"
                     },
-                    /*{
+                    {
                         count: 1.6,
                         name: "Verify that the forgot password functionality when the user enters the unregistered email id and clicks on the send code button.",
                         expect: "user should not get the code or link and and an error message should be displayed.",
+                        email: "demo@gmail.com",
                         assert: "No user exist"
-                    }*/
+                    },
+                    {
+                        count: 1.7,
+                        name: "Verify the forgot password functionality by trying to reset the password without entering the email address .",
+                        expect: "User should not be able to reset the new password and an error message should be displayed.",
+                        email: "",
+                        assert: "The email field is required."
+                    },
+                    {
+                        count: 1.8,
+                        name: "Verify the forgot password functionality by trying to reset the password by entering only space in email text-field",
+                        expect: "User should not be able to reset the new password and an error message should be displayed.",
+                        email: " ",
+                        assert: "The email field is required."
+                    },
+                    {
+                        count: 1.9,
+                        name: "Verify the user will get the reset password email from valid sender email",
+                        expect: " User should get the reset password email from valid sender.",
+                        email: "satyajeet.s001@webreinvent.com",
+                        mail_email: "dev@webreinvent.com",
+                        mail_password: "b$6hEHExKH955bP",
+                        assert: "Speaker <invite@speaker.com>"
+                    },
+                    {
+                        count: 2.1,
+                        name: "Verify the user will get the reset password email to valid receiver or valid email",
+                        expect: " User should get the reset password email to valid email.",
+                        email: "satyajeet.s001@webreinvent.com",
+                        mail_email: "dev@webreinvent.com",
+                        mail_password: "b$6hEHExKH955bP",
+                        assert: "<satyajeet.s001@webreinvent.com>"
+                    },
+                    {
+                        count: 2.2,
+                        name: "Verify the user will get the ",
+                        expect: " User should get ther.",
+                        email: "satyajeet.s001@webreinvent.com",
+                        mail_email: "dev@webreinvent.com",
+                        mail_password: "b$6hEHExKH955bP",
+                        assert: "Click to Reset"
+                    },
                 ]
             }
         ]
