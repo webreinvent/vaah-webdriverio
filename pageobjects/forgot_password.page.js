@@ -108,6 +108,25 @@ class FpasswordPage extends Page {
 
     //---------------------------------------------------------
 
+    async resetLinkClick(data,email,mail_email,mail_password)
+    {
+        await this.validEmailLogin(data,email,mail_email,mail_password)
+        //await browser.url("https://v6.getdemo.dev/demo/gbs-dev/develop/public/backend#/reset-password/637dfae3e3bd1")
+        //await this.mailLogout(data)
+        //await browser.waitForExist('iframe[data-test-id="message_view_iframe"]');
+        const my_frame = await Sl.$("iframe[data-test-id='message_view_iframe']")
+        //await expect(my_frame).toExist()
+        //const my_frame = await Sl.$('#iframe_message')
+        // const iframe = await Sl.testid("message_view_iframe")
+        //await browser.frame(my_frame)
+        await browser.switchToFrame(my_frame)
+        //await Sl.$('=https://v6.getdemo.dev/demo/gbs-dev/develop/public/backend#/reset-password/637dda3980ff2').click()
+        //await Sl.$('=Click to Reset').click()
+        await browser.pause(7000)
+    }
+
+    //---------------------------------------------------------
+
     async mailLogout(data)
     {
         await Sl.$(data.elements.mail_user_profile).click();

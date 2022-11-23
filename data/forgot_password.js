@@ -108,6 +108,15 @@ class Fpassword{
                         mail_password: "b$6hEHExKH955bP",
                         assert: "<satyajeet.s001@webreinvent.com>"
                     },
+                    {
+                        count: 2.2,
+                        name: "Verify reset password link or button is clickable",
+                        expect: "Reset password link or button should be clickable and reset password page should be displayed",
+                        email: "satyajeet.s001@webreinvent.com",
+                        mail_email: "dev@webreinvent.com",
+                        mail_password: "b$6hEHExKH955bP",
+                        //assert: "<satyajeet.s001@webreinvent.com>"
+                    },
 
                 ]
             }

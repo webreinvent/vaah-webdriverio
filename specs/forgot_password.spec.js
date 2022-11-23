@@ -147,6 +147,22 @@ describe(Page.groupId(params), async () => {
         );
     })
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    params.test = Data.groups[0].tests[10];
+
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[10];
+        await Page.open()
+        await Page.resetLinkClick(
+            Data,
+            inputs.email,
+            inputs.mail_email,
+            inputs.mail_password,
+            //inputs.assert
+        );
+    })
+
 
 
     //------------------------------------------------------------------------------------------------------------------
