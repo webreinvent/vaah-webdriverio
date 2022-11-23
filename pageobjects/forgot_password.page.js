@@ -73,14 +73,7 @@ class FpasswordPage extends Page {
 
     //---------------------------------------------------------
 
-    async refresh()
-    {
-        await browser.refresh();
-    }
-
-    //---------------------------------------------------------
-
-    async validEmail(data,email,assert,mail_email,mail_password)
+    async validEmailLogin(data,email,mail_email,mail_password)
     {
         await this.forgotPassword(data)
         await Sl.dusk(data.elements.email).setValue(email)
@@ -90,59 +83,35 @@ class FpasswordPage extends Page {
         await Sl.$(data.elements.mail_next_button).click()
         await Sl.id(data.elements.mail_password).setValue(mail_password)
         const login = await Sl.name(data.elements.mail_login_button)
-        login.scrollIntoView()
         await browser.pause(2000)
         login.click()
         await Sl.$(data.elements.mail_recent_email).click()
+    }
+
+    //---------------------------------------------------------
+
+    async emailSenderAssertion(data,email,mail_email,mail_password,assert)
+    {
+        await this.validEmailLogin(data,email,mail_email,mail_password)
         await expect(Sl.$(data.elements.mail_senders_email)).toHaveTextContaining(assert)
+        await this.mailLogout(data)
     }
 
     //---------------------------------------------------------
 
-    async validEmailreceiver(data,email,assert,mail_email,mail_password)
+    async emailReceiverAssertion(data,email,mail_email,mail_password,assert)
     {
-        await this.forgotPassword(data)
-        await Sl.dusk(data.elements.email).setValue(email)
-        await Sl.dusk(data.elements.send_code_button).click()
-        await browser.url(data.mailtrap_path)
-        await Sl.id(data.elements.mail_email).setValue(mail_email)
-        await Sl.$(data.elements.mail_next_button).click()
-        await browser.pause(3000);
-        await Sl.id(data.elements.mail_password).setValue(mail_password)
-        const login = await Sl.name(data.elements.mail_login_button)
-        login.scrollIntoView()
-        await browser.pause(2000)
-        login.click()
-        await Sl.$(data.elements.mail_recent_email).click()
+        await this.validEmailLogin(data,email,mail_email,mail_password)
         await expect(Sl.$(data.elements.mail_receiver_email)).toHaveTextContaining(assert)
+        await this.mailLogout(data)
     }
 
     //---------------------------------------------------------
 
-    async validEmailLink(data,email,assert,mail_email,mail_password)
+    async mailLogout(data)
     {
-        await this.forgotPassword(data)
-        await Sl.dusk(data.elements.email).setValue(email)
-        await Sl.dusk(data.elements.send_code_button).click()
-        await browser.url(data.mailtrap_path)
-        await browser.pause(3000)
-        await Sl.id(data.elements.mail_email).setValue(mail_email)
-        await browser.pause(3000)
-        await Sl.$(data.elements.mail_next_button).click()
-        await Sl.id(data.elements.mail_password).setValue(mail_password)
-        const login = await Sl.name(data.elements.mail_login_button)
-        login.scrollIntoView()
-        await browser.pause(2000)
-        login.click()
-        await browser.pause(3000)
-        await Sl.$(data.elements.mail_recent_email).click()
-        await browser.pause(3000)
-        //const frame = await Sl.$('iframe[data-test-id="message_view_iframe"]')
-        const iframe = await Sl.testid("message_view_iframe")
-        browser.switchToFrame(iframe)
-        await browser.pause(5000)
-        await expect(Sl.$('=Click to Reset')).toHaveTextContaining(assert)
-        //await expect(Sl.$(data.elements.page_subheading)).toHaveTextContaining(assert)
+        await Sl.$(data.elements.mail_user_profile).click();
+        await Sl.$(data.elements.mail_logout).click();
     }
 
 }

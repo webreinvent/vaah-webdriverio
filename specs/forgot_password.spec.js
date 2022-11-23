@@ -122,12 +122,12 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[8];
         await Page.open()
-        await Page.validEmail(
+        await Page.emailSenderAssertion(
             Data,
             inputs.email,
-            inputs.assert,
             inputs.mail_email,
-            inputs.mail_password
+            inputs.mail_password,
+            inputs.assert
         );
     })
 
@@ -138,12 +138,12 @@ describe(Page.groupId(params), async () => {
     it(Page.testId(params), async () => {
         inputs = Data.groups[0].tests[9];
         await Page.open()
-        await Page.validEmailreceiver(
+        await Page.emailReceiverAssertion(
             Data,
             inputs.email,
-            inputs.assert,
             inputs.mail_email,
-            inputs.mail_password
+            inputs.mail_password,
+            inputs.assert
         );
     })
 

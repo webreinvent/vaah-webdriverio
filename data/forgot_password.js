@@ -23,7 +23,9 @@ class Fpassword{
             mail_login_button: 'commit',
             mail_recent_email: '=Reset Password Email',
             mail_senders_email: 'span=Speaker <invite@speaker.com>',
-            mail_receiver_email: 'span=<satyajeet.s001@webreinvent.com>'
+            mail_receiver_email: 'span=<satyajeet.s001@webreinvent.com>',
+            mail_user_profile: 'span=dev@webreinvent.com',
+            mail_logout: '=Logout',
         }
 
         this.params.page = {
@@ -106,15 +108,7 @@ class Fpassword{
                         mail_password: "b$6hEHExKH955bP",
                         assert: "<satyajeet.s001@webreinvent.com>"
                     },
-                    {
-                        count: 2.2,
-                        name: "Verify the user will get the ",
-                        expect: " User should get ther.",
-                        email: "satyajeet.s001@webreinvent.com",
-                        mail_email: "dev@webreinvent.com",
-                        mail_password: "b$6hEHExKH955bP",
-                        assert: "Click to Reset"
-                    },
+
                 ]
             }
         ]
