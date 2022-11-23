@@ -1,14 +1,19 @@
-const chalk = require('chalk');
+//const chalk = await import('chalk');
+//import {chalk} from "chalk";
+let color  = require("cli-color");
+
+
 const env = require('./../../../wdio.env');
 
 /**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
+ * main page object containing all methods, selectors and functionality
+ * that is shared across all page objects
+ */
 module.exports = class Page {
 
     constructor() {
         this.base_url = env.base_url;
+        this.signup_url = env.signup_url
         this.params = {
             page: {
                 id: null,
@@ -27,7 +32,6 @@ module.exports = class Page {
                 expect: null,
             }
         };
-
     }
 
     //-------------------------------------------------
@@ -37,7 +41,7 @@ module.exports = class Page {
     //-------------------------------------------------
     highlight(str)
     {
-        return chalk.magenta(str);
+        return color.blue(str);
     }
     //-------------------------------------------------
     pageId(params)
@@ -49,7 +53,7 @@ module.exports = class Page {
     //-------------------------------------------------
     groupId(params)
     {
-        let id = chalk.red(`
+        let id = color.red(`
 ---------------------------------------------------------------`);
         id += this.pageId(params);
         id += `
@@ -64,7 +68,7 @@ module.exports = class Page {
         if(params.test.expect)
         {
             id += `
-    ${chalk.blue('Expect:')} ${params.test.expect}`;
+${color.blue('Expects:')} ${params.test.expect}`;
         }
 
 
