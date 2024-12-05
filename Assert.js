@@ -1,13 +1,20 @@
-const env = require('./../../../wdio.env');
+import env from '../../../wdio.env.js'
+const envObj = new env();
+const params = envObj.getParams();
 
-class Assert{
+export default class Asserts{
 
-    pause()
+    async pauseIfHuman(seconds = params.is_human_pause)
     {
-        if(env.is_human)
-        {
-            browser.pause(env.is_human_pause*1000);
+        if(params.is_human) {
+            await browser.pause(seconds);
         }
+    }
+
+    pageUrl(text)
+    {
+        return expect(browser).toHaveUrl(text);
+
     }
 
     pageTitle(text)
@@ -21,7 +28,13 @@ class Assert{
         return expect(selector).toHaveTextContaining(text);
     }
 
+    isDisabled(selector)
+    {
+        return expect(selector).toBeDisabled();
+    }
 
+    isClickable(selector)
+    {
+        return expect(selector).toBeClickable();
+    }
 };
-
-module.exports = new Assert()
