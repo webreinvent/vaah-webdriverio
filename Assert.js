@@ -14,13 +14,11 @@ export default class Asserts{
     pageUrl(text)
     {
         return expect(browser).toHaveUrl(text);
-
     }
 
     pageTitle(text)
     {
         return expect(browser).toHaveTitleContaining(text);
-
     }
 
     text(selector, text)
