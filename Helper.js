@@ -21,11 +21,39 @@ export default class Helper{
         await element.scrollIntoView({ block: 'center', inline: 'center' });
     }
 
-    async waitForClickable(element, timeout = 2000){
-        await element.waitForClickable({ timeout: timeout });
+    async waitForClickable(element, millisecond = 2000){
+        await element.waitForClickable({ timeout: millisecond });
     }
 
-    async waitForUnClickable(element, timeout = 2000){
-        await element.waitForClickable({ reverse: true, timeout: timeout });
+    async waitForEnabled(element, millisecond = 2000){
+        await element.waitForEnabled({ timeout: millisecond });
+    }
+
+    async waitForDisabled(element, millisecond = 2000){
+        await element.waitForEnabled({ reverse: true, timeout: millisecond })
+    }
+
+    async waitForExist(element, millisecond = 2000){
+        await element.waitForExist({ timeout: millisecond });
+    }
+
+    async saveScreenshot(element, filename){
+        await element.saveScreenshot(filename);
+    }
+
+    async switchFrame(iframe){                                  // Here the parameter 'iframe' is a valid selector for the iframe element
+        try {
+            await browser.switchToFrame(iframe);
+        } catch (error) {
+            throw 'Cannot switch frame, frame not found'
+        }
+    }
+
+    async switchWindow(handle){                                 // Here the parameter 'handle' can be the URL handle or page title
+        try {
+            await browser.switchToWindow(handle);
+        } catch (error) {
+            throw 'Cannot switch window, added window not found'
+        }
     }
 }
