@@ -26,13 +26,17 @@ export default class Asserts{
         return expect(selector).toHaveTextContaining(text);
     }
 
-    isDisabled(selector)
+    isDisplayed(selector)
     {
-        return expect(selector).toBeDisabled();
+        return expect(selector).toBeDisplayed();
     }
 
     isClickable(selector)
     {
         return expect(selector).toBeClickable();
+    }
+
+    hasAttributeValue(selector, attribute, value){
+        return expect(selector).toHaveAttribute(attribute, expect.stringContaining(value));
     }
 };
