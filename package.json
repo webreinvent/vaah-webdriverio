@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "wdio": "npm run common-steps",
+    "wdio-test": "wdio run ./wdio.conf.js",
+    "wdio debug": "cross-env NODE_WDIO_DEBUG=true npm run common-steps",
+    "wdio is_human": "cross-env NODE_WDIO_IS_HUMAN=true npm run common-steps",                 
+    "wdio mac": "cross-env NODE_WDIO_OS=mac npm run common-steps",
+    "wdio ios": "cross-env NODE_WDIO_OS=ios npm run common-steps",
+    "wdio windows": "cross-env NODE_WDIO_OS=windows npm run common-steps",
+    "wdio linux": "cross-env NODE_WDIO_OS=linux npm run common-steps",
+    "wdio android": "cross-env NODE_WDIO_OS=android npm run common-steps",
+    "allure:clean": "node cleanAllureResults.js",
+    "copy-history": "node copyHistoryFolder.js",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open",
+    "common-steps": "npm run allure:clean && npm run wdio-test || true && npm run copy-history && npm run allure:generate && npm run allure:open"
+  },
+  
+  "type": "module"
+}
+
+
+
+
+
+
+
+
