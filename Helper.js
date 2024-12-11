@@ -1,6 +1,6 @@
 export default class Helper{
 
-    async checkBaseUrlResponse(base_url){
+    async checkBaseUrlResponse(base_url){                   // Method to check wether the base_url reponse is 200 or not
         const response = await fetch(base_url);
         expect(response.status).toBe(200);
     }

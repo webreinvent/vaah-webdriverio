@@ -18,12 +18,12 @@ export default class Asserts{
 
     pageTitle(text)
     {
-        return expect(browser).toHaveTitleContaining(text);
+        return expect(browser).toHaveTitle(expect.stringContaining(text));
     }
 
     text(selector, text)
     {
-        return expect(selector).toHaveTextContaining(text);
+        return expect(selector).toHaveText(expect.stringContaining(text));
     }
 
     isDisplayed(selector)
