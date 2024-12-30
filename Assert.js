@@ -11,32 +11,33 @@ export default class Asserts{
         }
     }
 
-    pageUrl(text)
+    async pageUrl(text)
     {
         return expect(browser).toHaveUrl(text);
     }
 
-    pageTitle(text)
+    async pageTitle(text)
     {
         return expect(browser).toHaveTitle(expect.stringContaining(text));
     }
 
-    text(selector, text)
+    async text(selector, text)
     {
         return expect(selector).toHaveText(expect.stringContaining(text));
     }
 
-    isDisplayed(selector)
+    async isDisplayed(selector)
     {
         return expect(selector).toBeDisplayed();
     }
 
-    isClickable(selector)
+    async isClickable(selector)
     {
         return expect(selector).toBeClickable();
     }
 
-    hasAttributeValue(selector, attribute, value){
+    async hasAttributeValue(selector, attribute, value)
+    {
         return expect(selector).toHaveAttribute(attribute, expect.stringContaining(value));
     }
 };
