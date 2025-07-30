@@ -10,7 +10,7 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 ## Setup & Configure
 
 ### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
-**Refer**: https://drive.google.com/file/d/1OTspQqlKci6lBlT0BxW4idtCvXVnbIUe/view?usp=sharing
+**Refer**: [clone project](assets/step%201%20-%20clone%20repo.mov)
 
 
 ### Step 2: Configure `wdio.env.sample.js`
@@ -60,6 +60,34 @@ In `wdio.env.js` tester should set the base URL based on their test environment.
 ```
 **Refer**: https://drive.google.com/file/d/1Nx98HK2Hc_FNs6-1rm4rSruuTn1clL48/view?usp=sharing
 
+### Step 5: Install Dependencies
+In this steps, we will install few packages that will be used by the automation scripts. To install the required dependencies and configure package.json file, follow the steps given below:
+
+1. Run following commands in the terminal of the Code Editor. (Make sure the path is set to your project directory)
+   ```shell
+   npm install axios chalk cli-color cross-env ts-node typescript wdio-wait-for --save-dev
+   ```
+2. In `package.json` file, replace the code in script with the below code:
+   ```json
+   "scripts": {
+    "wdio": "cross-env wdio run ./wdio.conf.js",
+    "wdio debug": "cross-env NODE_WDIO_DEBUG=true wdio run ./wdio.conf.js",
+    "wdio is_human": "cross-env NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js",
+    }
+   ```
+3. Also add "type":"module" inside package.json file. Refer to the code below
+   ```json
+    ...
+    "type": "module",
+    "devDependencies": {
+        ...
+    }
+   ```
+
+**Note:** Since we have add `"type": "module"` in the package.json file, we need to update the import statements on all files. Also we need to update the class declaration statement for each classes. Refer to the example mentioned below:
+
+- Previous import statement: `const Page = require('./page')`. New import statement: `import Page from './page.js'`
+- Previous class declaration: `class LoginPage extends Page`. New class declaration: `export default class LoginPage extends Page`
 
 ### Step 5: Create `Data` Directory and Add Data files
 In this step, we will create a new directory called **Data** inside **tests** on your webdriverio testing project.
@@ -69,6 +97,8 @@ This folder will contain all the data files for seperate pages. In these file, a
 We also add all the locators and test data used for the test cases.
 
 Each webpage must have separate data files with locators, test data, test case descriptions, etc.
+
+The naming convention for the data file is: `pagename.js`. Eg. `login.js` or `signup.js` or `registration.js`.
 
 To understand this better, let's look at a sample data file for a page:
 
@@ -216,14 +246,19 @@ In the code snippet above, we have four objects.
 
 **Refer:** 
 
-### Step 5: Extend `pageobjects` and variables in `constructor`
+### Step 6: Extend `pageobjects` and variables in `constructor`
 Extend all your `pageobjects` to `import Page from '../vaah-webdriverio/Page.js';`, 
 
 Example: For a pageobject file - `pageobjects/Login.page.js`, we have to import and extend Page.js file.
+
+Also, import `Selector.js` and `Assert.js` files on all your pageobject files. Do not extend these files. Only extend `Page.js` file.
+
 ```js
 import Page from '../webdriverio-hepler/Page.js'
+import Selector from '../webdriverio-helper/Selector.js'
+import Asserts from "../webdriverio-helper/Asserts.js";
 
-export default class Login extends Page {
+export default class LoginPage extends Page {
 
     constructor() {
         super();
@@ -243,221 +278,187 @@ export default class Login extends Page {
     ...
 }
 ```
-Demo: https://drive.google.com/file/d/1qSu8nc99BJm9dp_M7Bn88orBg0vQT8Y8/view?usp=sharing
+**Refer:** 
 
+The page object file contains all the methods for each test case and some additional methods as needed.
 
-### Step 6: Writing test cases
-In `specs` folder create a file `login.spec.js` and write following code for example:
+All the functionalities such as locating an element, opening a URL, clicking a button and other test logics. All these should be added in this page object file.
+
+Let's look at a sample page object file for better understanding.
+
 ```js
-import Selector from '../../vaah-webdriverio/Selector.js'
-import Assert from '../../vaah-webdriverio/Assert.js'
-import LoginPage from '../pageobjects/login.page.js'
+import Page from '../vaah-webdriverio/Page.js'
+import Selector from '../vaah-webdriverio/Selector.js'
+import VaahAsserts from "../vaah-webdriverio/VaahAsserts.js";
 
+let Asserts = new VaahAsserts();
 let Sl = new Selector();
-let asserts = new Assert();
-let login = new LoginPage();
 
-login.group.count = 1; // Group counter which will be used to generate Group ID
-login.group.name = 'Login';
-
-describe(login.groupId(), () => {
-    //-----------------------------------------------------------
-    login.test = {
-        count: 1.1, // Test counter which will be used to generate Test ID
-        name: 'Tester should be ble to run login test successfully',
-        expect: "Alert message 'You logged into a secure area!' should appear",
-        data: "You logged into a secure area!",
+export default class RegistrationPage extends Page{
+    constructor() {
+        super();
+        this.params.page.id = "RG";
+        this.params.page.name = "Registration";
+        this.params.page.path = "/register";
+        this.params.page.url = this.base_url+this.params.page.path;
     }
 
-    it(login.testId(), async () => {
-        login.open();
-        browser.maximizeWindow();
-        await assert.pageTitle("The Internet");
-        Sl.name("username", "tomsmith"); 
-        // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
-        Sl.name("password", "SuperSecretPassword!");
-        Sl.class('radius').click();
-        await asserts.text(Sl.id('flash'), login.test.data);
-    });
-    //-----------------------------------------------------------
- 
-});
+    async open() {
+        await browser.maximizeWindow();
+        await Asserts.pause();
+        await super.open(this.params.page.url);
+    }
+
+    async firstNameFieldTypeFunctionality(data, assert){
+        await Sl.id(data.element.first_name_id).setValue(data.value.first_name);
+        await expect(Sl.id(data.element.first_name_id)).toHaveValueContaining(assert);
+    }
+
+    async lastNameFieldTypeFunctionality(data, assert){
+        const last_name = await Sl.id(data.element.last_name_id);
+        await last_name.setValue(data.value.last_name);
+        await expect(last_name).toHaveValueContaining(assert);
+    }
+}
 ```
-Demo: https://drive.google.com/file/d/1auagekvKGp-Oghx8o-zUV7nFOU0BtUSJ/view?usp=sharing
 
-Note: This is just an example of where to write the test script. The test script may differ.
+#### How to locate elements
+In the code above, you can see that we imported a file named Selector.js and used this file to locate all the elements using the methods inside it.
 
-**To know more about the type of selectors used in the above example script, kindly refer to the table added below:**
+Here we will use the objects we created in the **data file** for different elements under `this.element`.
 
-
-| Selector | In Selector.js|Use|Description|
-|--|--|--|--|
-|testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "demo@test.com")`|This will select the element having attribute `data-testid='royal_email'` and then will insert the value as "demo@test.com" in it.|
-|id|`id(id)  {  return $("#"+id);  } `|`sl.id("submit").click;`|This will select the element with attribute id='submit' and will click on it.|
-|class|`class(name) { return $("."+name); }`|`sl.class("submit").click;`|This will select the element with attribute `id='submit'` and will click on it.
-|$|`$(selector){return $(selector);}`|`sl.$("h1");`|This will select the element having attribute as `h1`. Mostly used during assertion.|
-|attr|`attr(attribute, value){return$('['+attribute+'="'+value+'"]'); }`|`sl.attr('href','#/forgot-password' ).click();`|This will select the element having attribute as `href` and its value as `#/forgot-password`.
-|name|`name(name,value=null) { let el = this.attr('name', name); if(value) { el.setValue(value) } return el; }`|`sl.name("username", "tomsmith");`|This will select the element with attribute `name="username"` and will insert value "tomsmith" in it.|
-|wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio("username", "tomsmith")`|This will select the element having attribute `data-wdio='username'` and then will insert the value as "tomsmith" in it. Note: If you are not able to find data-wdio attribute associated with the element in that case either you can add it by yourself or you can ask the developer to add this attribute.|
-|dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk("username", "tomsmith")`|This will select the element having attribute `dusk='username'` and then will insert the value as "tomsmith" in it.|
-|role|`role(name) { return this.attr('role', name); }`|`sl.role("navigation").click()`|This will select the element having attribute `role="navigation"` and will click on it.|
-
-
-Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
-
-To implement page object we need to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
-
-Demo: https://img-v3.getdemo.dev/screenshot/37DZHpTEcH.mp4
-
-Note: Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
+**Note:** The data object in the method: `firstNameFieldTypeFunctionality` and `lastNameFieldTypeFunctionality` added above are the reference object from the Data file of the perticular page. We do not import the data file in this pageobject file. Instead we have a seperate **Spec** file, from which we import and call the these menthods with data file as an argument. You will get know about this in detail on further sections of this document.
 
 ```js
- class Elements {  
-    constructor() {  
-        this.login= {
-          signin_email: "signin-email_or_username",  
-          signin_password: "signin-password",
-          button_signin: "signin-signin",
-          remember_me_checkbox: "checkbox",
- }}}
- module.exports = new Elements();
+export default class Selector{
+
+    //-----------------------------------------------------
+    id(id)
+    {
+        return $("#"+id);
+    }
+    //-----------------------------------------------------
+    class(name)
+    {
+        return $("."+name);
+    }
+    //-----------------------------------------------------
+    $(selector)
+    {
+        return $(selector);
+    }
+    ...
+
 ```
-`this.login={}` block contains all the attributes values used in for the login value. If you are testing any other page you can create a seperate block and add the attributes used in that block. An example is mentioned below: 
- 
- Demo: https://img-v3.getdemo.dev/screenshot/bt9XOVsbUS.mp4
+In the code snippet above, you can see that we have different locators as a method. We have locators for ID, class name, attribute name and value, and much more.
 
+We just have to import the file and make the function calls inside it. Refer to the example below:
 
- ```js
- class Elements {  
-    constructor() {  
-        this.login= {
-          signin_email: "signin-email_or_username",  
-          signin_password: "signin-password",
-          button_signin: "signin-signin",
-          remember_me_checkbox: "checkbox",
-        }
-        this.home={
-          main_heading:"h1",
-          sub_heading:"h2",
-        }
- }}
- module.exports = new Elements();
+```js
+import Selector from 'Selector.js'
+let Sl = new Selector();
+
+const element = await Sl.id('element_id');  // Here we have used 'element_id' but we should use the locator objects from data file.
+
 ```
 
-
-When using the above pageobject then you can write the selectors in the following manner:
-
-
+Similarly, we can use the remaining functions inside `Selector.js` as needed. Refer to the table given below to know more about the usage of the selectors:
 
 | Selector | In Selector.js | Use with pageobject |
 |--|--|--|
 |testid|`testid(name,value=null) { let el = this.attr('data-testid', name); if(value) { el.setValue(value) } return el; }`|`sl.testid("royal_email", "demo@test.com");` or `sl.testid("royal_email").setValue("demo@test.com")`|
 |id|`id(id) { return $("#"+id); }`|`sl.id(elements.login.button_signin).click();`|
 |class|`class(name) { return $("."+name); }`|`sl.class(elements.login.button_signin).click();`|
-|$|`$(selector){return $(selector);}`|`expect(sl.$(elements.login.remember_me_checkbox)).toBeSelected();`|
+|\$| `$(selector){return $(selector);}`|`expect(sl.$(elements.login.remember_me_checkbox)).toBeSelected();`|
 |attr|`attr(attribute, value){return$('['+attribute+'="'+value+'"]'); }`|`sl.attr("class", elements.login.button_signin).click();`
 |name|`name(name,value=null) { let el = this.attr('name', name); if(value) { el.setValue(value) } return el; }`|`sl.name(elements.login.signin_email, "tomsmith");` or `sl.name(elements.login.signin_email).setValue("tomsmith");`|
 |wdio|`wdio(name,value=null) { let el = this.attr('data-wdio', name); if(value) { el.setValue(value) } return el; }`|`sl.wdio(elements.login.signin_email, "tomsmith");` or `sl.wdio(elements.login.signin_email).setValue("tomsmith")`|
 |dusk|`dusk(name,value=null) { let el = this.attr('dusk', name); if(value) { el.setValue(value) } return el; }`|`sl.dusk(elements.login.signin_password, "SuperSecretPassword")` or `sl.dusk(elements.login.signin_password).setValue("SuperSecretPassword");`|
 |role|`role(name) { return this.attr('role', name); }`|`sl.role(elements.login.button_signin).click();`|
 
+#### Test Methods
 
+Inside the Data file, we should include all the methods used for the test cases. Let's look at these methods in detail:
 
-Demo: https://img-v3.getdemo.dev/screenshot/F0Q3bDNA9K.mp4
- ```
-Note:
+1. **constructor():** In the constructor, we have to add page id, name and path. We also need to add the complete URL of the page by appending the baseUrl and page path.
+2. **Open()**: This method should be included in every page object file to open the specific URL of the page, which should come from `this.params`.
+3. **Test methods:** These include all the methods required for each test case. For locating an element, we have to use selector methods and the locators added to the data file inside `this.element`. Similarly, for assertions and test data, we have to use assert and `this.value` objects.
 
-1.For selector 'testid', if attribute or locator "data-testid" is present in the html code when we are inspecting or locating an element then we should give the first priority to the locator or attribute 'data-testid'.
-   e.g. sl.testid("royal_email", "demo@test.com");
+**Note:** The QA need to remove all the hardcoded locators and values from the pageobject files, add those in the data file, import required files such as Assert.js, Selector.js, Page.js etc. Use Selector class to locate elements. They have to refactor test methods.
 
-2.Due to limitations this section is not showing in tabular format. Please copy and paste the section in https://stackedit.io/ to view the tabular form.
+### Step 7: Refactor Spec files
+In this step, we will refactor and remove all the test logic, functionalities from the spec files. This file will only contain the method calls for the methods we have created in page object file.
+
+Each page will have a seperate spec file just like it has seperate data and page object files. The naming convention should be `pagename.spec.js`. Eg. `login.spec.js`.
+
+The spec file is the starting point of execution of your automation script.
+
+We have to import the data file and the page object file that we have created for a page, as mentioned in the previous sections.
+
+Refer to the sample spec file added below:
+
+```js
+import RegistrationPage from '../pageobjects/registration.page.js'
+import Registration from '../data/registration.js'
+import Assert from "../vaah-webdriverio/Assert.js";
+
+let Page = new RegistrationPage();
+let Data = new Registration();
+let Asserts = new Assert();
+let params = Data.params;
+let inputs;
+
+params.group = Data.groups[0];
+describe(Page.groupId(params), () => {
+
+    params.test = Data.groups[0].tests[0];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[0];
+        await Page.open();
+        await Asserts.pageUrl(inputs.assert);
+    })
+
+    params.test = Data.groups[0].tests[1];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[1];
+        await Page.open();
+        await Asserts.pageTitle(inputs.assert);
+    })
+
+    params.test = Data.groups[0].tests[2];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[2];
+        await Page.open();
+        await Page.mandatorySymbolVisibility(Data, inputs.assert);
+    })
+})
 ```
-Demo(1): https://img-v4.getdemo.dev/screenshot/chrome_revNZwwQcK.mp4
 
-I have written an example on how to write a test script for logging in using the page object:
+There are several points to note in this file. Let's look at these one by one:
 
- ```js
-const sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert');
-const login = require('../pageobjects/login.page');  
-const elements = require('../data/elements');
-login.group.count = 1; // Group counter which will be used to generate Group IDlogin.group.name = 'Login';  
-
-describe(login.groupId(), () => {  
-    login.test = {  
-        count: 1, // Test counter which will be used to generate Test ID  
-        name: 'Tester should be ble to run login test successfully',  
-        expect: "Alert message 'You logged into a secure area!' should appear",  
-        data: "You logged into a secure area!",
-    };
-
-    it(login.testId(), async () => {  
-        login.open();  
-        browser.maximizeWindow();
-        await assert.pageTitle("The Internet");  
-        sl.wdio(elements.login.signin_email, "tomsmith"); 
-        /*This will select the element with attribute as `data-wdio='signin-email_or_username'`which is stored in the elements.js 
-          as `signin_email` and will also insert the value "tomsmith".*/  
-        sl.dusk(elements.login.signin_password, "SuperSecretPassword"); 
-        sl.class(elements.login.button_signin).click();  
-        await assert.text(sl.id('flash'), login.test.data);  
-    }); 
-});
-```
-
-Demo: https://img-v3.getdemo.dev/screenshot/RU2Tp6h1qo.mp4
+- The data file `registration.js` is imported and assigned to a variable **Data**.
+- The page object file `registration.page.js` is imported and assigned to a variable **Page**.
+- The params object inside `registration.js` file is assigned to a new variable, **params**.
+- For the test suite name: the group object added in the data file is passed as an argument to the function **groupId()** of file `Page.js`.
+- Similarly, for test case name, the test object inside the group is passed as an argument to the function **testId()** of the `Page.js` file.
+- Notice that the first two statements inside the **it** block were
+  ```js
+    inputs = Data.groups[0].tests[2];
+    await Page.open();
+  ```
+  - The first statement assigns the test object inside a group in the data file to the `inputs` variable.
+  - The second statement is used to call the open() method inside the page object file.
+- After this, the last statement inside the **it** block is the method call for the test case method created in the page object file.
+- The variable **Data** is passed as an argument in the method `Page.mandatorySymbolVisibility`.
+- Similarly, we have to pass the **Data** variable whenever we make a call to a function inside the page object file.
+- We have to update the `params.test` object for every test case or it block.
+- We have to update the `params.group` object for every test group or describe block.
 
 
-Note: The test_count_id should be unique so that there will be no conflict between the test scripts.
-Example:
- ```js
-const sl = require('../vaah-webdriverio/Selector');
-const assert = require('../vaah-webdriverio/Assert');
-const page = require('../pageobjects/about-us.page');
-const elements = require('../data/elements');
-const assert_data = require('../data/assert-data');
-
-
-let params = page.params;
-
-params.group.count = 1;
-params.group.name = 'About-Us';
-
-describe(page.groupId(params), () => {
-
-//----------------------------------------------------------------------------------------
-
-    params.test = {
-        count: 1.1,
-        name: "Visit About Us page and check for title",
-        expect: "Main heading should be '" + assert_data.about_us_page_title.title + "'",
-    };
-    it(page.testId(params), async () => {
-        page.open();
-        browser.maximizeWindow();
-        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-    });
-
-    params.test = {
-        count: 1.2,
-        name: "Validating seems interesting button",
-        expect: "After clicking the button should reveal the rest of story '" + assert_data.about_us_page_title.last_story + "'",
-    };
-    it(page.testId(params), async () => {
-        page.open();
-        browser.maximizeWindow();
-        await assert.text(sl.$(elements.about_us.heading), assert_data.about_us_page_title.title);
-        sl.wdio(elements.about_us.button_interesting).click();
-        await assert.text(sl.wdio(elements.about_us.last_story), assert_data.about_us_page_title.last_story);
-    });
-});
-``` 
-Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
-
-#### Step 7: Run test 
+#### Step 7: Execute tests 
 Now, you can run the test via:
 ```sh
-npx wdio --spec ./tests/wdio/specs/login.e2e.js
+npx wdio --spec ./tests/wdio/specs/login.spec.js
 ```
 Demo: https://img-v4.getdemo.dev/screenshot/chrome_uNW2UpI0dH.mp4
 
@@ -465,7 +466,7 @@ Demo: https://img-v4.getdemo.dev/screenshot/chrome_uNW2UpI0dH.mp4
 or run all tests via:
 
 ```shell
-npx wdio run ./wdio.conf.js
+npm run wdio
 ```
 Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
 
@@ -488,26 +489,27 @@ If you need to run tests based on `page id`, `group id` or `test id`, you can us
 
 ```shell
 npx wdio --mochaOpts.grep <page id> 
-e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI_1
-Demo:https://img-v3.getdemo.dev/screenshot/jqNYsEBnhT.mp4
+e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI
+Demo:
 
 npx wdio --mochaOpts.grep <group id>
 e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
-Demo:https://img-v3.getdemo.dev/screenshot/b54baoyxkZ.mp4
+Demo:
 
 npx wdio --mochaOpts.grep <test id>
-e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run all the test cases under the Page ID LI having Group ID 1 and Test ID starting with 1.1
-Demo:https://img-v4.getdemo.dev/screenshot/phpstorm64_NhXad1pY4Z.mp4
+e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run only one test cases which contains Page ID 'LI' having Group ID 1 and Test ID starting with 1.1
+Demo:
 // Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 or you can even run the test cases based on a specific keyword:
 ```npx wdio --mochaOpts.grep <any keyword>
 e.g. npx wdio --mochaOpts.grep smoke
-Demo: https://img-v3.getdemo.dev/screenshot/vju9IYLTiO.mp4
+Demo: 
 ```
+
 #### Possible error
- ```
+```
 @wdio/runner: Error: Failed to create session.
 session not created: This version of ChromeDriver only supports Chrome version 96
 ```
