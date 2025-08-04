@@ -8,66 +8,52 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 - Generate a well `formated` report
 
 ## Setup
-### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
-Demo: https://drive.google.com/file/d/1GufgBWKTGBVkphCn5AFqheVTza75s3kl/view?usp=sharing
+##### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
+Demo: https://img-v3.getdemo.dev/screenshot/spjG338m6A.mp4
 
 
-### Step 2: Configure `wdio.env.sample.js`
+##### Step 2: Configure `wdio.env.sample.js`
 - Rename `wdio.env.sample.js` to `wdio.env.js`
 - Move `wdio.env.js` to the `root` folder of your project or where `wdio.conf.js` exist
 
-Demo: https://drive.google.com/file/d/11F6IezeWfDT8elwfGhVFVsRP3ebtiMlE/view?usp=sharing
+Demo: https://img-v3.getdemo.dev/screenshot/HwjLwZEoOk.mp4
 
 
-### Step 3: Include `wdio.env.js`
-In `wdio.conf.js`, include `wdio.env.js` file and update the `env`, `baseUrl`, `logLevel` and `capabilities` variables:
+##### Step 3: Include `wdio.env.js`
+In `wdio.conf.js`, include `wdio.env.js` and update following variables:
 
 ```js
-import env from "./wdio.env.js";
-const envObj = new env();
-const params = envObj.getParams();
+const env = require('./wdio.env');
 
-export const config = {
+exports.config = {
     ...
-    env: params,
-    capabilities: params.capabilities,
-    logLevel: params.log_level,
-    baseUrl: params.base_url,
+    env: env,
+    baseUrl: env.base_url,
     ...
 }
 
 ```
-Demo: https://drive.google.com/file/d/1kWrtqGTUbvYIAhAOAxpg7WJdZVQt229a/view?usp=sharing
+Demo: https://img-v3.getdemo.dev/screenshot/eNboGGqmrh.mp4
 
 
-### Step 4: Updated `wdio.env.js` file
-In `wdio.env.js` tester should set the base URL based on their test environment. // Make sure that the URL ends with '/'.
+In `env.js` tester should set the base URL based on their test environment. // Make sure that the URL ends with '/'.
+````js
+case 'localhost':
+        params.base_url = null // Instead of null insert your base URL inside " ".
+        break;
+````
+Demo: https://img-v3.getdemo.dev/screenshot/BiI0D6ygq3.mp4
+
+
+
+##### Step 4: Extend `pageobjects` and variables in `constructor`
+Extend all your `pageobjects` to `const Page = require('./../vaah-webdriverio/Page');`, 
+
+Example: `pageobjects/Login.page.js`: 
 ```js
- this.params = {
-            debug: false,
-            is_human: true,
-            is_human_pause: 1000,
-            env: null,
-            log_level: 'error',
-            small_pause: 2000,
-            medium_pause: 5000,
-            long_pause: 10000,
-            base_url: '',       // Instead of '', insert your base URL.
-            version: null,
-            capabilities: [
-            ...
-```
-Demo: https://drive.google.com/file/d/1eEVImCxkZWG5bBtDMcA27RRaw7dUZtao/view?usp=sharing
+const Page = require('./../vaah-webdriverio/Page');
 
-
-### Step 5: Extend `pageobjects` and variables in `constructor`
-Extend all your `pageobjects` to `import Page from '../vaah-webdriverio/Page.js';`, 
-
-Example: For a pageobject file - `pageobjects/Login.page.js`, we have to import and extend Page.js file.
-```js
-import Page from '../webdriverio-hepler/Page.js'
-
-export default class Login extends Page {
+class Login extends Page {
 
     constructor() {
         super();
@@ -84,22 +70,49 @@ export default class Login extends Page {
         }
         return super.open(this.page.url);
     }
-    ...
+    
 }
+module.exports = new Login();
 ```
-Demo: https://drive.google.com/file/d/1qSu8nc99BJm9dp_M7Bn88orBg0vQT8Y8/view?usp=sharing
+Demo: https://img-v3.getdemo.dev/screenshot/iTSi72u1p3.mp4
 
-
-### Step 6: Writing test cases
-In `specs` folder create a file `login.spec.js` and write following code for example:
+#### step 5: All the methods present in Assert class under Assets in vaah-webdriverio should be prefixed with "async" to run the methods in async mode in the test scripts.
+Example:
 ```js
-import Selector from '../../vaah-webdriverio/Selector.js'
-import Assert from '../../vaah-webdriverio/Assert.js'
-import LoginPage from '../pageobjects/login.page.js'
+const env = require('./../../../wdio.env');
 
-let Sl = new Selector();
-let asserts = new Assert();
-let login = new LoginPage();
+class Assert{
+
+    async pause()
+    {
+        if(env.is_human)
+        {
+            browser.pause(env.is_human_pause*1000);
+        }
+    }
+
+    async pageTitle(text)
+    {
+        return expect(browser).toHaveTitleContaining(text);
+
+    }
+
+    async text(selector, text) {
+        await expect(selector).toHaveTextContaining(text);
+        await this.pause();
+    }
+    
+};
+
+module.exports = new Assert()
+```` 
+
+##### Step 6: Writing test cases
+In `specs` folder create a file `login.e2e.js` and write following code for example:
+```js
+const sl = require('../vaah-webdriverio/Selector');
+const assert = require('../vaah-webdriverio/Assert');
+const login = require('../pageobjects/login.page');
 
 login.group.count = 1; // Group counter which will be used to generate Group ID
 login.group.name = 'Login';
@@ -117,21 +130,19 @@ describe(login.groupId(), () => {
         login.open();
         browser.maximizeWindow();
         await assert.pageTitle("The Internet");
-        Sl.name("username", "tomsmith"); 
+        sl.name("username", "tomsmith"); 
         // This will select the element with attribute as name='username' and will also insert the value "tomsmith".
-        Sl.name("password", "SuperSecretPassword!");
-        Sl.class('radius').click();
-        await asserts.text(Sl.id('flash'), login.test.data);
+        sl.name("password", "SuperSecretPassword!");
+        sl.class('radius').click();
+        await assert.text(sl.id('flash'), login.test.data);
     });
     //-----------------------------------------------------------
  
 });
-```
-Demo: https://drive.google.com/file/d/1auagekvKGp-Oghx8o-zUV7nFOU0BtUSJ/view?usp=sharing
+````   
+Demo: https://img-v3.getdemo.dev/screenshot/OdRIb4yXIr.mp4
 
 Note: This is just an example of where to write the test script. The test script may differ.
-
-**To know more about the type of selectors used in the above example script, kindly refer to the table added below:**
 
 
 | Selector | In Selector.js|Use|Description|
@@ -149,7 +160,7 @@ Note: This is just an example of where to write the test script. The test script
 
 Page object model will help you to store the element's attribute value at one place so that if there is a change in the value then we have to change it at one page rather then changing it at every instance.
 
-To implement page object we need to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
+To implement page object we need to to create a file to store these values. Inside the tests folder go to wdio folder and then go inside data folder (if the folder does not exist you can create one). Then inside the data folder create a javascript file elements.js and paste the below mentioned code.
 
 Demo: https://img-v3.getdemo.dev/screenshot/37DZHpTEcH.mp4
 
@@ -298,7 +309,7 @@ describe(page.groupId(params), () => {
 ``` 
 Demo: https://img-v4.getdemo.dev/screenshot/phpstorm64_KzTsODht7l.mp4
 
-#### Step 7: Run test 
+##### Step 7: Run test 
 Now, you can run the test via:
 ```sh
 npx wdio --spec ./tests/wdio/specs/login.e2e.js
@@ -315,7 +326,7 @@ Demo: https://img-v3.getdemo.dev/screenshot/AWcVR496IG.mp4
 
 The Demo shows how a passed and failed test cases will be represented.
 
-#### Step 8: Result
+##### Step 8: Result
 
 <img src="https://user-images.githubusercontent.com/114494381/193214928-bc3bed84-65ca-4f4c-bf68-9f39ff8ab089.png" width="70%" style="max-width: 100%;">
 
@@ -350,7 +361,7 @@ or you can even run the test cases based on a specific keyword:
 e.g. npx wdio --mochaOpts.grep smoke
 Demo: https://img-v3.getdemo.dev/screenshot/vju9IYLTiO.mp4
 ```
-#### Possible error
+##### Possible error
  ```
 @wdio/runner: Error: Failed to create session.
 session not created: This version of ChromeDriver only supports Chrome version 96
