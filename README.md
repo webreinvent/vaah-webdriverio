@@ -13,14 +13,14 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 
 ### Step 1: Clone or add as this repo as submodule to root of `webdriverio` tests folder with folder name `vaah-webdriverio`
 
-**Refer**: [clone project](assets/step%201%20-%20clone%20repo.mov)
+**Refer**: [Clone project](https://youtu.be/7UQFlr39xAk)
 
 ### Step 2: Configure `wdio.env.sample.js`
 
 - Rename `wdio.env.sample.js` to `wdio.env.js`
 - Move `wdio.env.js` to the `root` folder of your project or where `wdio.conf.js` exist
 
-**Refer**: https://drive.google.com/file/d/1vUsWXuuGWpS3HIM8-fNSdbANPOXvgRr6/view?usp=sharing
+**Refer**: https://youtu.be/tq4XGpKV3Ws
 
 ### Step 3: Include `wdio.env.js`
 
@@ -67,7 +67,7 @@ export const config = {
 }
 ```
 
-**Refer**: (need to update this video)https://drive.google.com/file/d/1U4AuuoSn9KAEVYxk6X2gf5Ft9-6VbCnY/view?usp=sharing
+**Refer**: https://youtu.be/Fop5JRTCXDA
 
 ### Step 4: Update `wdio.env.js` file
 
@@ -89,7 +89,7 @@ In `wdio.env.js` tester should set the base URL based on their test environment.
             ...
 ```
 
-**Refer**: https://drive.google.com/file/d/1Nx98HK2Hc_FNs6-1rm4rSruuTn1clL48/view?usp=sharing
+**Refer**: https://youtu.be/jA_JwsfaRLQ
 
 ### Step 5: Install Dependencies
 
@@ -107,7 +107,7 @@ In this steps, we will install few packages that will be used by the automation 
     "wdio is_human": "cross-env NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js"
     }
    ```
-3. Also add "type":"module" inside package.json file. Refer to the code below
+3. Also add "type":"module" inside `package.json` file. Refer to the code below
    ```json
     ...
     "type": "module",
@@ -122,9 +122,9 @@ In this steps, we will install few packages that will be used by the automation 
 - Previous class declaration: `class LoginPage extends Page`. New class declaration: `export default class LoginPage extends Page`
 - Remove `export` statement from the page object files if added. This will be added at the bottom. Eg. `module.exports = new LoginPage();`.
 
-### Step 5: Create `Data` Directory and Add Data files
+### Step 6: Create `data` Directory and Add Data files
 
-In this step, we will create a new directory called **Data** inside **tests** on your webdriverio testing project.
+In this step, we will create a new directory called **data** inside **tests** on your webdriverio testing project.
 
 This folder will contain all the data files for seperate pages. In these file, all the details regarding the test case, such as test case name, expect message, test case ID, group ID and assert value.
 
@@ -173,7 +173,7 @@ export default class Registration extends Page{
         this.params.page = {
             id: "RG",
             name: "Registration",
-            url : this.base_url+"/register"
+            url : this.base_url+"register"
         }
         this.groups = [
             {
@@ -206,7 +206,7 @@ export default class Registration extends Page{
 
 The above is an example of a data file for a registration page of a website. Note that we import `Page.js` file from `vaah-webdriverio` directory.
 
-The class name in the file must be the name of the page. It should also extend the Page class from Page.js file.
+The class name in the file must be the name of the page. It should also extend the Page class from Page.js file in vaah-webdriverio directory.
 
 #### Locators and Values
 
@@ -218,12 +218,12 @@ Also notice the naming convention of the locators and values.
 
 **Note:** The QA should analyze and create multiple data files for different pages and add all the locator values based on the type. Similary, they should also add the test data in this file as well. For reference, kindly follow the steps shown in thw video down below.
 
-**Demo:** [How to add locators in data file](https://drive.google.com/file/d/1F9PkTO5W0Sqn0e2z2tGJdYleVfPY9i_p/view?usp=sharing)
-**Demo:** [How to add test data/values in data file](https://drive.google.com/file/d/1AE50e0t1dUx32kq8OYfTE2oySOTKKXjR/view?usp=sharing)
+**Demo:** [How to add locators in data file](https://youtu.be/NJIEN1WHtlg)
+**Demo:** [How to add test data/values in data file](https://youtu.be/ZXd7zCl8kOk)
 
 #### Page Details
 
-The Page ID, Name and URL which was visible in the custom spec report mentioned in the section: Test Report should be added in the `this.params.page` object.
+The Page ID, Name and URL which was visible in the custom spec report mentioned in the section should be added in the `this.params.page` object.
 
 Refer to `this.params.page` object in the constructor.
 
@@ -231,13 +231,13 @@ Refer to `this.params.page` object in the constructor.
 this.params.page = {
     id: 'RG',                          // Page ID
     name: 'Registration',              // Page Name
-    url : this.base_url+'/register'    // Page URL (base_url referenced from wdio.env.js)
+    url : this.base_url+'register'    // Page URL (base_url referenced from wdio.env.js)
 }
 ```
 
 **Note:** The QA need to add the ID, name and url of the pages based on the page name.
 
-**Demo:** [How to add page id, name and url in the data file](https://drive.google.com/file/d/1XLIr9ubYHjsGp245ukKeFS1kk5uiOhWj/view?usp=sharing)
+**Demo:** [How to add page id, name and url in the data file](https://youtu.be/TK81CLl_fXk)
 
 #### Test Group
 
@@ -262,7 +262,7 @@ this.groups = [
 
 **Note:** The QA need to analyse the written test cases and devide them in different groups if required.
 
-**Demo:** [How to add group details in data file](https://drive.google.com/file/d/1uRhcmdAasmJohxRq4rSngPhnluPR2N_2/view?usp=sharing)
+**Demo:** [How to add group details in data file](https://youtu.be/jr9JyLLiL-U)
 
 #### Test Case Description
 
@@ -292,15 +292,17 @@ In the code snippet above, we have four objects.
 
 **Note:** The QA need to add the test case description based on the previously written test cases. The assert object is optional. If we do not have any value to assert in the test case, we can remove this object from the test cases.
 
-**Demo:** [How to add test case description in the data file](https://drive.google.com/file/d/1rFldw6dKzjINH2tdxhJlMlbhmxKd9fpD/view?usp=sharing)
+**Demo:** [How to add test case description in the data file](https://youtu.be/jQYQzv9dTCI)
 
-### Step 6: Extend `pageobjects` and variables in `constructor`
+### Step 7: Extend `pageobjects` and variables in `constructor`
 
 Extend all your `pageobjects` to `import Page from '../vaah-webdriverio/Page.js';`,
 
+**Note:** If there is already a file with name 'Page.js' that is being used by the automation script, then kindly refactor the file and variable name to something else. For 'Page.js', we will always use file in 'vaah-webdriverio' directory.  
+
 Example: For a pageobject file - `pageobjects/Login.page.js`, we have to import and extend Page.js file.
 
-Also, import `Selector.js` and `Assert.js` files on all your pageobject files. Do not extend these files. Only extend `Page.js` file.
+Also, import `Selector.js` and `Assert.js` files on all your pageobject files. Do not extend these files. Only extend `Page.js` file in vaah-webdriverio directory.
 
 ```js
 import Page from '../webdriverio-hepler/Page.js'
@@ -314,7 +316,7 @@ export default class LoginPage extends Page {
         this.params.page.id = "LI"; // Page ID, Please keep this unique for all the pages.
         this.params.page.name = "Login";
         this.params.page.path = "login";
-        this.params.page.url = this.base_url + this.page.path;
+        this.params.page.url = this.base_url + this.params.page.path;
     }
 
     open (url=null) {
@@ -328,7 +330,7 @@ export default class LoginPage extends Page {
 }
 ```
 
-**Demo:** [How to add page details in page object file](https://drive.google.com/file/d/1tmC0gXLdSLfXzr8agAxZL-AnJcpo1yBW/view?usp=sharing)
+**Demo:** [How to add page details in page object file](https://youtu.be/KbJHFRUKQ3g)
 
 The page object file contains all the methods for each test case and some additional methods as needed.
 
@@ -339,9 +341,9 @@ Let's look at a sample page object file for better understanding.
 ```js
 import Page from '../vaah-webdriverio/Page.js'
 import Selector from '../vaah-webdriverio/Selector.js'
-import VaahAsserts from "../vaah-webdriverio/VaahAsserts.js";
+import Assert from "../vaah-webdriverio/Assert.js";
 
-let Asserts = new VaahAsserts();
+let Asserts = new Assert();
 let Sl = new Selector();
 
 export default class RegistrationPage extends Page{
@@ -349,7 +351,7 @@ export default class RegistrationPage extends Page{
         super();
         this.params.page.id = "RG";
         this.params.page.name = "Registration";
-        this.params.page.path = "/register";
+        this.params.page.path = "register";
         this.params.page.url = this.base_url+this.params.page.path;
     }
 
@@ -438,10 +440,10 @@ Inside the Data file, we should include all the methods used for the test cases.
 
 **Note:** The QA need to remove all the hardcoded locators and values from the pageobject files, add those in the data file, import required files such as Assert.js, Selector.js, Page.js etc. Use Selector class to locate elements. They have to refactor test methods.
 
-**Demo:** [How to add selectors in page object file](https://drive.google.com/file/d/1jLIo5V20UNPz6gA7LIfnMgQBuaSoci_B/view?usp=sharing)
-**Demo:** [How to refactor test methods in page object file](https://drive.google.com/file/d/1JA8GcsnsdwM0oebCpUshRG7R9-QixW7Z/view?usp=sharing)
+**Demo:** [How to add selectors in page object file](https://youtu.be/EuvjIh5MMyE)
+**Demo:** [How to refactor test methods in page object file](https://youtu.be/bvEJbzGfqKA)
 
-### Step 7: Create Spec files
+### Step 8: Create Spec files
 
 In this step, we will refactor and remove all the test logic, functionalities from the spec files. This file will only contain the method calls for the methods we have created in page object file.
 
@@ -511,17 +513,19 @@ There are several points to note in this file. Let's look at these one by one:
 - We have to update the `params.test` object for every test case or it block.
 - We have to update the `params.group` object for every test group or describe block.
 
-**Demo:** [How to add spec files](https://drive.google.com/file/d/133OoOBBsabdvOvVVLVbIdV8tyyp1W0_O/view?usp=sharing)
+**Demo:** [How to add spec files](https://youtu.be/3Z7Raxws68A)
 
-#### Step 7: Execute tests
+#### Step 9: Execute tests
 
 Now, you can run the test via:
 
 ```sh
-npx wdio --spec ./tests/specs/login.spec.js
+npx wdio --spec ./test/specs/login.spec.js
 ```
 
-**Demo:** https://drive.google.com/file/d/1pJmtJ3_Hya9pW4_lKMpK_azJtfNFbjaT/view?usp=sharing
+**Note:** Kindly verify the path before execution.
+
+**Demo:** https://youtu.be/PaMVKUvkYu8
 
 or run all tests via:
 
@@ -529,11 +533,11 @@ or run all tests via:
 npm run wdio
 ```
 
-**Demo:** https://drive.google.com/file/d/1XVVMppNSC_EsmDyelVac-Al6IXdfh-Qh/view?usp=sharing
+**Demo:** https://youtu.be/nNiXkLNRYEs
 
 The Demo shows how a passed and failed test cases will be represented.
 
-#### Step 8: Result
+#### Step 10: Result
 
 <img src="assets/img/result.png" width="70%" style="max-width: 100%;">
 
@@ -550,15 +554,15 @@ If you need to run tests based on `page id`, `group id` or `test id`, you can us
 ```shell
 npx wdio --mochaOpts.grep <page id>
 e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI
-Demo: https://drive.google.com/file/d/1ojMqK-r0N0gu1Gx_zeH3GSSq9GjvWWpC/view?usp=sharing
+Demo: https://youtu.be/wiNbPLZeH3k
 
 npx wdio --mochaOpts.grep <group id>
 e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
-Demo: https://drive.google.com/file/d/1EpmAjXoCLhD7CsOU0lJO5X_jQqbGN_SN/view?usp=sharing
+Demo: https://youtu.be/9eWWYWBRFBQ
 
 npx wdio --mochaOpts.grep <test id>
 e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run only one test cases which contains Page ID 'LI' having Group ID 1 and Test ID starting with 1.1
-Demo: https://drive.google.com/file/d/1Q3IxNdhKuJ7YBDGzh4UORVdU4xETQPkl/view?usp=sharing
+Demo: https://youtu.be/aln6ZeNKvlI
 // Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
@@ -567,7 +571,7 @@ or you can even run the test cases based on a specific keyword:
 
 ```npx
 e.g. npx wdio --mochaOpts.grep smoke
-**Demo:** https://drive.google.com/file/d/1z183K0rveF1asVs_rO9q_Oe6lB7ec9-m/view?usp=sharing
+Demo: https://youtu.be/6YOUdSy7D48
 ```
 
 #### Possible error
@@ -578,9 +582,6 @@ session not created: This version of ChromeDriver only supports Chrome version 9
 ```
 
 If this error occurrs that means your `wdio-chromedriver-service` and `chromedriver` dependencies are outdated and those need to be updated.
-Easiest way to update the dependency is provided in the demo.
-
-Demo: https://img-v3.getdemo.dev/screenshot/xL5B0R3Gar.mp4
 
 <br/>
 
