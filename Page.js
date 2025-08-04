@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import color from 'cli-color'
-import env from '../../../wdio.env.js'
+import env from '../../wdio.env.js'
 
 chalk.enabled = true
 chalk.level = 3

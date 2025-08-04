@@ -1,8 +1,8 @@
-import env from '../../../wdio.env.js'
+import env from '../../wdio.env.js'
 const envObj = new env();
 const params = envObj.getParams();
 
-export default class Asserts{
+export default class Assert{
 
     async pauseIfHuman(seconds = params.is_human_pause)
     {
