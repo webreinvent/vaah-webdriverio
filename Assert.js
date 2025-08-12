@@ -1,27 +1,43 @@
-const env = require('./../../../wdio.env');
+import env from '../../wdio.env.js'
+const envObj = new env();
+const params = envObj.getParams();
 
-class Assert{
+export default class Assert{
 
-    pause()
+    async pauseIfHuman(seconds = params.is_human_pause)
     {
-        if(env.is_human)
-        {
-            browser.pause(env.is_human_pause*1000);
+        if(params.is_human) {
+            await browser.pause(seconds);
         }
     }
 
-    pageTitle(text)
+    async pageUrl(text)
     {
-        return expect(browser).toHaveTitleContaining(text);
-
+        return expect(browser).toHaveUrl(text);
     }
 
-    text(selector, text)
+    async pageTitle(text)
     {
-        return expect(selector).toHaveTextContaining(text);
+        return expect(browser).toHaveTitle(expect.stringContaining(text));
     }
 
+    async text(selector, text)
+    {
+        return expect(selector).toHaveText(expect.stringContaining(text));
+    }
 
+    async isDisplayed(selector)
+    {
+        return expect(selector).toBeDisplayed();
+    }
+
+    async isClickable(selector)
+    {
+        return expect(selector).toBeClickable();
+    }
+
+    async hasAttributeValue(selector, attribute, value)
+    {
+        return expect(selector).toHaveAttribute(attribute, expect.stringContaining(value));
+    }
 };
-
-module.exports = new Assert()

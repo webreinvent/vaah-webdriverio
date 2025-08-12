@@ -1,4 +1,4 @@
-class El{
+export default class Selector{
 
     //-----------------------------------------------------
     id(id)
@@ -71,7 +71,50 @@ class El{
         return el;
     }
     //-----------------------------------------------------
-
+    arialabel(name, value=null)
+    {
+        let el = this.attr('aria-label', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
+    placeholder(name, value=null){
+        let el = this.attr('placeholder', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
+    title(name, value=null){
+        let el = this.attr('title', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
+    href(name, value=null){
+        let el = this.attr('href', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
+    value(name, value=null){
+        let el = this.attr('value', name);
+        if(value)
+        {
+            el.setValue(value)
+        }
+        return el;
+    }
+    //-----------------------------------------------------
 }
-
-module.exports = new El()
