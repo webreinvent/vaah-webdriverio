@@ -13,15 +13,16 @@ class Env {
             long_pause: 10000,
             base_url: '',
             version: null,
-            capabilities: [
-                {
-                    platformName: "mac",
-                    "appium:automationName": "Chromium",
-                    browserName: 'chrome',
-                    acceptInsecureCerts: true,
-                },
-            ]
+            capabilities: [{
+                browserName: 'chrome'
+            }],
         };
+        if (process.env.NODE_WDIO_IS_HUMAN) {
+            this.params.is_human = true;
+        }
+        if (process.env.NODE_WDIO_DEBUG) {
+            this.params.debug = true;
+        }
     }
 
     //-------------------------------------------------

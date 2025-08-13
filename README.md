@@ -22,7 +22,38 @@ Helpful classes to reduce code &amp; accelerate speed for writing test cases for
 
 **Refer**: https://youtu.be/tq4XGpKV3Ws
 
-### Step 3: Include `wdio.env.js`
+### Step 3: Install Dependencies
+
+In this steps, we will install few packages that will be used by the automation scripts. To install the required dependencies and configure package.json file, follow the steps given below:
+
+1. Run following commands in the terminal of the Code Editor. (Make sure the path is set to your project directory)
+   ```shell
+   npm install axios chalk cli-color cross-env ts-node typescript wdio-wait-for --save-dev
+   ```
+2. In `package.json` file, replace the code in script with the below code:
+   ```json
+   "scripts": {
+    "wdio": "cross-env wdio run ./wdio.conf.js",
+    "wdio-debug": "cross-env NODE_WDIO_DEBUG=true wdio run ./wdio.conf.js",
+    "wdio-is_human": "cross-env NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js"
+    }
+   ```
+3. Also add "type":"module" inside `package.json` file. Refer to the code below
+   ```json
+    ...
+    "type": "module",
+    "devDependencies": {
+        ...
+    }
+   ```
+
+**Note:** Since we have add `"type": "module"` in the package.json file, we need to update the import statements on all files. Also we need to update the class declaration statement for each classes. Refer to the example mentioned below:
+
+- Previous import statement: `const Page = require('./page')`. New import statement: `import Page from './page.js'`
+- Previous class declaration: `class LoginPage extends Page`. New class declaration: `export default class LoginPage extends Page`
+- Remove `export` statement from the page object files if added. This will be added at the bottom. Eg. `module.exports = new LoginPage();`.
+
+### Step 4: Include `wdio.env.js`
 
 In `wdio.conf.js`, include `wdio.env.js` file and update the `env`, `baseUrl`, `logLevel` and `capabilities` variables:
 
@@ -69,7 +100,7 @@ export const config = {
 
 **Refer**: https://youtu.be/Fop5JRTCXDA
 
-### Step 4: Update `wdio.env.js` file
+### Step 5: Update `wdio.env.js` file
 
 In `wdio.env.js` tester should set the base URL based on their test environment. // Make sure that the URL ends with '/'.
 
@@ -90,37 +121,6 @@ In `wdio.env.js` tester should set the base URL based on their test environment.
 ```
 
 **Refer**: https://youtu.be/jA_JwsfaRLQ
-
-### Step 5: Install Dependencies
-
-In this steps, we will install few packages that will be used by the automation scripts. To install the required dependencies and configure package.json file, follow the steps given below:
-
-1. Run following commands in the terminal of the Code Editor. (Make sure the path is set to your project directory)
-   ```shell
-   npm install axios chalk cli-color cross-env ts-node typescript wdio-wait-for --save-dev
-   ```
-2. In `package.json` file, replace the code in script with the below code:
-   ```json
-   "scripts": {
-    "wdio": "cross-env wdio run ./wdio.conf.js",
-    "wdio debug": "cross-env NODE_WDIO_DEBUG=true wdio run ./wdio.conf.js",
-    "wdio is_human": "cross-env NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js"
-    }
-   ```
-3. Also add "type":"module" inside `package.json` file. Refer to the code below
-   ```json
-    ...
-    "type": "module",
-    "devDependencies": {
-        ...
-    }
-   ```
-
-**Note:** Since we have add `"type": "module"` in the package.json file, we need to update the import statements on all files. Also we need to update the class declaration statement for each classes. Refer to the example mentioned below:
-
-- Previous import statement: `const Page = require('./page')`. New import statement: `import Page from './page.js'`
-- Previous class declaration: `class LoginPage extends Page`. New class declaration: `export default class LoginPage extends Page`
-- Remove `export` statement from the page object files if added. This will be added at the bottom. Eg. `module.exports = new LoginPage();`.
 
 ### Step 6: Create `data` Directory and Add Data files
 
@@ -357,19 +357,20 @@ export default class RegistrationPage extends Page{
 
     async open() {
         await browser.maximizeWindow();
-        await Asserts.pause();
+        await Asserts.pauseIfHuman();
         await super.open(this.params.page.url);
     }
 
     async firstNameFieldTypeFunctionality(data, assert){
         await Sl.id(data.element.first_name_id).setValue(data.value.first_name);
         await expect(Sl.id(data.element.first_name_id)).toHaveValueContaining(assert);
+        await expect(Sl.id(data.element.first_name_id)).toHaveText(expect.stringContaining(assert));
     }
 
     async lastNameFieldTypeFunctionality(data, assert){
         const last_name = await Sl.id(data.element.last_name_id);
         await last_name.setValue(data.value.last_name);
-        await expect(last_name).toHaveValueContaining(assert);
+        await expect(last_name).toHaveText(expect.stringContaining(assert));
     }
 }
 ```
@@ -442,6 +443,8 @@ Inside the Data file, we should include all the methods used for the test cases.
 
 **Demo:** [How to add selectors in page object file](https://youtu.be/EuvjIh5MMyE)
 **Demo:** [How to refactor test methods in page object file](https://youtu.be/bvEJbzGfqKA)
+
+**Note:** Change all pause statement from **Asserts.pause()** to **Asserts.pauseIfHuman()**.
 
 ### Step 8: Create Spec files
 
