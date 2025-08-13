@@ -585,11 +585,313 @@ If this error occurrs that means your `wdio-chromedriver-service` and `chromedri
 
 <br/>
 
-## Mobile Execution Setup
+## How to Execute Scripts on Mobile Web Browser
 If you want to execute your scripts on a web browser in mobile device, follow the steps given below to configure the scripts.
 
 ### Step 1: Install Emulator device
-Before installing the emulator device, you need to install `Android Studio`. Follow the steps giben 
+Before installing the emulator device, you need to install `Android Studio`. Follow the steps given in this [documentation](https://developer.android.com/studio/install).
+
+Once fully installed, we need to create and manage an android virtual device (emulator). Follow the steps given in this [documentation](https://developer.android.com/studio/run/managing-avds).
+
+If all the steps were performed correctly, an android virtual device should be opened without any issues.
+
+### Step 2: Install Dependencies for Mobile Automation
+Install the following packages to automate mobile browser with `appium` service in webdriverio.
+
+1. First, we will install appium service on the project. `appium` service is required to handle mobile based operations.
+    ```shell
+    npm i @wdio/appium-service --save-dev
+    ```
+
+2. Now, we need to install different appium driver for different browser and operating system.
+    ```shell
+    npm i appium appium-chromedriver appium-mac2-driver appium-safari-driver appium-uiautomator2-driver appium-xcuitest-driver --save-dev
+    ```
+3. Lastly, we need to install `chromedriver` to automation the scripts on chrome browser.
+    ```shell
+    npm i chromedriver wdio-chromedriver-service --save-dev
+    ```
+
+### Step 3: Configure `wdio.env.js` file
+
+We need to add multiple capabilities for different operating systems and browsers. Follow the steps mentioned below:
+
+1. Import `os` & `chromedriver` packages. We will use this to detect platform and chromedriver path.
+```js
+import os from 'os';
+import chromedriver from 'chromedriver';
+
+class Env {
+    constructor() {
+        this.params = {
+            debug: false,
+            is_human: false,
+            is_human_pause: 1000,
+            small_pause: 2000,
+            medium_pause: 5000,
+            ...
+```
+
+2. Add multiple objects in the constructor of the `Env` class. Also, we need to add multiple method calls and conditions in the same constructor. Refer to the code snipped below.
+```js
+class Env {
+    constructor() {
+        this.params = {
+            debug: false,
+            is_human: false,
+            is_human_pause: 1000,
+            small_pause: 2000,
+            medium_pause: 5000,
+            long_pause: 30000,
+            env: null,
+            current_os: null,                       // New object for current operating system
+            log_level: 'error',
+            base_url: '',
+            version: null,
+            chrome_driver_path: chromedriver.path,  // New object for chromedriver path
+            capabilities: [                         // This capability is for android device. You can ignore this for now.
+                {
+                    platformName: 'Android',
+                    browserName: 'chrome',
+                    acceptInsecureCerts: true,
+                    'goog:chromeOptions': {
+                        args: [
+                            '--disable-notifications',
+                            '--disable-geolocation',
+                            '--disable-save-password-bubble',
+                            '--disable-features=TranslateUI',
+                            '--disable-infobars',
+                            '--lang=nl'
+                        ]
+                    },
+                    "appium:deviceName": "Pixel_7",
+                    'appium:autoGrantPermissions': true, 
+                    'appium:noReset': true,
+                    'appium:automationName': 'UIAutomator2',
+                    'appium:udid': 'emulator-5554',
+                },
+            ],
+
+            services: []                            // New object for services used by webdriverio
+        };
+
+          this.detectOS();                          // Method call to detect current os
+
+        if (process.env.NODE_WDIO_IS_HUMAN) {       // Condition to execute tests in non-headless mode
+            this.params.is_human = true;
+        }
+        if (process.env.NODE_WDIO_DEBUG) {          // Condition to execute tests in debug mode
+            this.params.debug = true;
+        }
+
+        this.setCapabilities()                      // Method call for setting right capabilities for different devices
+        this.setServices();                         // Method call for setting right services for different devices
+
+        if (this.params.debug === true) {           // Condition to set log level as 'debug'
+            this.params.log_level = 'debug'
+        }
+    }
+```
+All the statements which are commented with an explaination should be added constructor.
+
+3. Add `setCapabilities` method in the **Env** class outside constructor.
+```js
+    setCapabilities() {
+
+        const osToUse = process.env.NODE_WDIO_OS || this.params.current_os;
+
+
+
+        switch (osToUse) {
+            case 'mac':
+                this.params.capabilities = [
+                    {
+                        platformName: "mac",
+                        "appium:automationName": "Chromium",
+                        browserName: 'chrome',
+                        acceptInsecureCerts: true,
+                        'goog:chromeOptions': {
+                            args: [
+                                '--disable-notifications',
+                                '--disable-geolocation',
+                                '--disable-save-password-bubble',
+                            ]
+                        }
+                    },
+                    // {
+                    //     platformName: "mac",
+                    //     "appium:automationName": "Safari",
+                    //     browserName: 'Safari'
+                    // }
+                ]
+                break;
+            case 'ios':
+                this.params.capabilities = [
+                    {
+                        platformName: 'iOS',                        
+                        browserName: 'Safari',
+                        'appium:platformVersion': '17.0',                   // Add the version of your iOS simulator device
+                        'appium:automationName': 'XCUITest'
+                    }
+                ]
+                break;
+            case 'android':
+                this.params.capabilities = [
+                    {
+                        platformName: 'Android',
+                    browserName: 'chrome',
+                    acceptInsecureCerts: true,
+                    'goog:chromeOptions': {
+                        args: [
+                            '--disable-notifications',
+                            '--disable-geolocation',
+                            '--disable-save-password-bubble',
+                            '--disable-features=TranslateUI',
+                            '--disable-infobars',
+                            '--lang=nl'
+                        ]
+                    },
+                    "appium:deviceName": "Pixel_7",                         // Add the name of your android emulator device
+                    'appium:autoGrantPermissions': true, 
+                    'appium:noReset': true,
+                    'appium:automationName': 'UIAutomator2',
+                    'appium:udid': 'emulator-5554',                         // Add the udid of your android emulator device
+                    }
+                ]
+                break;
+            case 'windows':
+                this.params.capabilities = [
+                    {
+                        platformName: "windows",
+                        "appium:automationName": "Chromium",
+                        browserName: 'chrome',
+                        acceptInsecureCerts: true,
+                    }
+                ]
+                break;
+            case 'linux':
+                this.params.capabilities = [
+                    /*{
+                        platformName: "Linux",
+                        "appium:automationName": "Chromium",
+                        browserName: 'chrome',
+                        acceptInsecureCerts: true,
+                    }*/
+                    {
+                        browserName: 'chrome',   // or 'chromium'
+                        'goog:chromeOptions': {
+                            args: [
+                                'no-sandbox',
+                                'disable-dev-shm-usage',
+                                'disable-infobars',
+                                'headless',
+                                'disable-gpu',
+                                'window-size=1440,735',
+                                'disable-extensions'
+                            ]
+                        }
+                    }
+                ]
+                break;
+        }
+    }
+```
+
+4. Add `setServices` method in the same Env class below the `setCapabilities` method.
+```js
+    setServices() {
+        if (this.params.current_os === 'android') {
+            this.params.services = [[
+                'appium',
+                {
+                    args: {
+                        relaxedSecurity: true,
+                        sessionOverride: true,
+                        debugLogSpacing: true,
+                        allowInsecure: ['chromedriver_autodownload', 'adb_shell'],
+                    },
+                    command: 'appium',
+                }
+            ]];
+        } else {
+            this.params.services = [['chromedriver', {
+                chromedriverCustomPath: chromedriver.path
+            }]];
+        }
+    }
+```
+
+5. Add `detectOs` method in the same Env class below the `setServices` method.
+```js
+    detectOS() {
+        const platform = os.platform();
+        const release = os.release();
+
+        if (process.env.NODE_WDIO_EMULATOR) {
+            this.params.current_os = 'android';
+            console.log(`Detected OS: ${this.params.current_os} (Emulator)`);
+            return;
+        }
+
+        switch (platform) {
+            case 'darwin':
+                this.params.current_os = 'mac';
+                break;
+            case 'win32':
+                this.params.current_os = 'windows';
+                break;
+            case 'linux':
+                if (release.toLowerCase().includes('android')) {
+                    this.params.current_os = 'android';
+                } else {
+                    this.params.current_os = 'linux';
+                }
+                break;
+            case 'ios':
+            case 'iPadOS':
+                this.params.current_os = 'ios';
+                break;
+            default:
+                this.params.current_os = 'unknown';
+        }
+        console.log(`Detected OS: ${this.params.current_os}`);
+    }
+```
+
+Finally, your `wdio.env.js` should look something like this [refer](https://youtu.be/yvp1dfU93u8).
+
+### Step 4: Configure `wdio.conf.js` file
+Add a service on wdio.conf.js file. Locate the `services: []` object on the config file. It should be between `connectionRetryCount: 3` and `framework: 'mocha'` object. 
+
+It may be commented out. Uncomment and add a service using param object from the `wdio.env.js`. Refer to the code snipped below:
+```js
+connectionRetryCount: 3,
+...
+
+services: params.services,
+
+...
+framework: 'mocha',
+```
+
+### Step 5: Add Mobile Scripts in Package.json file
+Open `package.json` file and add the following scripts for mobile devices.
+```json
+"scripts": {
+    "wdio": "cross-env wdio run ./wdio.conf.js",
+    "wdio-debug": "cross-env NODE_WDIO_DEBUG=true wdio run ./wdio.conf.js",
+    "wdio-is_human": "cross-env NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js",
+    "wdio-android": "cross-env NODE_WDIO_EMULATOR=true NODE_WDIO_IS_HUMAN=true wdio run ./wdio.conf.js"
+ }
+```
+
+### Step 6: Execute Scripts on Mobile Web Browser
+To execute the script on mobile device, first open the emulator/simulator device. Make sure the name of the device should be added in the `wdio.env.js` for the capabilities.
+
+Once the device is opened, execute the command given below:
+```shell
+npm run wdio-android
+```
 
 ## Support us
 
