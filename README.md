@@ -219,6 +219,7 @@ Also notice the naming convention of the locators and values.
 **Note:** The QA should analyze and create multiple data files for different pages and add all the locator values based on the type. Similary, they should also add the test data in this file as well. For reference, kindly follow the steps shown in thw video down below.
 
 **Demo:** [How to add locators in data file](https://youtu.be/NJIEN1WHtlg)
+
 **Demo:** [How to add test data/values in data file](https://youtu.be/ZXd7zCl8kOk)
 
 #### Page Details
@@ -442,6 +443,7 @@ Inside the Data file, we should include all the methods used for the test cases.
 **Note:** The QA need to remove all the hardcoded locators and values from the pageobject files, add those in the data file, import required files such as Assert.js, Selector.js, Page.js etc. Use Selector class to locate elements. They have to refactor test methods.
 
 **Demo:** [How to add selectors in page object file](https://youtu.be/EuvjIh5MMyE)
+
 **Demo:** [How to refactor test methods in page object file](https://youtu.be/bvEJbzGfqKA)
 
 **Note:** Change all pause statement from **Asserts.pause()** to **Asserts.pauseIfHuman()**.
@@ -518,7 +520,7 @@ There are several points to note in this file. Let's look at these one by one:
 
 **Demo:** [How to add spec files](https://youtu.be/3Z7Raxws68A)
 
-#### Step 9: Execute tests
+### Step 9: Execute tests
 
 Now, you can run the test via:
 
@@ -547,26 +549,26 @@ The Demo shows how a passed and failed test cases will be represented.
 It contains:
 
 ```
-[PAGE ID: LI]
-[GROUP ID: LI_1]
-[TEST ID: LI_1_1.1]
+[PAGE ID: LG]
+[GROUP ID: LG_1]
+[TEST ID: LG_1_1.1]
 ```
 
 If you need to run tests based on `page id`, `group id` or `test id`, you can use following command:
 
 ```shell
 npx wdio --mochaOpts.grep <page id>
-e.g. npx wdio --mochaOpts.grep LI // This will run all the test cases under the Page with Page ID LI
+e.g. npx wdio --mochaOpts.grep LG // This will run all the test cases under the Page with Page ID LG
 Demo: https://youtu.be/wiNbPLZeH3k
 
 npx wdio --mochaOpts.grep <group id>
-e.g. npx wdio --mochaOpts.grep LI_1 // This will run all the test cases under the Group with Group ID LI_1
+e.g. npx wdio --mochaOpts.grep LG_1 // This will run all the test cases under the Group with Group ID LG_1
 Demo: https://youtu.be/9eWWYWBRFBQ
 
 npx wdio --mochaOpts.grep <test id>
-e.g. npx wdio --mochaOpts.grep LI_1_1.1 // This will run only one test cases which contains Page ID 'LI' having Group ID 1 and Test ID starting with 1.1
+e.g. npx wdio --mochaOpts.grep LG_1_1.1 // This will run only one test cases which contains Page ID 'LG' having Group ID 1 and Test ID starting with 1.1
 Demo: https://youtu.be/aln6ZeNKvlI
-// Note: If you have test case with test ID as LI_1_11, LI_1_12... LI_1_19, these tests will also run if you provide the test ID as LI_1_1
+// Note: If you have test case with test ID as LG_1_11, LG_1_12... LG_1_19, these tests will also run if you provide the test ID as LG_1_1
 // To avoid this situation you can use a keyword to run a single test, but make sure to keep the keyword unique otherwise all the test cases having that keyword will run while executing tests. 
 ```
 
@@ -574,8 +576,8 @@ or you can even run the test cases based on a specific keyword:
 
 ```npx
 e.g. npx wdio --mochaOpts.grep smoke
-Demo: https://youtu.be/6YOUdSy7D48
 ```
+**Demo:** https://youtu.be/6YOUdSy7D48
 
 #### Possible error
 
